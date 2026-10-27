@@ -39,6 +39,24 @@ func _run() -> void:
 		_finish()
 		return
 
+	_check(scr.editor.is_graphic(), "P1-01 uses the graphic command tray")
+	_check(not scr.editor._tabs.visible, "graphic missions hide the text tab")
+	_check(not scr._right_open, "elementary mission starts with the help drawer closed")
+	_check(scr.editor._palette.get_child_count() >= 7, "graphic tray exposes command tiles")
+	scr.editor.blocks = []
+	scr.editor._target = scr.editor.blocks
+	scr.editor._rebuild()
+	scr.editor._palette.get_child(0).pressed.emit()
+	_check(scr.editor.blocks.size() == 1, "a command tile appends a block")
+	_check(scr.editor.get_source() == "AVANTI", "the first tile serialises AVANTI")
+	var field_open: float = scr.rig.safe_rect.size.x
+	scr._toggle_left_panel()
+	await process_frame
+	_check(scr.rig.safe_rect.size.x > field_open, "collapsing the program drawer enlarges the field")
+	scr._toggle_left_panel()
+	await process_frame
+	_check(absf(scr.rig.safe_rect.size.x - field_open) < 0.001, "reopening restores the field area")
+
 	scr.editor._switch_tab("text")
 	scr.editor.set_source("AVANTI 4")
 	scr._execute(false)
@@ -61,6 +79,20 @@ func _run() -> void:
 	var serialized: String = scr.editor.get_source()
 	_check(serialized.contains("RIPETI x3"), "block editor serialises loops")
 	_check(serialized.contains("DESTRA"), "block editor serialises turns")
+
+	# Graphic-only path: a child can finish INF-01 without ever seeing text.
+	main.show_screen("mission", {"world_id": "savana", "mission_id": "INF-01"})
+	await _wait(0.5)
+	scr = main.current
+	scr.editor._palette.get_child(0).pressed.emit()
+	scr._execute(false)
+	await _wait(0.1)
+	var graphic_guard := 0
+	while not scr.playback.is_finished() and graphic_guard < 200:
+		scr.playback.step()
+		graphic_guard += 1
+		await process_frame
+	_check(bool(scr.result.get("success", false)), "INF-01 succeeds with the graphic tray only")
 
 	main.show_screen("mission", {"world_id": "cittadella", "mission_id": "S1-01"})
 	await _wait(0.5)

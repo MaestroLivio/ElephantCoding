@@ -32,7 +32,11 @@ var _palette: HFlowContainer
 var _text_panel: VBoxContainer
 var _code: CodeEdit
 var _hint: Label
+var _target_bar: HBoxContainer
+var _target_label: Label
+var _root_btn: Button
 var _error_line := 0
+var _graphic := false
 
 
 func _ready() -> void:
@@ -79,19 +83,19 @@ func _build_chrome() -> void:
 	block_box.mouse_filter = Control.MOUSE_FILTER_PASS
 	_stack.add_child(block_box)
 
-	var target_bar := Palette.hbox(8)
-	target_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	block_box.add_child(target_bar)
-	var target_label := Palette.label("Sto aggiungendo a: programma", 15, Palette.MUTED)
-	target_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	target_bar.add_child(target_label)
-	var root_btn := Palette.ghost_button("RADICE", 14)
-	root_btn.custom_minimum_size = Vector2(96, 40)
-	root_btn.pressed.connect(func():
+	_target_bar = Palette.hbox(8)
+	_target_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	block_box.add_child(_target_bar)
+	_target_label = Palette.label("Sto aggiungendo a: programma", 15, Palette.MUTED)
+	_target_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_target_bar.add_child(_target_label)
+	_root_btn = Palette.icon_button("chevron_up", "", Palette.CARD_LIGHT, 14, Vector2(48, 40), 18)
+	_root_btn.tooltip_text = "Torna al programma principale"
+	_root_btn.pressed.connect(func():
 		_target = blocks
 		_target_name = "programma"
 		_rebuild())
-	target_bar.add_child(root_btn)
+	_target_bar.add_child(_root_btn)
 
 	_block_scroll = Palette.scroll()
 	block_box.add_child(_block_scroll)
@@ -144,7 +148,8 @@ func _build_chrome() -> void:
 func set_mission(p_mission: Dictionary) -> void:
 	mission = p_mission
 	mode = str(mission.get("editor", "text"))
-	current_tab = "blocks" if mode in ["icons", "beads"] else "text"
+	_graphic = mode in ["icons", "beads"]
+	current_tab = "blocks" if _graphic else "text"
 	blocks = []
 	_target = blocks
 	_target_name = "programma"
@@ -152,9 +157,21 @@ func set_mission(p_mission: Dictionary) -> void:
 	_text_source = starter
 	if _code != null:
 		_code.text = starter
+	_apply_mode_visibility()
 	_rebuild_palette()
 	_rebuild()
 	_switch_tab(current_tab)
+
+
+func _apply_mode_visibility() -> void:
+	if _tabs != null:
+		_tabs.visible = not _graphic
+	if _hint != null:
+		_hint.add_theme_font_size_override("font_size", 13 if _graphic else 14)
+
+
+func is_graphic() -> bool:
+	return _graphic
 
 
 func get_source() -> String:
@@ -231,13 +248,19 @@ func _rebuild_palette() -> void:
 		c.queue_free()
 	var entries := _palette_entries()
 	for e in entries:
-		var b := Palette.button(str(e.label), e.get("color", Palette.CARD_LIGHT), 15)
-		b.custom_minimum_size = Vector2(0, 44)
+		var b: Button
+		if _graphic:
+			b = _graphic_tile(e)
+		else:
+			b = Palette.button(str(e.label), e.get("color", Palette.CARD_LIGHT), 15)
+			b.custom_minimum_size = Vector2(0, 44)
 		b.pressed.connect(func(): _add_block(str(e.op)))
 		_palette.add_child(b)
 
 
 func _palette_entries() -> Array:
+	if _graphic:
+		return _graphic_entries()
 	var simple := [
 		{"label": "AVANTI", "op": "AVANTI", "color": Palette.TEAL},
 		{"label": "DESTRA", "op": "DESTRA", "color": Palette.BLUE},
@@ -259,11 +282,77 @@ func _palette_entries() -> Array:
 		{"label": "PER i DA a A", "op": "PER", "color": Palette.GREEN},
 		{"label": "ASPETTA", "op": "ASPETTA", "color": Palette.MUTED},
 	]
-	if mode == "icons" or mode == "beads":
-		return simple + actions.slice(0, 1) + structured.slice(0, 1)
 	if mode == "coordinates":
 		return simple + extra.slice(0, 1) + structured
 	return simple + actions + structured + extra
+
+
+## Pictorial commands. The first worlds only see the commands they actually
+## need, so the tray stays short and every tile fits on a touch screen.
+func _graphic_entries() -> Array:
+	var all := [
+		{"label": "AVANTI", "op": "AVANTI", "icon": "forward", "color": Palette.TEAL},
+		{"label": "DESTRA", "op": "DESTRA", "icon": "right", "color": Palette.BLUE},
+		{"label": "SINISTRA", "op": "SINISTRA", "icon": "left", "color": Palette.BLUE},
+		{"label": "RACCOGLI", "op": "RACCOGLI", "icon": "collect", "color": Palette.YELLOW},
+		{"label": "PRENDI", "op": "PRENDI", "icon": "prendi", "color": Palette.YELLOW},
+		{"label": "DEPOSITA", "op": "DEPOSITA", "icon": "deposita", "color": Palette.YELLOW},
+		{"label": "TOCCA", "op": "TOCCA", "icon": "tocca", "color": Palette.CORAL},
+		{"label": "ATTIVA", "op": "ATTIVA", "icon": "attiva", "color": Palette.CORAL},
+		{"label": "ACCENDI", "op": "ACCENDI", "icon": "accendi", "color": Palette.CORAL},
+		{"label": "APRI", "op": "APRI", "icon": "apri", "color": Palette.PURPLE},
+		{"label": "FOTO", "op": "FOTO", "icon": "foto", "color": Palette.PURPLE},
+		{"label": "SUONA", "op": "SUONA", "icon": "suona", "color": Palette.PURPLE},
+		{"label": "PAUSA", "op": "PAUSA", "icon": "pausa", "color": Palette.MUTED},
+		{"label": "RIPETI", "op": "RIPETI", "icon": "ripeti", "color": Palette.GREEN},
+	]
+	var level := str(mission.get("id", "")).get_slice("-", 0)
+	if level == "INF":
+		var keep := ["AVANTI", "DESTRA", "SINISTRA", "RACCOGLI", "TOCCA", "SUONA", "PAUSA", "RIPETI"]
+		return all.filter(func(e): return keep.has(str(e.op)))
+	return all
+
+
+func _graphic_tile(entry: Dictionary) -> Button:
+	var tint: Color = entry.get("color", Palette.CARD_LIGHT)
+	var b := Button.new()
+	b.custom_minimum_size = Vector2(88, 84)
+	b.focus_mode = Control.FOCUS_NONE
+	b.tooltip_text = str(entry.get("label", entry.get("op", "")))
+	b.add_theme_stylebox_override("normal", _tile_style(tint.darkened(0.66), tint, 2))
+	b.add_theme_stylebox_override("hover", _tile_style(tint.darkened(0.54), Palette.CREAM, 2))
+	b.add_theme_stylebox_override("pressed", _tile_style(tint.darkened(0.74), tint, 2))
+	b.add_theme_stylebox_override("focus", _tile_style(tint.darkened(0.54), Palette.CREAM, 2))
+
+	var box := VBoxContainer.new()
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.add_theme_constant_override("separation", 2)
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(box)
+	box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	box.offset_left = 4
+	box.offset_right = -4
+	box.offset_top = 4
+	box.offset_bottom = -4
+
+	var glyph := GameIcon.new(str(entry.get("icon", "•")), 40.0, tint.lightened(0.22))
+	glyph.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	box.add_child(glyph)
+	var caption := Palette.label(str(entry.get("label", "")), 10, Palette.CREAM)
+	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(caption)
+	return b
+
+
+func _tile_style(bg: Color, border: Color, border_width: int) -> StyleBoxFlat:
+	var s := Palette.style(bg, 16, border, border_width)
+	s.content_margin_left = 4
+	s.content_margin_right = 4
+	s.content_margin_top = 4
+	s.content_margin_bottom = 4
+	s.shadow_size = 0
+	return s
 
 
 func _add_block(op: String) -> void:
@@ -346,16 +435,30 @@ func _rebuild() -> void:
 	for c in _block_list.get_children():
 		c.queue_free()
 	if blocks.is_empty():
-		var empty := Palette.label("Il programma è vuoto. Tocca un comando qui sotto per iniziare.", 16, Palette.MUTED, true)
-		empty.custom_minimum_size = Vector2(0, 70)
-		_block_list.add_child(empty)
+		if _graphic:
+			var empty_box := Palette.vbox(10)
+			empty_box.alignment = BoxContainer.ALIGNMENT_CENTER
+			empty_box.custom_minimum_size = Vector2(0, 120)
+			var hint_icon := GameIcon.new("chevron_down", 42, Palette.MUTED)
+			hint_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			empty_box.add_child(hint_icon)
+			var empty := Palette.label("Tocca un comando qui sotto", 15, Palette.MUTED, true)
+			empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			empty_box.add_child(empty)
+			_block_list.add_child(empty_box)
+		else:
+			var empty := Palette.label("Il programma è vuoto. Tocca un comando qui sotto per iniziare.", 16, Palette.MUTED, true)
+			empty.custom_minimum_size = Vector2(0, 70)
+			_block_list.add_child(empty)
 	else:
 		_render_into(blocks, _block_list, 0)
-	_block_list.add_child(_tail_button(blocks, "fine programma"))
+	if not _graphic:
+		_block_list.add_child(_tail_button(blocks, "fine programma"))
 	_ignore = false
-	var target_bar = _block_scroll.get_parent().get_child(0)
-	if target_bar != null and target_bar.get_child_count() > 0:
-		target_bar.get_child(0).text = "Sto aggiungendo a: " + _target_name
+	if _target_label != null:
+		_target_label.text = ("Dentro " if _graphic else "Sto aggiungendo a: ") + _target_name
+	if _target_bar != null:
+		_target_bar.visible = not _graphic or not is_same(_target, blocks)
 	_rebuild_palette()
 
 
@@ -396,8 +499,13 @@ func _body_panel(body: Array, label: String, parent_arr: Array, depth: int) -> P
 	grow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	grow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	header.add_child(grow)
-	var add_btn := Palette.ghost_button("+ AGGIUNGI QUI", 12)
-	add_btn.custom_minimum_size = Vector2(0, 34)
+	var add_btn: Button
+	if _graphic:
+		add_btn = Palette.icon_button("plus", "", Palette.CARD_LIGHT, 12, Vector2(40, 34), 16)
+		add_btn.tooltip_text = "Aggiungi qui"
+	else:
+		add_btn = Palette.ghost_button("+ AGGIUNGI QUI", 12)
+		add_btn.custom_minimum_size = Vector2(0, 34)
 	add_btn.pressed.connect(func():
 		_target = body
 		_target_name = label
@@ -417,6 +525,11 @@ func _body_panel(body: Array, label: String, parent_arr: Array, depth: int) -> P
 
 
 func _tail_button(_arr: Array, label: String) -> Control:
+	if _graphic:
+		var gap := Control.new()
+		gap.custom_minimum_size = Vector2(0, 2)
+		gap.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		return gap
 	var row := Palette.hbox(6)
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var line := ColorRect.new()
@@ -434,10 +547,10 @@ func _row(block: Dictionary, arr: Array, depth: int) -> PanelContainer:
 	match op:
 		"AVANTI": tint = Color("#1b4d52")
 		"DESTRA", "SINISTRA": tint = Color("#1b3b62")
-		"RACCOGLI", "ATTIVA", "FOTO": tint = Color("#4a3a1c")
+		"RACCOGLI", "PRENDI", "DEPOSITA", "TOCCA", "ATTIVA", "ACCENDI", "FOTO": tint = Color("#4a3a1c")
 		"RIPETI", "SE", "FINCHÉ", "PER": tint = Color("#24462f")
 		"VAI A", "MUOVI": tint = Color("#4a2c2c")
-		"IMPOSTA": tint = Color("#382b55")
+		"APRI", "SUONA", "PAUSA", "IMPOSTA": tint = Color("#382b55")
 	var panel := PanelContainer.new()
 	var style := Palette.style(tint, 12)
 	style.shadow_size = 0
@@ -446,33 +559,40 @@ func _row(block: Dictionary, arr: Array, depth: int) -> PanelContainer:
 	style.content_margin_top = 6
 	style.content_margin_bottom = 6
 	panel.add_theme_stylebox_override("panel", style)
-	panel.custom_minimum_size = Vector2(0, 52)
+	panel.custom_minimum_size = Vector2(0, 52 if not _graphic else 56)
 
 	var h := Palette.hbox(8)
 	h.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(h)
 
-	var glyph := Palette.label(_glyph(op), 20, Palette.CREAM)
-	glyph.custom_minimum_size = Vector2(28, 0)
-	glyph.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	h.add_child(glyph)
+	if _graphic:
+		var glyph_icon := GameIcon.new(_icon_for(op), 28.0, Palette.CREAM)
+		h.add_child(glyph_icon)
+	else:
+		var glyph := Palette.label(_glyph(op), 20, Palette.CREAM)
+		glyph.custom_minimum_size = Vector2(28, 0)
+		glyph.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		h.add_child(glyph)
 
-	var title := Palette.label(_title(op), 16, Palette.CREAM)
-	title.custom_minimum_size = Vector2(82, 0)
+	var title := Palette.label(_title(op), 13 if _graphic else 16, Palette.CREAM)
+	title.custom_minimum_size = Vector2(0 if _graphic else 82, 0)
 	h.add_child(title)
 
 	match op:
 		"AVANTI", "ASPETTA", "RIPETI":
-			var spin := SpinBox.new()
-			spin.min_value = 0 if op == "ASPETTA" else 1
-			spin.max_value = 50
-			spin.value = int(block.get("n", 1))
-			spin.custom_minimum_size = Vector2(88, 40)
-			spin.value_changed.connect(func(v: float):
-				block["n"] = int(v)
-				_model_changed())
-			h.add_child(spin)
-			h.add_child(Palette.label("passi" if op == "AVANTI" else "volte", 13, Palette.MUTED))
+			if _graphic:
+				h.add_child(_stepper(block, "n", 0 if op == "ASPETTA" else 1))
+			else:
+				var spin := SpinBox.new()
+				spin.min_value = 0 if op == "ASPETTA" else 1
+				spin.max_value = 50
+				spin.value = int(block.get("n", 1))
+				spin.custom_minimum_size = Vector2(88, 40)
+				spin.value_changed.connect(func(v: float):
+					block["n"] = int(v)
+					_model_changed())
+				h.add_child(spin)
+			h.add_child(Palette.label("passi" if op == "AVANTI" else "volte", 13 if not _graphic else 11, Palette.MUTED))
 		"VAI A":
 			var sx := SpinBox.new()
 			sx.min_value = -20
@@ -575,6 +695,59 @@ func _row(block: Dictionary, arr: Array, depth: int) -> PanelContainer:
 	return panel
 
 
+## Graphic counter used by the first worlds: − number +, no keyboard or spinner.
+func _stepper(block: Dictionary, key: String, min_value: int) -> HBoxContainer:
+	var value := int(block.get(key, 1))
+	var row := Palette.hbox(2)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var minus := _mini("−")
+	minus.custom_minimum_size = Vector2(34, 34)
+	minus.disabled = value <= min_value
+	minus.pressed.connect(func():
+		if int(block.get(key, 1)) > min_value:
+			block[key] = int(block.get(key, 1)) - 1
+			_model_changed()
+			_rebuild())
+	row.add_child(minus)
+	var number := Palette.label(str(value), 18, Palette.CREAM)
+	number.custom_minimum_size = Vector2(34, 0)
+	number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	row.add_child(number)
+	var plus := _mini("+")
+	plus.custom_minimum_size = Vector2(34, 34)
+	plus.pressed.connect(func():
+		block[key] = mini(50, int(block.get(key, 1)) + 1)
+		_model_changed()
+		_rebuild())
+	row.add_child(plus)
+	return row
+
+
+func _icon_for(op: String) -> String:
+	match op:
+		"AVANTI": return "forward"
+		"DESTRA": return "right"
+		"SINISTRA": return "left"
+		"RACCOGLI": return "collect"
+		"PRENDI": return "prendi"
+		"DEPOSITA": return "deposita"
+		"TOCCA": return "tocca"
+		"ATTIVA": return "attiva"
+		"ACCENDI": return "accendi"
+		"APRI": return "apri"
+		"FOTO": return "foto"
+		"SUONA": return "suona"
+		"PAUSA": return "pausa"
+		"RIPETI": return "ripeti"
+		"SE": return "target"
+		"FINCHÉ": return "ripeti"
+		"PER": return "ripeti"
+		"VAI A": return "target"
+		"IMPOSTA": return "code"
+		"ASPETTA": return "pausa"
+		_: return "forward"
+
+
 func _mini(text: String) -> Button:
 	var b := Button.new()
 	b.text = text
@@ -596,6 +769,13 @@ func _title(op: String) -> String:
 		"RIPETI": return "RIPETI"
 		"SE": return "SE"
 		"PER": return "PER"
+		"PRENDI": return "PRENDI"
+		"DEPOSITA": return "DEPOSITA"
+		"TOCCA": return "TOCCA"
+		"ACCENDI": return "ACCENDI"
+		"APRI": return "APRI"
+		"SUONA": return "SUONA"
+		"PAUSA": return "PAUSA"
 		_: return op
 
 
@@ -605,8 +785,15 @@ func _glyph(op: String) -> String:
 		"DESTRA": return "↻"
 		"SINISTRA": return "↺"
 		"RACCOGLI": return "★"
+		"PRENDI": return "↓"
+		"DEPOSITA": return "↑"
+		"TOCCA": return "◎"
 		"ATTIVA": return "!"
+		"ACCENDI": return "☀"
+		"APRI": return "▯"
 		"FOTO": return "◉"
+		"SUONA": return "♪"
+		"PAUSA": return "❚❚"
 		"RIPETI": return "↻"
 		"SE": return "?"
 		"FINCHÉ": return "∞"
@@ -629,7 +816,7 @@ func _serialize(arr: Array, depth: int) -> String:
 			"AVANTI":
 				var n := int(block.get("n", 1))
 				lines.append(pad + ("AVANTI" if n <= 1 else "AVANTI %d" % n))
-			"DESTRA", "SINISTRA", "RACCOGLI", "ATTIVA", "FOTO", "APRI", "ACCENDI", "TOCCA", "SUONA", "SALUTA":
+			"DESTRA", "SINISTRA", "RACCOGLI", "PRENDI", "DEPOSITA", "ATTIVA", "FOTO", "APRI", "ACCENDI", "TOCCA", "SUONA", "PAUSA", "SALUTA":
 				lines.append(pad + op)
 			"ASPETTA":
 				lines.append(pad + "ASPETTA %d" % int(block.get("n", 1)))

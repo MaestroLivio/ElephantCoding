@@ -105,13 +105,11 @@ func _reposition(weight: float) -> void:
 			offset.y += orbit_pitch * distance * 0.35
 			var desired := Vector3(0, 0, 0) + offset
 			global_position = global_position.lerp(desired, weight) if weight < 1.0 else desired
-			look_at(Vector3(0, 0.4, 0), Vector3.UP)
-			# Shift the frustum so the field centre lands in the middle of the
-			# safe rect instead of the middle of the whole screen.
-			var ndc_x: float = safe_rect.position.x + safe_rect.size.x * 0.5
-			var ndc_y: float = safe_rect.position.y + safe_rect.size.y * 0.5
-			h_offset = lerpf(h_offset, -(ndc_x * 2.0 - 1.0) * distance * tan_h, weight)
-			v_offset = lerpf(v_offset, -(ndc_y * 2.0 - 1.0) * distance * tan_v, weight)
+			look_at(Vector3(0, 0.15, 0), Vector3.UP)
+			# Centre the *projected* field in the safe rect: with a tilted camera
+			# the near edge projects much lower than the far edge, so centring
+			# the 3D pivot alone would push the field under the bottom panels.
+			_center_in_safe_rect(weight)
 		Mode.CHASE:
 			if target == null:
 				return
@@ -128,3 +126,50 @@ func _reposition(weight: float) -> void:
 			var eye := target.global_position + Vector3(0, 1.55, 0) + fwd * 0.30
 			global_position = global_position.lerp(eye, weight)
 			look_at(eye + fwd * 5.0, Vector3.UP)
+
+
+## Bounding box (viewport pixels) of the four field corners projected on screen.
+func _projected_bounds() -> Rect2:
+	var hw := bounds.size.x * 0.5
+	var hh := bounds.size.y * 0.5
+	var c := bounds.get_center()
+	var minp := Vector2(INF, INF)
+	var maxp := Vector2(-INF, -INF)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			var sp := unproject_position(Vector3(c.x + sx * hw, 0.0, c.y + sz * hh))
+			minp = minp.min(sp)
+			maxp = maxp.max(sp)
+	return Rect2(minp, maxp - minp)
+
+
+## Shift the frustum so the projected field is centred in `safe_rect`. The
+## correction is measured on screen, so it works for any field size, zoom and
+## panel layout without re-deriving the projection maths.
+func _center_in_safe_rect(weight: float) -> void:
+	var vp := get_viewport()
+	if vp == null:
+		return
+	var view_size := vp.get_visible_rect().size
+	if view_size.x <= 1.0 or view_size.y <= 1.0:
+		return
+	var bbox := _projected_bounds()
+	if bbox.size.x <= 0.0:
+		return
+	var want := Vector2(
+		(safe_rect.position.x + safe_rect.size.x * 0.5) * view_size.x,
+		(safe_rect.position.y + safe_rect.size.y * 0.5) * view_size.y)
+	var shift := want - bbox.get_center()
+	# How many pixels does one metre of frustum offset move the image?
+	var probe := Vector3(bounds.get_center().x, 0.0, bounds.get_center().y)
+	var before := unproject_position(probe)
+	h_offset += 0.01
+	v_offset += 0.01
+	var after := unproject_position(probe)
+	h_offset -= 0.01
+	v_offset -= 0.01
+	var gain := (after - before) / 0.01
+	if absf(gain.x) < 0.001 or absf(gain.y) < 0.001:
+		return
+	h_offset += shift.x / gain.x * weight
+	v_offset += shift.y / gain.y * weight

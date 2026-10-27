@@ -92,6 +92,26 @@ static func ghost_button(text: String, size := 18) -> Button:
 	return b
 
 
+static func icon_button(icon_name: String, label_text := "", bg: Color = CARD_LIGHT, font_size := 14, min_size := Vector2(48, 48), icon_size := 22.0, tint: Color = CREAM) -> Button:
+	var b := button("", bg, font_size)
+	b.custom_minimum_size = min_size
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 6)
+	row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(row)
+	var glyph := GameIcon.new(icon_name, icon_size, tint)
+	glyph.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(glyph)
+	if label_text != "":
+		var l := label(label_text, font_size, tint)
+		l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_child(l)
+	return b
+
+
 static func chip(text: String, bg: Color = CARD_LIGHT, color: Color = CREAM) -> PanelContainer:
 	var p := PanelContainer.new()
 	var s := style(bg, 999)

@@ -50,6 +50,10 @@ Output atteso: `PASS: 272 FAIL: 0`.
 - Presenza dello stage 3D nelle schermate che lo usano.
 - Apertura di una missione, esecuzione di `P1-01`, `S1-01` e `P4-01`
   attraverso l'interfaccia.
+- Modalità grafica: tessere dei comandi, scheda testo nascosta, pannello aiuti
+  chiuso nei livelli elementari.
+- Pannelli minimizzabili: la chiusura del programma allarga il `safe_rect` della
+  telecamera e la riapertura lo ripristina.
 - Serializzazione dei blocchi: cicli e rotazioni.
 
 Output atteso: `UI SMOKE: 0 failures`.

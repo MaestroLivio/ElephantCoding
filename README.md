@@ -4,7 +4,7 @@
 pensiero computazionale, la logica e la matematica dalla scuola dell'infanzia
 alla secondaria di primo grado.
 
-90 missioni · 9 mondi · comandi grandi per il touch · tre viste 3D ·
+90 missioni · 9 mondi · comandi grafici per il touch · tre viste 3D ·
 sottotitoli sempre disponibili · area insegnante · nessun account
 
 ![Menu principale](docs/media/menu.png)
@@ -90,14 +90,18 @@ Le tre viste richieste dal progetto sono **campo fisso**, **inseguimento 3D** e
 
 - **90 missioni** con obiettivi, tre aiuti progressivi, testo di successo,
   estensione facoltativa e note di accessibilità.
-- **Editor doppio**: blocchi/perle per i più piccoli, editor testuale con
-  palette di snippet per i mondi successivi. Il linguaggio è un DSL italiano
-  sicuro: nessun `eval`, nessun accesso al filesystem.
+- **Editor doppio**: nei primi mondi i comandi sono **pittogrammi vettoriali**
+  grandi, senza tabella di testo; dai mondi successivi si passa all'editor
+  testuale con palette di snippet. Il linguaggio è un DSL italiano sicuro:
+  nessun `eval`, nessun accesso al filesystem.
 - **Simulatore deterministico** con goal verificabili (raggiungere una cella,
   raccogliere, attivare, fotografare, variabili, eventi, tracce chiuse).
 - **Replay evento per evento** con pausa, passo e velocità adattiva.
 - **Tre viste 3D** e telecamera che inquadra il campo nella zona libera dai
   pannelli, anche su schermi stretti.
+- **Pannelli minimizzabili**: programma e obiettivi si riducono a un tocco,
+  con icone nella barra superiore; la telecamera si riadatta subito e il campo
+  resta interamente visibile.
 - **Voce e sottotitoli**: clip registrate facoltative, voce di sistema come
   riserva, sottotitoli sempre attivi.
 - **Area insegnante**: panoramica della classe, evidenze per missione, PIN

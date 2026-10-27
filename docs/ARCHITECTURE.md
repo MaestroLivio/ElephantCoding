@@ -36,9 +36,14 @@ segnale `navigate`, quindi le schermate non si conoscono tra loro.
 
 Poiché i pannelli coprono i lati del viewport, la telecamera fissa riceve un
 `safe_rect` normalizzato (`CameraRig.safe_rect`) e sposta il frustum con
-`h_offset`/`v_offset` in modo che il campo cada nella striscia visibile. Lo
-stesso ragionamento vale per il diorama del menu, spostato nell'area libera a
-destra.
+`h_offset`/`v_offset` in modo che il campo cada nella striscia visibile. In
+missione il `safe_rect` non è più fisso: viene ricalcolato a ogni apertura o
+chiusura dei pannelli e al ridimensionamento della finestra, così il campo si
+restringe o si allarga insieme all'interfaccia. L'inquadratura centra il
+rettangolo *proiettato* del campo (non il pivot 3D): con la camera inclinata il
+bordo vicino proietta molto più in basso di quello lontano, e centrare solo il
+pivot lo farebbe scivolare sotto i pannelli. Lo stesso ragionamento vale per
+il diorama del menu, spostato nell'area libera a destra.
 
 ## Servizi
 
@@ -101,22 +106,26 @@ con ombre e una luce di riempimento.
 
 Le schermate sono costruite a runtime: nessun file `.tscn` per la UI. Il
 linguaggio visivo è centralizzato in `scripts/ui/palette.gd` (colori, tipografia,
-bottoni, chip, pannelli, barre di progresso).
+bottoni, chip, pannelli, barre di progresso). I pittogrammi dei comandi sono
+vettoriali e condivisi (`scripts/ui/game_icon.gd`): niente emoji o font esterni,
+stesse forme su desktop, web, Android e lavagna.
 
 | Schermata | File | Contenuto |
 | --- | --- | --- |
 | Menu | `menu_screen.gd` | Diorama 3D, avvio, officina, area insegnante, impostazioni, crediti, profili |
 | Mondi | `world_select_screen.gd` | Nove mondi in ordine di curricolo, progresso, blocchi facoltativi |
 | Hub | `hub_screen.gd` | Portali 3D delle missioni, joystick, striscia di schede |
-| Missione | `mission_screen.gd` | Editor, esecuzione, obiettivi, aiuti, diagnostica, viste, successo |
+| Missione | `mission_screen.gd` | Editor, esecuzione, obiettivi, aiuti, diagnostica, viste, successo; pannelli minimizzabili e campo 3D riadattivo |
 | Officina | `lab_screen.gd` | Griglia libera e programmazione aperta |
 | Impostazioni | `settings_screen.gd` | Voce, sottotitoli, TTS, contrasto, animazioni, touch, vista |
 | Insegnante | `teacher_screen.gd` | Riepilogo, evidenze per missione, PIN, preferenze, export |
 | Crediti | `credits_screen.gd` | Trasparenza su codice, arte, voci e licenze |
 
 `program_editor.gd` offre due modalità: blocchi/perle (per `icons` e `beads`) e
-testo con palette di snippet (tutti gli altri editor). La modalità deriva dal
-campo `editor` della missione.
+testo con palette di snippet (tutti gli altri editor). Nei primi due la palette
+è una distesa di tessere con pittogramma, etichetta di supporto e contatore
+grafico; la scheda testo è nascosta e i comandi disponibili sono filtrati per
+livello. La modalità deriva dal campo `editor` della missione.
 
 ## Dati
 

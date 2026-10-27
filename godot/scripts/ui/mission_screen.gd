@@ -15,22 +15,42 @@ var result: Dictionary = {}
 var editor: ProgramEditor
 
 var _touch_area: Control
+var _top_bar: PanelContainer
+var _left_panel: PanelContainer
+var _right_panel: PanelContainer
+var _left_toggle: Button
+var _right_toggle: Button
+var _right_icon: GameIcon
 var _run_btn: Button
+var _run_icon: GameIcon
+var _run_label: Label
 var _step_btn: Button
 var _status: Label
+var _status_icon: GameIcon
 var _steps_label: Label
 var _goal_box: VBoxContainer
 var _hint_box: VBoxContainer
 var _hint_button: Button
 var _debug_label: Label
 var _camera_btn: Button
+var _camera_label: Label
+var _voice_btn: Button
+var _voice_icon: GameIcon
+var _zoom_buttons: Array[Button] = []
 var _subtitle_panel: PanelContainer
 var _subtitle_label: Label
+var _subtitle_token := 0
 var _success_overlay: Control
 var _hint_level := 0
 var _press_pos := Vector2.ZERO
 var _dragging := false
 var _camera_mode := 0
+var _graphic := false
+var _left_open := true
+var _right_open := true
+var _left_width := 520.0
+var _right_width := 340.0
+var _goal_state := 0  # -1 failed, 0 pending, 1 complete
 
 
 func build() -> void:
@@ -43,23 +63,32 @@ func build() -> void:
 			mission_id = str(mission.get("id", ""))
 	world = MissionRepository.world(str(mission.get("world", args.get("world_id", ""))))
 	_camera_mode = maxi(0, ["fixed", "chase", "first"].find(str(GameState.get_setting("camera_mode", "fixed"))))
-	_build_stage()
+	_graphic = str(mission.get("editor", "text")) in ["icons", "beads"]
+	_compute_widths()
+	_apply_layout_defaults()
 	_build_ui()
+	_build_stage()
+	_update_layout()
 	editor.set_mission(mission)
 	_refresh_goals({}, false)
 	_update_debug()
 	_populate_hints()
-	_set_status("Pronto. Componi il programma e premi ESEGUI.", Palette.MUTED)
+	_set_status("Tocca un comando, poi GIOCA." if _graphic else "Pronto. Componi il programma e premi ESEGUI.", Palette.MUTED)
 	var narration := str(mission.get("narration_line", mission.get("narrative", "")))
 	if narration != "":
 		_show_subtitle(narration)
 		Narration.speak(mission_id.to_lower(), narration, 8.0)
 	Narration.subtitle.connect(_on_narration_subtitle)
+	if not get_viewport().size_changed.is_connected(_on_viewport_resized):
+		get_viewport().size_changed.connect(_on_viewport_resized)
 
 
 func leave() -> void:
+	_subtitle_token += 1
 	if Narration.subtitle.is_connected(_on_narration_subtitle):
 		Narration.subtitle.disconnect(_on_narration_subtitle)
+	if get_viewport().size_changed.is_connected(_on_viewport_resized):
+		get_viewport().size_changed.disconnect(_on_viewport_resized)
 	Narration.stop()
 
 
@@ -75,7 +104,7 @@ func _build_stage() -> void:
 	out.root.add_child(rig)
 	var bounds: Rect2 = out.get("bounds", Rect2(-5, -4, 10, 8))
 	rig.fov = 32.0
-	rig.safe_rect = Rect2(0.379, 0.111, 0.392, 0.778)
+	rig.safe_rect = _safe_rect()
 	rig.setup_for_bounds(bounds, builder.nilo)
 	rig.mode = _camera_mode
 	rig.zoom = 1.0
@@ -115,72 +144,79 @@ func _build_ui() -> void:
 
 
 func _build_top_bar() -> void:
-	var bar := PanelContainer.new()
-	bar.add_theme_stylebox_override("panel", Palette.style(Color(0.06, 0.10, 0.17, 0.95), 18, Color(1, 1, 1, 0.10), 1))
-	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-	bar.offset_left = 24
-	bar.offset_right = -24
-	bar.offset_top = 16
-	bar.offset_bottom = 88
-	add_child(bar)
+	_top_bar = PanelContainer.new()
+	_top_bar.add_theme_stylebox_override("panel", _bar_style())
+	_top_bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	add_child(_top_bar)
 
-	var h := Palette.hbox(10)
-	bar.add_child(h)
+	var h := Palette.hbox(8)
+	_top_bar.add_child(h)
 
-	var back := Palette.ghost_button("← MONDO", 16)
-	back.custom_minimum_size = Vector2(128, 50)
+	var back := Palette.icon_button("chevron_left", "MONDO", Palette.CARD_LIGHT, 13, Vector2(116, 44), 18)
+	back.tooltip_text = "Torna al mondo"
 	back.pressed.connect(func(): go("hub", {"world_id": str(world.get("id", mission.get("world", "")))}))
 	h.add_child(back)
+
+	_left_toggle = Palette.icon_button("code", "", Palette.CARD_LIGHT, 13, Vector2(44, 44), 20)
+	_left_toggle.pressed.connect(_toggle_left_panel)
+	h.add_child(_left_toggle)
 
 	var titles := Palette.vbox(0)
 	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	titles.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	h.add_child(titles)
-	titles.add_child(Palette.label(mission_id + " · " + str(world.get("title", str(mission.get("world", "")))), 12, Palette.MUTED))
-	var title := Palette.label(str(mission.get("title", "Missione")), 22, Palette.CREAM)
+	titles.add_child(Palette.label(mission_id + " · " + str(world.get("title", str(mission.get("world", "")))), 10, Palette.MUTED))
+	var title := Palette.label(str(mission.get("title", "Missione")), 17, Palette.CREAM)
 	title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	title.max_lines_visible = 1
 	title.clip_text = true
 	titles.add_child(title)
 
-	_steps_label = Palette.label("passi 0", 13, Palette.MUTED)
-	_steps_label.custom_minimum_size = Vector2(90, 0)
+	_steps_label = Palette.label("passi 0", 12, Palette.MUTED)
+	_steps_label.custom_minimum_size = Vector2(70, 0)
+	_steps_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	h.add_child(_steps_label)
 
-	_camera_btn = Palette.ghost_button("VISTA", 14)
-	_camera_btn.custom_minimum_size = Vector2(128, 48)
+	_right_toggle = Palette.icon_button("target", "", Palette.CARD_LIGHT, 13, Vector2(44, 44), 20)
+	_right_toggle.pressed.connect(_toggle_right_panel)
+	h.add_child(_right_toggle)
+	_right_icon = _find_icon(_right_toggle)
+
+	_camera_btn = Palette.icon_button("view", "FISSA", Palette.CARD_LIGHT, 12, Vector2(118, 44), 18)
+	_camera_btn.tooltip_text = "Cambia vista 3D"
 	_camera_btn.pressed.connect(_cycle_camera)
 	h.add_child(_camera_btn)
+	_camera_label = _find_label(_camera_btn)
 	_update_camera_button()
 
-	var zoom_in := Palette.ghost_button("+", 20)
-	zoom_in.custom_minimum_size = Vector2(48, 48)
+	var zoom_in := Palette.icon_button("zoom_in", "", Palette.CARD_LIGHT, 13, Vector2(44, 44), 20)
 	zoom_in.tooltip_text = "Avvicina la vista"
 	zoom_in.pressed.connect(func():
 		if rig != null:
 			rig.zoom_by(0.88))
 	h.add_child(zoom_in)
-	var zoom_out := Palette.ghost_button("-", 20)
-	zoom_out.custom_minimum_size = Vector2(48, 48)
+	_zoom_buttons.append(zoom_in)
+	var zoom_out := Palette.icon_button("zoom_out", "", Palette.CARD_LIGHT, 13, Vector2(44, 44), 20)
 	zoom_out.tooltip_text = "Allontana la vista"
 	zoom_out.pressed.connect(func():
 		if rig != null:
 			rig.zoom_by(1.14))
 	h.add_child(zoom_out)
+	_zoom_buttons.append(zoom_out)
 
-	var voice := Palette.ghost_button("VOCE", 14)
-	voice.custom_minimum_size = Vector2(96, 48)
-	voice.pressed.connect(func():
+	_voice_btn = Palette.icon_button("voice", "", Palette.CARD_LIGHT, 13, Vector2(44, 44), 20)
+	_voice_btn.pressed.connect(func():
 		var enabled := not bool(GameState.get_setting("voice", true))
 		GameState.set_setting("voice", enabled)
 		toast("Voce " + ("attiva" if enabled else "disattivata"), 1.6)
-		voice.text = "VOCE ON" if enabled else "VOCE OFF")
-	voice.text = "VOCE ON" if bool(GameState.get_setting("voice", true)) else "VOCE OFF"
-	h.add_child(voice)
+		_update_voice_button())
+	h.add_child(_voice_btn)
+	_voice_icon = _find_icon(_voice_btn)
+	_update_voice_button()
 
 	if bool(GameState.get_setting("show_solution", false)):
-		var solution := Palette.ghost_button("SOLUZIONE", 13)
-		solution.custom_minimum_size = Vector2(110, 48)
+		var solution := Palette.icon_button("hint", "", Palette.CARD_LIGHT, 13, Vector2(44, 44), 20)
+		solution.tooltip_text = "Carica la soluzione di riferimento"
 		solution.pressed.connect(_show_solution)
 		h.add_child(solution)
 
@@ -199,27 +235,27 @@ func _editor_label(editor: String) -> String:
 
 
 func _build_left_panel() -> void:
-	var panel := PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", Palette.style(Color(0.06, 0.10, 0.17, 0.95), 20, Color(1, 1, 1, 0.10), 1))
-	panel.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
-	panel.offset_left = 24
-	panel.offset_right = 606
-	panel.offset_top = 100
-	panel.offset_bottom = -24
-	add_child(panel)
+	_left_panel = PanelContainer.new()
+	_left_panel.add_theme_stylebox_override("panel", _panel_style())
+	_left_panel.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
+	add_child(_left_panel)
 
-	var box := Palette.vbox(8)
-	panel.add_child(box)
+	var box := Palette.vbox(6)
+	_left_panel.add_child(box)
 
-	var head := Palette.hbox(8)
+	var head := Palette.hbox(6)
 	head.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(head)
-	head.add_child(Palette.label("PROGRAMMA DI NILO", 13, Palette.MUTED))
+	head.add_child(Palette.label("PROGRAMMA", 11, Palette.MUTED))
 	var grow := Control.new()
 	grow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	grow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	head.add_child(grow)
-	head.add_child(Palette.label(_editor_label(str(mission.get("editor", "text"))), 12, Palette.PURPLE))
+	head.add_child(Palette.label(_editor_label(str(mission.get("editor", "text"))), 10, Palette.PURPLE))
+	var collapse := Palette.icon_button("chevron_left", "", Palette.CARD_LIGHT, 11, Vector2(34, 30), 15)
+	collapse.tooltip_text = "Riduci il programma"
+	collapse.pressed.connect(_toggle_left_panel)
+	head.add_child(collapse)
 
 	editor = ProgramEditor.new()
 	editor.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -227,81 +263,283 @@ func _build_left_panel() -> void:
 
 	var actions := Palette.hbox(8)
 	box.add_child(actions)
-	_run_btn = Palette.button("ESEGUI", Palette.TEAL, 20)
+	_run_btn = Palette.button("", Palette.TEAL, 20)
 	_run_btn.custom_minimum_size = Vector2(0, 62)
 	_run_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_run_btn.pressed.connect(_on_run)
 	actions.add_child(_run_btn)
-	_step_btn = Palette.button("PASSO", Palette.CARD_LIGHT, 17)
-	_step_btn.custom_minimum_size = Vector2(120, 62)
+	var run_row := Palette.hbox(10)
+	run_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	run_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	run_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_run_btn.add_child(run_row)
+	_run_icon = GameIcon.new("play", 26, Palette.INK)
+	run_row.add_child(_run_icon)
+	_run_label = Palette.label("GIOCA" if _graphic else "ESEGUI", 19, Palette.INK)
+	_run_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	run_row.add_child(_run_label)
+
+	_step_btn = Palette.icon_button("step", "PASSO", Palette.CARD_LIGHT, 15, Vector2(132, 62), 20)
+	_step_btn.tooltip_text = "Esegui un solo passo"
 	_step_btn.pressed.connect(_on_step)
 	actions.add_child(_step_btn)
-	var reset := Palette.ghost_button("RESET", 15)
-	reset.custom_minimum_size = Vector2(100, 62)
+	var reset := Palette.icon_button("reset", "", Palette.CARD_LIGHT, 15, Vector2(62, 62), 22)
+	reset.tooltip_text = "Ricomincia da capo"
 	reset.pressed.connect(_on_reset)
 	actions.add_child(reset)
 
-	_status = Palette.label("", 14, Palette.MUTED)
+	var status_row := Palette.hbox(6)
+	box.add_child(status_row)
+	_status_icon = GameIcon.new("hint", 16, Palette.MUTED)
+	status_row.add_child(_status_icon)
+	_status = Palette.label("", 13, Palette.MUTED)
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status.custom_minimum_size = Vector2(0, 40)
-	box.add_child(_status)
+	_status.custom_minimum_size = Vector2(0, 34)
+	_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	status_row.add_child(_status)
 
 
 func _build_right_panel() -> void:
-	var panel := PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", Palette.style(Color(0.06, 0.10, 0.17, 0.95), 20, Color(1, 1, 1, 0.10), 1))
-	panel.set_anchors_and_offsets_preset(Control.PRESET_RIGHT_WIDE)
-	panel.offset_left = -366
-	panel.offset_right = -24
-	panel.offset_top = 100
-	panel.offset_bottom = -24
-	add_child(panel)
+	_right_panel = PanelContainer.new()
+	_right_panel.add_theme_stylebox_override("panel", _panel_style())
+	_right_panel.set_anchors_and_offsets_preset(Control.PRESET_RIGHT_WIDE)
+	add_child(_right_panel)
 
-	var outer := Palette.vbox(6)
-	panel.add_child(outer)
+	var outer := Palette.vbox(4)
+	_right_panel.add_child(outer)
+
+	var head := Palette.hbox(6)
+	head.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	outer.add_child(head)
+	head.add_child(Palette.label("OBIETTIVO E AIUTI", 11, Palette.MUTED))
+	var grow := Control.new()
+	grow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	head.add_child(grow)
+	var collapse := Palette.icon_button("chevron_right", "", Palette.CARD_LIGHT, 11, Vector2(34, 30), 15)
+	collapse.tooltip_text = "Riduci obiettivi e aiuti"
+	collapse.pressed.connect(_toggle_right_panel)
+	head.add_child(collapse)
+
 	var scroll := Palette.scroll()
 	outer.add_child(scroll)
-	var box := Palette.vbox(10)
+	var box := Palette.vbox(8)
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(box)
 
-	box.add_child(Palette.label("OBIETTIVO", 13, Palette.MUTED))
-	box.add_child(Palette.label(str(mission.get("coding_goal", mission.get("narrative", ""))), 14, Palette.CREAM, true))
-	_goal_box = Palette.vbox(4)
+	box.add_child(Palette.label("OBIETTIVO", 10, Palette.MUTED))
+	box.add_child(Palette.label(str(mission.get("coding_goal", mission.get("narrative", ""))), 13, Palette.CREAM, true))
+	_goal_box = Palette.vbox(3)
 	box.add_child(_goal_box)
 
-	box.add_child(Palette.spacer(4))
-	box.add_child(Palette.label("AIUTI", 13, Palette.MUTED))
-	_hint_button = Palette.button("MOSTRA UN AIUTO", Palette.YELLOW, 15)
-	_hint_button.custom_minimum_size = Vector2(0, 46)
+	box.add_child(Palette.spacer(2))
+	box.add_child(Palette.label("AIUTI", 10, Palette.MUTED))
+	_hint_button = Palette.button("MOSTRA UN AIUTO", Palette.YELLOW, 14)
+	_hint_button.custom_minimum_size = Vector2(0, 44)
 	_hint_button.pressed.connect(_on_hint)
 	box.add_child(_hint_button)
-	_hint_box = Palette.vbox(4)
+	_hint_box = Palette.vbox(3)
 	box.add_child(_hint_box)
 
-	box.add_child(Palette.spacer(4))
-	box.add_child(Palette.label("DIAGNOSTICA", 13, Palette.MUTED))
-	_debug_label = Palette.label("Nessuna esecuzione.", 13, Palette.MUTED, true)
-	_debug_label.custom_minimum_size = Vector2(0, 60)
+	box.add_child(Palette.spacer(2))
+	box.add_child(Palette.label("DIAGNOSTICA", 10, Palette.MUTED))
+	_debug_label = Palette.label("Nessuna esecuzione.", 12, Palette.MUTED, true)
+	_debug_label.custom_minimum_size = Vector2(0, 54)
 	box.add_child(_debug_label)
 
 
 func _build_subtitle() -> void:
 	_subtitle_panel = PanelContainer.new()
-	_subtitle_panel.add_theme_stylebox_override("panel", Palette.style(Color(0.04, 0.07, 0.12, 0.90), 14, Color(1, 1, 1, 0.10), 1))
+	var st := Palette.style(Color(0.04, 0.07, 0.12, 0.86), 12, Color(1, 1, 1, 0.08), 1)
+	st.content_margin_left = 16
+	st.content_margin_right = 16
+	st.content_margin_top = 6
+	st.content_margin_bottom = 6
+	st.shadow_size = 4
+	_subtitle_panel.add_theme_stylebox_override("panel", st)
 	_subtitle_panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	_subtitle_panel.offset_left = 610
-	_subtitle_panel.offset_right = -372
-	_subtitle_panel.offset_top = -100
-	_subtitle_panel.offset_bottom = -28
 	_subtitle_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_subtitle_panel.visible = false
 	add_child(_subtitle_panel)
-	_subtitle_label = Palette.label("", 16, Palette.CREAM, true)
+	_subtitle_label = Palette.label("", 15, Palette.CREAM, true)
 	_subtitle_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_subtitle_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_subtitle_label.max_lines_visible = 3
+	_subtitle_label.max_lines_visible = 2
 	_subtitle_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	_subtitle_panel.add_child(_subtitle_label)
+
+
+# ---------------------------------------------------------------------------
+# Responsive layout: the panels are drawers and the camera frames only the
+# screen area they leave free, so the field is never hidden behind the UI.
+# ---------------------------------------------------------------------------
+func _screen_size() -> Vector2:
+	var s := get_viewport_rect().size
+	return s if s.x > 0 and s.y > 0 else Vector2(1600, 900)
+
+
+func _compute_widths() -> void:
+	var w := _screen_size().x
+	_left_width = clampf(w * (0.33 if _graphic else 0.36), 340.0, 560.0)
+	_right_width = clampf(w * 0.22, 260.0, 350.0)
+
+
+func _apply_layout_defaults() -> void:
+	var w := _screen_size().x
+	_left_open = w >= 900.0
+	_right_open = not _graphic and w >= 1180.0
+
+
+func _toggle_left_panel() -> void:
+	_left_open = not _left_open
+	_update_layout()
+
+
+func _toggle_right_panel() -> void:
+	_right_open = not _right_open
+	_update_layout()
+
+
+func _update_layout() -> void:
+	if _left_panel == null or _top_bar == null:
+		return
+	var s := _screen_size()
+	var margin := 16.0
+	var top := 82.0
+	var bottom := -16.0
+
+	_top_bar.offset_left = margin
+	_top_bar.offset_right = -margin
+	_top_bar.offset_top = 10
+	_top_bar.offset_bottom = 72
+
+	_left_panel.visible = _left_open
+	_left_panel.offset_left = margin
+	_left_panel.offset_right = margin + _left_width
+	_left_panel.offset_top = top
+	_left_panel.offset_bottom = bottom
+
+	_right_panel.visible = _right_open
+	_right_panel.offset_left = -(margin + _right_width)
+	_right_panel.offset_right = -margin
+	_right_panel.offset_top = top
+	_right_panel.offset_bottom = bottom
+
+	var left_gap := margin + (_left_width + 10.0 if _left_open else 0.0)
+	var right_gap := margin + (_right_width + 10.0 if _right_open else 0.0)
+	_subtitle_panel.offset_left = left_gap
+	_subtitle_panel.offset_right = -right_gap
+	_subtitle_panel.offset_top = -86
+	_subtitle_panel.offset_bottom = -16
+
+	for b in _zoom_buttons:
+		b.visible = s.x >= 1060
+	if _steps_label != null:
+		_steps_label.visible = s.x >= 760
+	_update_panel_toggles()
+	_update_safe_rect()
+
+
+func _safe_rect() -> Rect2:
+	var s := _screen_size()
+	var margin := 16.0
+	var left := margin + (_left_width + 10.0 if _left_open else 0.0)
+	var right := margin + (_right_width + 10.0 if _right_open else 0.0)
+	var top := 80.0
+	var bottom := 150.0 if (_subtitle_panel != null and _subtitle_panel.visible) else 92.0
+	var width := maxf(0.2, (s.x - left - right) / s.x)
+	var height := maxf(0.2, (s.y - top - bottom) / s.y)
+	return Rect2(left / s.x, top / s.y, width, height)
+
+
+func _update_safe_rect() -> void:
+	if rig != null:
+		rig.safe_rect = _safe_rect()
+
+
+func _update_panel_toggles() -> void:
+	if _left_toggle != null:
+		_left_toggle.add_theme_stylebox_override("normal", _toggle_style(_left_open))
+		_left_toggle.tooltip_text = "Nascondi il programma" if _left_open else "Mostra il programma"
+	if _right_toggle != null:
+		_right_toggle.add_theme_stylebox_override("normal", _toggle_style(_right_open))
+		_right_toggle.tooltip_text = "Nascondi obiettivi e aiuti" if _right_open else "Mostra obiettivi e aiuti"
+	if _right_icon != null:
+		var tint := Palette.CREAM
+		if _goal_state == 1:
+			tint = Palette.GREEN
+		elif _goal_state == -1:
+			tint = Palette.CORAL
+		_right_icon.set_icon("target", tint)
+
+
+func _update_voice_button() -> void:
+	var enabled := bool(GameState.get_setting("voice", true))
+	if _voice_icon != null:
+		_voice_icon.set_icon("voice", Palette.GREEN if enabled else Palette.MUTED)
+	if _voice_btn != null:
+		_voice_btn.tooltip_text = "Voce attiva" if enabled else "Voce disattivata"
+
+
+func _on_viewport_resized() -> void:
+	_compute_widths()
+	# On narrow windows the drawers would cover the field: close them first.
+	var w := _screen_size().x
+	if w < 900.0:
+		_left_open = false
+	if w < 1180.0:
+		_right_open = false
+	_update_layout()
+
+
+func _panel_style() -> StyleBoxFlat:
+	var st := Palette.style(Color(0.06, 0.10, 0.17, 0.94), 18, Color(1, 1, 1, 0.10), 1)
+	st.content_margin_left = 14
+	st.content_margin_right = 14
+	st.content_margin_top = 10
+	st.content_margin_bottom = 10
+	st.shadow_size = 6
+	return st
+
+
+func _bar_style() -> StyleBoxFlat:
+	var st := Palette.style(Color(0.06, 0.10, 0.17, 0.92), 16, Color(1, 1, 1, 0.10), 1)
+	st.content_margin_left = 10
+	st.content_margin_right = 10
+	st.content_margin_top = 6
+	st.content_margin_bottom = 6
+	st.shadow_size = 4
+	return st
+
+
+func _toggle_style(active: bool) -> StyleBoxFlat:
+	var st := Palette.style(Palette.PURPLE if active else Palette.CARD_LIGHT, 12, Palette.PURPLE.lightened(0.25) if active else Color(1, 1, 1, 0.14), 1)
+	st.content_margin_left = 6
+	st.content_margin_right = 6
+	st.content_margin_top = 6
+	st.content_margin_bottom = 6
+	st.shadow_size = 0
+	return st
+
+
+func _find_icon(node: Node) -> GameIcon:
+	for c in node.get_children():
+		if c is GameIcon:
+			return c
+		var found := _find_icon(c)
+		if found != null:
+			return found
+	return null
+
+
+func _find_label(node: Node) -> Label:
+	for c in node.get_children():
+		if c is Label:
+			return c
+		var found := _find_label(c)
+		if found != null:
+			return found
+	return null
 
 
 func _show_subtitle(text: String) -> void:
@@ -309,6 +547,9 @@ func _show_subtitle(text: String) -> void:
 		return
 	_subtitle_label.text = text
 	_subtitle_panel.visible = text != ""
+	# The subtitle occupies the bottom strip: reserve it only while visible so
+	# the field can grow back as soon as the narration ends.
+	_update_safe_rect()
 
 
 # ---------------------------------------------------------------------------
@@ -346,7 +587,7 @@ func _execute(auto_play: bool) -> void:
 	_hide_success()
 	var source := editor.get_source()
 	if source.strip_edges().is_empty():
-		toast("Scrivi almeno un comando per Nilo.", 3.0, Palette.YELLOW)
+		toast("Tocca almeno un comando per Nilo." if _graphic else "Scrivi almeno un comando per Nilo.", 3.0, Palette.YELLOW)
 		_set_status("Il programma è vuoto.", Palette.YELLOW)
 		return
 	editor.clear_error()
@@ -368,9 +609,9 @@ func _execute(auto_play: bool) -> void:
 	playback.load_events(events, builder)
 	if auto_play:
 		playback.play()
-		_run_btn.text = "PAUSA"
+		_set_run_button("pausa", "PAUSA")
 	else:
-		_run_btn.text = "CONTINUA"
+		_set_run_button("play", "CONTINUA")
 	if events.is_empty():
 		_on_playback_finished()
 
@@ -384,18 +625,18 @@ func _on_reset() -> void:
 	editor.clear_error()
 	_refresh_goals({}, false)
 	_update_debug()
-	_set_status("Pronto. Componi il programma e premi ESEGUI.", Palette.MUTED)
-	_run_btn.text = "ESEGUI"
+	_set_status("Tocca un comando, poi GIOCA." if _graphic else "Pronto. Componi il programma e premi ESEGUI.", Palette.MUTED)
+	_set_run_button("play", "GIOCA" if _graphic else "ESEGUI")
 
 
 func _on_playback_state(playing: bool, index: int, total: int) -> void:
 	if _run_btn != null:
 		if playing:
-			_run_btn.text = "PAUSA"
+			_set_run_button("pausa", "PAUSA")
 		elif index >= total and total > 0:
-			_run_btn.text = "RIPETI"
+			_set_run_button("ripeti", "RIPETI")
 		else:
-			_run_btn.text = "CONTINUA" if index > 0 else "ESEGUI"
+			_set_run_button("play", "CONTINUA" if index > 0 else ("GIOCA" if _graphic else "ESEGUI"))
 	if _steps_label != null:
 		_steps_label.text = "passi %d" % _count_steps(index)
 
@@ -421,7 +662,7 @@ func _on_playback_finished() -> void:
 	if success:
 		editor.mark_success()
 		_set_status("Missione compiuta in %d passi!" % steps, Palette.GREEN)
-		_run_btn.text = "RIPETI"
+		_set_run_button("ripeti", "RIPETI")
 		if builder != null and builder.nilo != null:
 			builder.nilo.celebrate()
 		GameState.award_badge(mission_id)
@@ -431,7 +672,7 @@ func _on_playback_finished() -> void:
 		var reason := str(result.get("failure_reason", "Obiettivo non raggiunto."))
 		_set_status(reason, Palette.CORAL)
 		toast(reason, 5.0, Palette.CORAL)
-		_run_btn.text = "RIPROVA"
+		_set_run_button("reset", "RIPROVA")
 		var evs: Array = result.get("events", [])
 		if not evs.is_empty() and str(evs[-1].get("kind", "")) == "error":
 			var msg := str(evs[-1].get("message", ""))
@@ -459,26 +700,35 @@ func _refresh_goals(checks: Dictionary, has_result: bool) -> void:
 		c.queue_free()
 	var items := _goal_items()
 	if items.is_empty():
+		_goal_state = 0
 		_goal_box.add_child(Palette.label("Esplora liberamente: non ci sono vincoli.", 13, Palette.MUTED, true))
+		_update_panel_toggles()
 		return
+	var total := 0
+	var passed := 0
 	for item in items:
 		var key := str(item.get("key", ""))
 		var has_key := checks.has(key)
 		var ok := bool(checks.get(key, false)) if has_key else false
-		var glyph := "•"
+		total += 1
+		if has_result and has_key and ok:
+			passed += 1
+		var glyph := "target"
 		var color := Palette.MUTED
 		if has_result and has_key:
-			glyph = "✓" if ok else "✕"
+			glyph = "check" if ok else "cross"
 			color = Palette.GREEN if ok else Palette.CORAL
 		var row := Palette.hbox(8)
 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var g := Palette.label(glyph, 16, color)
-		g.custom_minimum_size = Vector2(18, 0)
+		var g := GameIcon.new(glyph, 16.0, color)
+		g.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		row.add_child(g)
 		var t := Palette.label(str(item.get("text", "")), 13, color if has_result else Palette.CREAM, true)
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(t)
 		_goal_box.add_child(row)
+	_goal_state = 1 if has_result and passed >= total else (-1 if has_result else 0)
+	_update_panel_toggles()
 
 
 func _goal_items() -> Array:
@@ -562,7 +812,7 @@ func _update_debug() -> void:
 	if _debug_label == null:
 		return
 	if result.is_empty():
-		_debug_label.text = "Nessuna esecuzione. Premi ESEGUI per vedere le variabili."
+		_debug_label.text = "Nessuna esecuzione. Premi %s per vedere le variabili." % ("GIOCA" if _graphic else "ESEGUI")
 		return
 	var state: Dictionary = result.get("state", {})
 	var vars: Dictionary = state.get("vars", {})
@@ -588,7 +838,7 @@ func _show_solution() -> void:
 		toast("Questa missione non ha una soluzione di riferimento.", 3.0, Palette.MUTED)
 		return
 	editor.set_source(ref)
-	_set_status("Soluzione caricata nell'editor. Premi ESEGUI per provarla.", Palette.YELLOW)
+	_set_status("Soluzione caricata nell'editor. Premi %s per provarla." % ("GIOCA" if _graphic else "ESEGUI"), Palette.YELLOW)
 
 
 # ---------------------------------------------------------------------------
@@ -690,10 +940,19 @@ func _cycle_camera() -> void:
 
 
 func _update_camera_button() -> void:
-	if _camera_btn == null or rig == null:
+	if _camera_btn == null:
 		return
-	var short := ["FISSA", "SEGUI", "1ª PERSONA"]
-	_camera_btn.text = "VISTA: " + short[clampi(_camera_mode, 0, 2)]
+	var short := ["FISSA", "SEGUI", "1ª"]
+	if _camera_label != null:
+		_camera_label.text = short[clampi(_camera_mode, 0, 2)]
+	_camera_btn.tooltip_text = "Vista: " + ["campo fisso", "inseguimento 3D", "prima persona"][clampi(_camera_mode, 0, 2)]
+
+
+func _set_run_button(icon_name: String, text: String) -> void:
+	if _run_label != null:
+		_run_label.text = text
+	if _run_icon != null:
+		_run_icon.set_icon(icon_name)
 
 
 func _on_stage_touch(event: InputEvent) -> void:
@@ -744,8 +1003,17 @@ func _unhandled_input(event: InputEvent) -> void:
 				go("hub", {"world_id": str(mission.get("world", ""))})
 
 
-func _on_narration_subtitle(text: String, _seconds: float) -> void:
+func _on_narration_subtitle(text: String, seconds: float) -> void:
 	_show_subtitle(text)
+	# Subtitles clear themselves so the bottom strip (and the field it reserves)
+	# is freed as soon as the line has been read.
+	_subtitle_token += 1
+	var token := _subtitle_token
+	var hold := maxf(4.0, seconds)
+	get_tree().create_timer(hold).timeout.connect(func():
+		if token != _subtitle_token or not is_inside_tree():
+			return
+		_show_subtitle(""))
 
 
 func _set_status(text: String, color: Color) -> void:
@@ -753,3 +1021,10 @@ func _set_status(text: String, color: Color) -> void:
 		return
 	_status.text = text
 	_status.add_theme_color_override("font_color", color)
+	if _status_icon != null:
+		var glyph := "hint"
+		if color == Palette.GREEN:
+			glyph = "check"
+		elif color == Palette.CORAL:
+			glyph = "cross"
+		_status_icon.set_icon(glyph, color)

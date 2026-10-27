@@ -33,8 +33,21 @@ func _run() -> void:
 	await _shot("04_mission_icons")
 
 	var scr = main.current
-	scr.editor._switch_tab("text")
-	scr.editor.set_source("AVANTI 4")
+	scr._toggle_left_panel()
+	await _wait(0.6)
+	await _shot("04b_mission_field")
+	scr._toggle_left_panel()
+	await _wait(0.4)
+
+	main.show_screen("mission", {"world_id": "savana", "mission_id": "INF-01"})
+	await _wait(0.8)
+	await _shot("04c_mission_inf")
+	main.show_screen("mission", {"world_id": "giardino", "mission_id": "P1-01"})
+	await _wait(0.8)
+	scr = main.current
+	scr.editor.blocks = [{"op": "AVANTI", "n": 4}]
+	scr.editor._target = scr.editor.blocks
+	scr.editor._rebuild()
 	scr._execute(true)
 	await _wait(1.2)
 	await _shot("05_mission_running")

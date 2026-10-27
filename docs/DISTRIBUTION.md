@@ -1,5 +1,8 @@
 # Distribuzioni
 
+Le build di questa versione sono allegate alla
+[release v0.1.0](https://github.com/MaestroLivio/ElephantCoding/releases/tag/v0.1.0).
+
 Le build distributive si generano da macOS con:
 
 ```bash

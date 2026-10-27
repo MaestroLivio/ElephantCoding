@@ -66,6 +66,9 @@ portatile per Windows, `.deb` e `.tar.gz` per Linux, APK per Android, ZIP per
 il web, più `SHA256SUMS.txt`. Istruzioni, requisiti e limiti in
 [`docs/DISTRIBUTION.md`](docs/DISTRIBUTION.md).
 
+Le build verificate di questa versione sono pubblicate nella
+[release v0.1.0](https://github.com/MaestroLivio/ElephantCoding/releases/tag/v0.1.0).
+
 ## Comandi
 
 | Azione | Touch | Mouse / tastiera |

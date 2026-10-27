@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "locale": "it",
+  "directory": "res://assets/audio/voice/it",
+  "naming": "<line_id>.ogg",
+  "policy": {
+    "allowed_licenses": [
+      "CC BY 4.0",
+      "CC BY-SA 4.0",
+      "CC0 1.0"
+    ],
+    "requires_attribution": true,
+    "notes": [
+      "Sono ammessi solo clip con licenza compatibile con la distribuzione CC BY 4.0 del progetto.",
+      "Ogni clip deve indicare autore, URL della fonte e riga di attribuzione.",
+      "Nessun audio di terze parti non verificato è incluso nel repository.",
+      "Se un clip manca, il gioco mostra i sottotitoli e può usare la voce di sistema."
+    ]
+  },
+  "fallback": {
+    "subtitles": true,
+    "system_tts": "DisplayServer.tts (voce italiana del dispositivo)",
+    "notes": "La voce del sistema non viene redistribuita con il gioco."
+  },
+  "expected_lines": 462,
+  "kinds": {
+    "system": 3,
+    "world": 9,
+    "narration": 90,
+    "success": 90,
+    "hint": 270
+  },
+  "bundled": false,
+  "packs": []
+}

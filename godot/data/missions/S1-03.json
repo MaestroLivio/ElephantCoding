@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "S1-03",
+  "world": "cittadella",
+  "school_level": "S1",
+  "age_hint": "11-12 anni",
+  "title": "La torre delle potenze",
+  "editor": "structured",
+  "narrative": "Scala modulare: 2 piani per blocco, 4 blocchi; un parametro definisce quanti passi salire.",
+  "coding_goal": "Usare funzione parametrica e iterazione numerica.",
+  "math_objective": "Prodotti, potenze introduttive, moltiplicazione ripetuta.",
+  "success_text": "L'elefantino raggiunge il livello 8 senza piani mancanti.",
+  "extension": "Confrontare 2×4 e 4×2 in termini di percorso.",
+  "design_reference": "«PROCEDURA sali(n) { RIPETI n VOLTE { SU 1 } }; sali(2) x4».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "N"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "s103-target",
+      "kind": "target",
+      "cell": [
+        0,
+        8
+      ],
+      "label": "Torre",
+      "glyph": "T"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "PROCEDURA sali(n) { RIPETI n VOLTE { AVANTI 1 } }\nsali(2) x4",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      0,
+      8
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "PROCEDURA sali(n) { RIPETI n VOLTE { AVANTI 1 } }\nsali(2) x4",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Confrontare 2×4 e 4×2 in termini di percorso."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s1",
+    "structured"
+  ],
+  "narration_line": "La torre delle potenze. Scala modulare: 2 piani per blocco, 4 blocchi; un parametro definisce quanti passi salire.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#bde0fe",
+    "ground": "#457b9d",
+    "accent": "#ffd166",
+    "prop": "tower"
+  }
+}

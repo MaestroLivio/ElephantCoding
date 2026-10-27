@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "id": "P4-08",
+  "world": "isola",
+  "school_level": "P4",
+  "age_hint": "9-10 anni",
+  "title": "L'ostacolo sulla griglia",
+  "editor": "coordinates",
+  "narrative": "Tra (0,0) e (4,0) c'è un blocco alle celle (2,0); passaggio possibile su y=1.",
+  "coding_goal": "Sostituire linea diretta con percorso valido composto da waypoint.",
+  "math_objective": "Reticolo, percorsi ortogonali, distanza.",
+  "success_text": "Nessuna collisione con (2,0) e arrivo a (4,0).",
+  "extension": "Cercare altro aggiramento e confrontare lunghezze.",
+  "design_reference": "«VAI A (1,0); VAI A (1,1); VAI A (3,1); VAI A (3,0); VAI A (4,0)».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [
+    [
+      2,
+      0
+    ]
+  ],
+  "entities": [
+    {
+      "id": "p408-target",
+      "kind": "target",
+      "cell": [
+        4,
+        0
+      ],
+      "label": "Uscita",
+      "glyph": "U"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "VAI A (1,0)\nVAI A (1,1)\nVAI A (3,1)\nVAI A (3,0)\nVAI A (4,0)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      4,
+      0
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Guarda la destinazione: si trova in (4, 0). Ricorda che si scrive prima la X, poi la Y."
+    },
+    {
+      "level": 2,
+      "text": "Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione."
+    },
+    {
+      "level": 3,
+      "text": "Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "VAI A (1,0)\nVAI A (1,1)\nVAI A (3,1)\nVAI A (3,0)\nVAI A (4,0)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Cercare altro aggiramento e confrontare lunghezze."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p4",
+    "coordinates"
+  ],
+  "narration_line": "L'ostacolo sulla griglia. Tra (0,0) e (4,0) c'è un blocco alle celle (2,0); passaggio possibile su y=1.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#90e0ef",
+    "ground": "#00b4d8",
+    "accent": "#ffb703",
+    "prop": "palm"
+  }
+}

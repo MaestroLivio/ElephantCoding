@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "id": "P1-10",
+  "world": "giardino",
+  "school_level": "P1",
+  "age_hint": "6-7 anni",
+  "title": "La mappa delle lanterne",
+  "editor": "icons",
+  "narrative": "Percorso di sette azioni tra caselle, curve e due lanterne che richiedono ACCENDI.",
+  "coding_goal": "Combinare quanto appreso in autonomia con debug e replay.",
+  "math_objective": "Composizione, conteggio, orientamento.",
+  "success_text": "Accese esattamente due lanterne e raggiunta la seconda.",
+  "extension": "Ridurre le azioni inutili, se introdotte in fase di prova.",
+  "design_reference": "AVANTI → ACCENDI → DESTRA → AVANTI → SINISTRA → AVANTI → ACCENDI.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p1-10-activate-2_0",
+      "kind": "activate",
+      "cell": [
+        2,
+        0
+      ],
+      "label": "Lanterna",
+      "glyph": "!",
+      "required": true
+    },
+    {
+      "id": "p1-10-activate-5_0",
+      "kind": "activate",
+      "cell": [
+        5,
+        0
+      ],
+      "label": "Lanterna",
+      "glyph": "!",
+      "required": true
+    },
+    {
+      "id": "p110-target",
+      "kind": "target",
+      "cell": [
+        6,
+        0
+      ],
+      "label": "Piazza",
+      "glyph": "P"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI 1\nAVANTI 1\nACCENDI\nAVANTI 1\nAVANTI 1\nAVANTI 1\nACCENDI\nAVANTI 1",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      6,
+      0
+    ],
+    "activate_all": [
+      "p1-10-activate-2_0",
+      "p1-10-activate-5_0"
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI 1\nAVANTI 1\nACCENDI\nAVANTI 1\nAVANTI 1\nAVANTI 1\nACCENDI\nAVANTI 1",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Ridurre le azioni inutili, se introdotte in fase di prova."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p1",
+    "icons"
+  ],
+  "narration_line": "La mappa delle lanterne. Percorso di sette azioni tra caselle, curve e due lanterne che richiedono ACCENDI.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#9bdeac",
+    "ground": "#6bbf59",
+    "accent": "#f4a261",
+    "prop": "tree"
+  }
+}

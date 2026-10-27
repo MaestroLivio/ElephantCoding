@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "INF-02",
+  "world": "savana",
+  "school_level": "INF",
+  "age_hint": "4-6 anni",
+  "title": "Le due impronte",
+  "editor": "icons",
+  "narrative": "Sentiero rettilineo di due passi verso un albero; predisporre due spazi vuoti nella sequenza.",
+  "coding_goal": "Ordinare due istruzioni identiche e seguirne la traccia.",
+  "math_objective": "Contare fino a 2; successione prima/dopo.",
+  "success_text": "Il personaggio raggiunge l'albero senza saltare caselle.",
+  "extension": "Mostrare le due impronte in ordine inverso e chiedere se cambia il risultato.",
+  "design_reference": "AVANTI, AVANTI: due tessere e un'esecuzione.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "inf02-target",
+      "kind": "target",
+      "cell": [
+        2,
+        0
+      ],
+      "label": "Albero",
+      "glyph": "T"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI 1\nAVANTI 1",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      2,
+      0
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI 1\nAVANTI 1",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Mostrare le due impronte in ordine inverso e chiedere se cambia il risultato."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "inf",
+    "icons"
+  ],
+  "narration_line": "Le due impronte. Sentiero rettilineo di due passi verso un albero; predisporre due spazi vuoti nella sequenza.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#f7c873",
+    "ground": "#c9a227",
+    "accent": "#e76f51",
+    "prop": "acacia"
+  }
+}

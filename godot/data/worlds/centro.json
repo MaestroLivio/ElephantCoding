@@ -1,0 +1,30 @@
+{
+  "code": "P5",
+  "title": "Centro di Ricerca",
+  "age": "10-11 anni",
+  "language": "Variabili, SE, FINCHÉ",
+  "editor": "pseudocode",
+  "description": "Sensori, provette e quattro quadranti: le decisioni entrano nel codice.",
+  "theme": {
+    "sky": "#cdb4db",
+    "ground": "#6d597a",
+    "accent": "#ffafcc",
+    "prop": "antenna"
+  },
+  "lab": "Serra dei dati",
+  "id": "centro",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "P5-01",
+    "P5-02",
+    "P5-03",
+    "P5-04",
+    "P5-05",
+    "P5-06",
+    "P5-07",
+    "P5-08",
+    "P5-09",
+    "P5-10"
+  ]
+}

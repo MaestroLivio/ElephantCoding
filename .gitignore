@@ -1,0 +1,34 @@
+# Godot 4 editor cache and imported resources
+godot/.godot/
+godot/.import/
+godot/android/
+godot/ios/
+
+# Exported builds
+build/
+dist/
+*.app/
+*.dmg
+*.exe
+*.pck
+*.zip
+
+# Python tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Voice recording masters and intermediate audio.
+# The shipped voice pack, when present, uses .ogg files declared in
+# data/locales/it/voice_manifest.json.
+voice_sources/
+*.wav
+*.aiff
+
+# Local editor / OS noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

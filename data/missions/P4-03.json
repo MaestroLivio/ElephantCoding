@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "P4-03",
+  "world": "isola",
+  "school_level": "P4",
+  "age_hint": "9-10 anni",
+  "title": "Due strade, stesso punto",
+  "editor": "coordinates",
+  "narrative": "Griglia vuota 5×5; una destinazione (4,3) può essere raggiunta con due ordini di spostamento.",
+  "coding_goal": "Riconoscere equivalenza di posizione ma differenza di traiettoria.",
+  "math_objective": "Proprietà degli spostamenti su assi ortogonali.",
+  "success_text": "Entrambi i programmi giungono a (4,3), replay mostra due tracce.",
+  "extension": "Posizionare un ostacolo e scoprire perché l'ordine conta.",
+  "design_reference": "«MUOVI X +4; MUOVI Y +3» vs «MUOVI Y +3; MUOVI X +4».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p403-target",
+      "kind": "target",
+      "cell": [
+        4,
+        3
+      ],
+      "label": "Punto",
+      "glyph": "P"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "MUOVI X +4\nMUOVI Y +3",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      4,
+      3
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Guarda la destinazione: si trova in (4, 3). Ricorda che si scrive prima la X, poi la Y."
+    },
+    {
+      "level": 2,
+      "text": "Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione."
+    },
+    {
+      "level": 3,
+      "text": "Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "MUOVI X +4\nMUOVI Y +3",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Posizionare un ostacolo e scoprire perché l'ordine conta."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p4",
+    "coordinates"
+  ],
+  "narration_line": "Due strade, stesso punto. Griglia vuota 5×5; una destinazione (4,3) può essere raggiunta con due ordini di spostamento.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#90e0ef",
+    "ground": "#00b4d8",
+    "accent": "#ffb703",
+    "prop": "palm"
+  }
+}

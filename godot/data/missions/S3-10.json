@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "id": "S3-10",
+  "world": "metropoli",
+  "school_level": "S3",
+  "age_hint": "13-14 anni",
+  "title": "La città di Nilo",
+  "editor": "systems",
+  "narrative": "Missione finale aperta: costruire un servizio cittadino con una mappa, robot, eventi e obiettivi autodefiniti.",
+  "coding_goal": "Progettare, implementare, verificare e presentare un sistema completo riusando i moduli.",
+  "math_objective": "Modellizzazione matematica, grafi, variabili, proporzionalità e ottimizzazione.",
+  "success_text": "Soddisfa contratto scelto, minimo 10 test, zero eccezioni, demo riproducibile e spiegazione del compromesso scelto.",
+  "extension": "Esportare scenario e codice in formato aperto, importabile nel laboratorio docente.",
+  "design_reference": "Progetto con specifica, dataset, state machine, pianificazione, test e report di efficienza.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA consegne = 3\nIMPOSTA collisioni = 0\nIMPOSTA test_superati = 10\nIMPOSTA energia = 12",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "consegne": 3,
+      "collisioni": 0,
+      "test_superati": 10
+    },
+    "min_vars": {
+      "energia": 0
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA consegne = 3\nIMPOSTA collisioni = 0\nIMPOSTA test_superati = 10\nIMPOSTA energia = 12",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA consegne = 2",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Esportare scenario e codice in formato aperto, importabile nel laboratorio docente."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s3",
+    "systems"
+  ],
+  "narration_line": "La città di Nilo. Missione finale aperta: costruire un servizio cittadino con una mappa, robot, eventi e obiettivi autodefiniti.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  }
+}

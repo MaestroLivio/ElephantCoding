@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "id": "S2-05",
+  "world": "arcipelago",
+  "school_level": "S2",
+  "age_hint": "12-13 anni",
+  "title": "Il labirinto a celle",
+  "editor": "data",
+  "narrative": "Griglia 6×6 con muri dichiarati in una matrice booleana; trovare meta mediante tentativi informati.",
+  "coding_goal": "Usare matrice, controllo dei vicini e memoria delle celle visitate.",
+  "math_objective": "Grafi su griglia, coordinate, adiacenza ortogonale.",
+  "success_text": "Raggiungimento meta senza visitare celle bloccate; visite registrate.",
+  "extension": "Confrontare percorso trovato e lunghezza minima verificata dal motore.",
+  "design_reference": "Algoritmo di ricerca semplificato con coda di frontiera fornita dall'interfaccia.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 5,
+    "max_y": 5
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [
+    [
+      2,
+      0
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      3,
+      3
+    ]
+  ],
+  "entities": [
+    {
+      "id": "s205-target",
+      "kind": "target",
+      "cell": [
+        5,
+        4
+      ],
+      "label": "Meta",
+      "glyph": "M"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "VAI A (1,0)\nVAI A (1,1)\nVAI A (3,1)\nVAI A (3,2)\nVAI A (5,2)\nVAI A (5,4)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      5,
+      4
+    ],
+    "visit_order": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        4
+      ]
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "VAI A (1,0)\nVAI A (1,1)\nVAI A (3,1)\nVAI A (3,2)\nVAI A (5,2)\nVAI A (5,4)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "VAI A (5,0)",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Confrontare percorso trovato e lunghezza minima verificata dal motore."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s2",
+    "data"
+  ],
+  "narration_line": "Il labirinto a celle. Griglia 6×6 con muri dichiarati in una matrice booleana; trovare meta mediante tentativi informati.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#1d3557",
+    "accent": "#f1faee",
+    "prop": "boat"
+  }
+}

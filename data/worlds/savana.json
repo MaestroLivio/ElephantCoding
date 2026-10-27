@@ -1,0 +1,30 @@
+{
+  "code": "INF",
+  "title": "Savana delle Impronte",
+  "age": "4-6 anni",
+  "language": "Pittogrammi e direzioni",
+  "editor": "icons",
+  "description": "Impronte, acacie e tamburi: i primi passi del pensiero computazionale.",
+  "theme": {
+    "sky": "#f7c873",
+    "ground": "#c9a227",
+    "accent": "#e76f51",
+    "prop": "acacia"
+  },
+  "lab": "Pista delle frecce",
+  "id": "savana",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "INF-01",
+    "INF-02",
+    "INF-03",
+    "INF-04",
+    "INF-05",
+    "INF-06",
+    "INF-07",
+    "INF-08",
+    "INF-09",
+    "INF-10"
+  ]
+}

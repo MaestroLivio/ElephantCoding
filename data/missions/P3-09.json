@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "id": "P3-09",
+  "world": "borgo",
+  "school_level": "P3",
+  "age_hint": "8-9 anni",
+  "title": "Il punto e virgola perduto",
+  "editor": "text",
+  "narrative": "Programma precompilato con un separatore mancante e un gruppo non chiuso.",
+  "coding_goal": "Distinguere errore di sintassi da errore di traiettoria.",
+  "math_objective": "Struttura di un linguaggio, sequenza.",
+  "success_text": "L'editor segnala riga e token problematico; dopo la correzione il programma parte.",
+  "extension": "Creare un errore intenzionale per il compagno e scrivere un indizio.",
+  "design_reference": "Correggere «RIPETI x2 { AVANTI 2; DESTRA }».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "N"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p309-target",
+      "kind": "target",
+      "cell": [
+        2,
+        2
+      ],
+      "label": "Cantiere",
+      "glyph": "C"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "RIPETI x2 { AVANTI 2; DESTRA }",
+  "starter_program": "RIPETI x2 { AVANTI 2 DESTRA",
+  "goal": {
+    "reach": [
+      2,
+      2
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "RIPETI x2 { AVANTI 2; DESTRA }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "RIPETI x2 { AVANTI 2 DESTRA",
+      "expect_success": false
+    },
+    {
+      "name": "syntax_error_fails",
+      "program": "RIPETI x2 { AVANTI 2 DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Creare un errore intenzionale per il compagno e scrivere un indizio."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p3",
+    "text"
+  ],
+  "narration_line": "Il punto e virgola perduto. Programma precompilato con un separatore mancante e un gruppo non chiuso.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#588157",
+    "accent": "#e76f51",
+    "prop": "house"
+  }
+}

@@ -1,0 +1,463 @@
+line_id,kind,reference,text
+benvenuto,system,ui,Ciao! Sono Nilo. Insieme impareremo a programmare viaggiando per nove mondi.
+officina,system,ui,Benvenuto nell'officina dei robot. Scrivi un programma libero: Nilo lo eseguirà sulla griglia.
+errore,system,ui,C'è un errore nel programma. Controlla il comando e riprova.
+mondo_arcipelago,world,arcipelago,"Arcipelago degli Algoritmi. Isole, rotte e magazzini: gli algoritmi lavorano sui dati."
+mondo_borgo,world,borgo,Borgo dei Comandi. Il primo linguaggio scritto: frasi comando chiare e verificabili.
+mondo_centro,world,centro,"Centro di Ricerca. Sensori, provette e quattro quadranti: le decisioni entrano nel codice."
+mondo_cittadella,world,cittadella,Cittadella delle Funzioni. Procedure riutilizzabili per far funzionare una cittadella modulare.
+mondo_giardino,world,giardino,"Giardino delle Frecce. Siepi, serre e lanterne da raggiungere con sequenze ordinate."
+mondo_isola,world,isola,"Isola Cartesiana. Un'isola a quadretti dove ogni punto ha un nome: (x, y)."
+mondo_metropoli,world,metropoli,"Metropoli dei Sistemi. Una città di sistemi interconnessi: progettare, testare, spiegare."
+mondo_officina,world,officina,"Officina dei Fili. Fili, perle e mollette: si programma infilando istruzioni."
+mondo_savana,world,savana,"Savana delle Impronte. Impronte, acacie e tamburi: i primi passi del pensiero computazionale."
+inf-01,narration,INF-01,Il primo passo. Prateria con una sola casella libera fra Nilo e una farfalla; un grande pulsante avvia l'esecuzione.
+inf-01_ok,success,INF-01,Nilo termina nella casella della farfalla con una sola istruzione.
+inf-01_hint1,hint,INF-01,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-01_hint2,hint,INF-01,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-01_hint3,hint,INF-01,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-02,narration,INF-02,Le due impronte. Sentiero rettilineo di due passi verso un albero; predisporre due spazi vuoti nella sequenza.
+inf-02_ok,success,INF-02,Il personaggio raggiunge l'albero senza saltare caselle.
+inf-02_hint1,hint,INF-02,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-02_hint2,hint,INF-02,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-02_hint3,hint,INF-02,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-03,narration,INF-03,"La curva dell'acacia. Percorso a L: un passo avanti, rotazione a destra, un passo avanti; indicatori direzionali nello scenario."
+inf-03_ok,success,INF-03,La sequenza percorre esattamente le tre azioni previste.
+inf-03_hint1,hint,INF-03,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-03_hint2,hint,INF-03,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-03_hint3,hint,INF-03,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-04,narration,INF-04,"Il tamburo nascosto. Un tamburo è dietro una siepe sul lato sinistro di Nilo, che parte rivolto in avanti."
+inf-04_ok,success,INF-04,Nilo si ferma sulla piattaforma sonora e attiva il tamburo.
+inf-04_hint1,hint,INF-04,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-04_hint2,hint,INF-04,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-04_hint3,hint,INF-04,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-05,narration,INF-05,"Il ponte più corto. Due passerelle evidenziate: una di 2 caselle, l'altra di 4, entrambe portano a un'isoletta."
+inf-05_ok,success,INF-05,La meta è raggiunta attraverso il ponte corto.
+inf-05_hint1,hint,INF-05,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-05_hint2,hint,INF-05,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-05_hint3,hint,INF-05,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-06,narration,INF-06,I fiori in fila. Tre aiuole in successione giallo-blu-giallo; Nilo deve visitarle una alla volta.
+inf-06_ok,success,INF-06,Sono raccolti tre fiori nell'ordine richiesto.
+inf-06_hint1,hint,INF-06,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-06_hint2,hint,INF-06,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-06_hint3,hint,INF-06,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-07,narration,INF-07,La pausa del riccio. Due segnali di stop su un viale con tre caselle; l'icona PAUSA blocca solo l'animazione per un battito.
+inf-07_ok,success,INF-07,Entrambi i segnali attivano un suono di pausa.
+inf-07_hint1,hint,INF-07,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-07_hint2,hint,INF-07,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-07_hint3,hint,INF-07,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-08,narration,INF-08,"Lo specchio delle orecchie. Due mini-percorsi speculari, uno con curva a destra e uno a sinistra, ma una sola meta è illuminata."
+inf-08_ok,success,INF-08,La traccia finale corrisponde al lato illuminato.
+inf-08_hint1,hint,INF-08,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-08_hint2,hint,INF-08,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-08_hint3,hint,INF-08,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-09,narration,INF-09,"Le tre pietre. Tre pietre numerate con pallini 1, 2, 3 disposte in linea; Nilo deve toccarle nell'ordine."
+inf-09_ok,success,INF-09,"Registro degli eventi [1,2,3] senza inversioni."
+inf-09_hint1,hint,INF-09,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-09_hint2,hint,INF-09,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-09_hint3,hint,INF-09,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+inf-10,narration,INF-10,"La festa della savana. Piccolo itinerario con due curve, tre passi e un campanello conclusivo; tabellone di massimo 7 icone."
+inf-10_ok,success,INF-10,"Nilo arriva alla festa e suona il campanello, senza uscire dal sentiero."
+inf-10_hint1,hint,INF-10,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+inf-10_hint2,hint,INF-10,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+inf-10_hint3,hint,INF-10,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-01,narration,P1-01,Quattro passi nel giardino. Quattro caselle verso la serra; il percorso è interamente visibile dall'alto.
+p1-01_ok,success,P1-01,La serra viene raggiunta con quattro avanzamenti.
+p1-01_hint1,hint,P1-01,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-01_hint2,hint,P1-01,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-01_hint3,hint,P1-01,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-02,narration,P1-02,Il ponte dei cinque. Due tronchi di lunghezza 2 e 3 formano un unico attraversamento.
+p1-02_ok,success,P1-02,Cinque caselle attraversate senza interruzioni.
+p1-02_hint1,hint,P1-02,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-02_hint2,hint,P1-02,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-02_hint3,hint,P1-02,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-03,narration,P1-03,La piazza degli angoli. Quattro insegne agli angoli di una piazza; Nilo deve orientarsi e raccoglierne una specifica.
+p1-03_ok,success,P1-03,Viene raccolto soltanto il segnale bersaglio.
+p1-03_hint1,hint,P1-03,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-03_hint2,hint,P1-03,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-03_hint3,hint,P1-03,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-04,narration,P1-04,"La ricetta in cinque mosse. Banco di cucina in cui occorre raggiungere acqua, semi e pentola rispettando una strada guidata."
+p1-04_ok,success,P1-04,La pentola riceve i semi soltanto dopo il prelievo.
+p1-04_hint1,hint,P1-04,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-04_hint2,hint,P1-04,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-04_hint3,hint,P1-04,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-05,narration,P1-05,La pista delle decine. Doppia corsia di 10 caselle con segni ogni 5; la meta è alla casella 8.
+p1-05_ok,success,P1-05,"L'elefantino si ferma alla casella 8, non alla 10."
+p1-05_hint1,hint,P1-05,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-05_hint2,hint,P1-05,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-05_hint3,hint,P1-05,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-06,narration,P1-06,Gira e rigira. Due corridoi identici con due curve ripetute; compare un'icona visiva «ripeti 2» facoltativa.
+p1-06_ok,success,P1-06,La traccia copre tutte le quattro azioni nella giusta direzione.
+p1-06_hint1,hint,P1-06,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-06_hint2,hint,P1-06,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-06_hint3,hint,P1-06,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-07,narration,P1-07,"Il mosaico alternato. Pavimento con stelle e cerchi alternati, da attivare con l'azione TOCCA."
+p1-07_ok,success,P1-07,Le tre piastrelle previste si illuminano in ordine.
+p1-07_hint1,hint,P1-07,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-07_hint2,hint,P1-07,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-07_hint3,hint,P1-07,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-08,narration,P1-08,"Il bivio dei numeri. Due porte contengono 6 e 9 gettoni, l'obiettivo è la porta con più gettoni."
+p1-08_ok,success,P1-08,Si apre la porta con il gruppo più numeroso.
+p1-08_hint1,hint,P1-08,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-08_hint2,hint,P1-08,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-08_hint3,hint,P1-08,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-09,narration,P1-09,L'errore del gufo. Un gufo consegna cinque tessere già inserite; una svolta è sbagliata e porta contro un recinto.
+p1-09_ok,success,P1-09,L'esecuzione corretta elimina la collisione.
+p1-09_hint1,hint,P1-09,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-09_hint2,hint,P1-09,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-09_hint3,hint,P1-09,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p1-10,narration,P1-10,"La mappa delle lanterne. Percorso di sette azioni tra caselle, curve e due lanterne che richiedono ACCENDI."
+p1-10_ok,success,P1-10,Accese esattamente due lanterne e raggiunta la seconda.
+p1-10_hint1,hint,P1-10,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p1-10_hint2,hint,P1-10,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p1-10_hint3,hint,P1-10,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-01,narration,P2-01,La prima stringa. Officina dei fili con una cordicella orizzontale e quattro perle verdi con freccia; un gancio ne definisce il verso.
+p2-01_ok,success,P2-01,Il motore legge esattamente quattro perle e muove Nilo di quattro caselle.
+p2-01_hint1,hint,P2-01,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-01_hint2,hint,P2-01,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-01_hint3,hint,P2-01,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-02,narration,P2-02,"Perle che girano. Una pista a L; perle blu rappresentano svolte, verdi passi e l'estremità del filo è marcata INIZIO."
+p2-02_ok,success,P2-02,Percorso a L realizzato con quattro perle valide.
+p2-02_hint1,hint,P2-02,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-02_hint2,hint,P2-02,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-02_hint3,hint,P2-02,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-03,narration,P2-03,"Due fili da confrontare. Due fili pronti, con 3 e 5 perle AVANTI; la meta richiede 5 caselle."
+p2-03_ok,success,P2-03,Il filo scelto raggiunge la piattaforma lontana.
+p2-03_hint1,hint,P2-03,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-03_hint2,hint,P2-03,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-03_hint3,hint,P2-03,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-04,narration,P2-04,La molletta del due. Un segmento di filo contiene [↑ ↱]; una molletta numerata 2 incornicia il segmento da riprodurre.
+p2-04_ok,success,P2-04,Il lettore effettua quattro istruzioni nell'ordine previsto.
+p2-04_hint1,hint,P2-04,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-04_hint2,hint,P2-04,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-04_hint3,hint,P2-04,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-05,narration,P2-05,Il filo allo specchio. Un percorso è riflesso rispetto a una linea; è necessario sostituire le perle di svolta.
+p2-05_ok,success,P2-05,Il nuovo tragitto arriva alla meta speculare.
+p2-05_hint1,hint,P2-05,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-05_hint2,hint,P2-05,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-05_hint3,hint,P2-05,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-06,narration,P2-06,"La stringa più economica. Due soluzioni per raggiungere una casella: una con sei perle e due svolte superflue, una con due perle."
+p2-06_ok,success,P2-06,Entrambe le stringhe valide vengono simulate; badge efficienza alla più corta.
+p2-06_hint1,hint,P2-06,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-06_hint2,hint,P2-06,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-06_hint3,hint,P2-06,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-07,narration,P2-07,Le decine di perle. Un filo a moduli 5+5 e un target a 10 caselle; clip separano due gruppi.
+p2-07_ok,success,P2-07,Il sensore certifica dieci movimenti e due gruppi di cinque.
+p2-07_hint1,hint,P2-07,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-07_hint2,hint,P2-07,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-07_hint3,hint,P2-07,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-08,narration,P2-08,La perla fuori posto. Stringa iniziale [↑ ↱ ↑ ↰ ↑] ma il campo richiede [↑ ↰ ↑ ↱ ↑].
+p2-08_ok,success,P2-08,Replay passo-passo mostra percorso corretto e nessuna collisione.
+p2-08_hint1,hint,P2-08,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-08_hint2,hint,P2-08,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-08_hint3,hint,P2-08,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-09,narration,P2-09,"Due fili, due incarichi. Primo filo apre un cancello, secondo porta Nilo al pozzo; i fili si eseguono in successione."
+p2-09_ok,success,P2-09,La porta si apre prima dell'attraversamento; i due log restano separati.
+p2-09_hint1,hint,P2-09,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-09_hint2,hint,P2-09,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-09_hint3,hint,P2-09,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p2-10,narration,P2-10,"La grande tessitura. Laboratorio finale con tre sottostringhe rimovibili: strada, cancello, fontana e due mollette di ripetizione."
+p2-10_ok,success,P2-10,Missione completata con i tre segmenti nel corretto ordine e una meta raggiunta.
+p2-10_hint1,hint,P2-10,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p2-10_hint2,hint,P2-10,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p2-10_hint3,hint,P2-10,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-01,narration,P3-01,La prima frase comando. Borgo dei comandi con editor a righe; il sentiero ha tre caselle verso la fontana.
+p3-01_ok,success,P3-01,Parser accetta il comando e raggiunge la fontana.
+p3-01_hint1,hint,P3-01,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-01_hint2,hint,P3-01,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-01_hint3,hint,P3-01,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-02,narration,P3-02,Una svolta scritta. Un incrocio con destinazione due caselle a destra dopo la rotazione.
+p3-02_ok,success,P3-02,Traccia raggiunge la casella bersaglio rispettando l'orientamento.
+p3-02_hint1,hint,P3-02,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-02_hint2,hint,P3-02,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-02_hint3,hint,P3-02,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-03,narration,P3-03,Il potere di x3. Un corridoio di sei caselle; l'editor mostra una coppia di righe equivalenti.
+p3-03_ok,success,P3-03,La traccia presenta sei passi e tre gruppi nel replay.
+p3-03_hint1,hint,P3-03,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-03_hint2,hint,P3-03,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-03_hint3,hint,P3-03,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-04,narration,P3-04,La parentesi del guardiano. Tre angoli uguali lungo un percorso a zig-zag; introdurre gruppi delimitati.
+p3-04_ok,success,P3-04,Sono eseguiti tre segmenti completi prima della fine.
+p3-04_hint1,hint,P3-04,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-04_hint2,hint,P3-04,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-04_hint3,hint,P3-04,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-05,narration,P3-05,"Le tre torri. Tre torri su una linea, ogni torre dista due caselle e va fotografata."
+p3-05_ok,success,P3-05,Foto nelle tre posizioni attese e nessuna duplicazione.
+p3-05_hint1,hint,P3-05,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-05_hint2,hint,P3-05,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-05_hint3,hint,P3-05,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-06,narration,P3-06,"Il mulino quadrato. Un recinto quadrato con lato tre caselle, Nilo parte da un angolo rivolto lungo un lato."
+p3-06_ok,success,P3-06,Nilo torna a partenza con orientamento iniziale.
+p3-06_hint1,hint,P3-06,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+p3-06_hint2,hint,P3-06,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+p3-06_hint3,hint,P3-06,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+p3-07,narration,P3-07,Percorsi equivalenti. Due codici completano lo stesso tragitto in corridoio sgombro.
+p3-07_ok,success,P3-07,Entrambi i codici producono la stessa posizione e direzione finali.
+p3-07_hint1,hint,P3-07,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-07_hint2,hint,P3-07,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-07_hint3,hint,P3-07,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-08,narration,P3-08,I passi dell'espressione. Cartello «2+3» indica la distanza fino al mercato; supporto a parentesi aritmetiche semplici.
+p3-08_ok,success,P3-08,Interpretazione produce 5 avanzamenti e stesso risultato per entrambe le forme.
+p3-08_hint1,hint,P3-08,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-08_hint2,hint,P3-08,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-08_hint3,hint,P3-08,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-09,narration,P3-09,Il punto e virgola perduto. Programma precompilato con un separatore mancante e un gruppo non chiuso.
+p3-09_ok,success,P3-09,L'editor segnala riga e token problematico; dopo la correzione il programma parte.
+p3-09_hint1,hint,P3-09,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-09_hint2,hint,P3-09,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-09_hint3,hint,P3-09,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p3-10,narration,P3-10,La carovana programmabile. Percorso con quattro carovane e una grande piazza; occorrono ripetizioni e tre azioni diverse.
+p3-10_ok,success,P3-10,"Tre saluti, una porta attivata e meta raggiunta."
+p3-10_hint1,hint,P3-10,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p3-10_hint2,hint,P3-10,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p3-10_hint3,hint,P3-10,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p4-01,narration,P4-01,"Benvenuto nel piano. Isola cartesiana con griglia nel primo quadrante, origine (0,0), assi X est e Y nord; target (2,1)."
+p4-01_ok,success,P4-01,"Coordinate finali esattamente (2,1) visualizzate nell'HUD."
+p4-01_hint1,hint,P4-01,"Guarda la destinazione: si trova in (2, 1). Ricorda che si scrive prima la X, poi la Y."
+p4-01_hint2,hint,P4-01,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-01_hint3,hint,P4-01,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-02,narration,P4-02,"Prima X, poi Y. Posto di raccolta al punto (3,2), con nastro guida che invita a muoversi lungo assi separati."
+p4-02_ok,success,P4-02,"Il registro mostra (0,0)→(3,0)→(3,2)."
+p4-02_hint1,hint,P4-02,"Guarda la destinazione: si trova in (3, 2). Ricorda che si scrive prima la X, poi la Y."
+p4-02_hint2,hint,P4-02,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-02_hint3,hint,P4-02,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-03,narration,P4-03,"Due strade, stesso punto. Griglia vuota 5×5; una destinazione (4,3) può essere raggiunta con due ordini di spostamento."
+p4-03_ok,success,P4-03,"Entrambi i programmi giungono a (4,3), replay mostra due tracce."
+p4-03_hint1,hint,P4-03,"Guarda la destinazione: si trova in (4, 3). Ricorda che si scrive prima la X, poi la Y."
+p4-03_hint2,hint,P4-03,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-03_hint3,hint,P4-03,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-04,narration,P4-04,"Le aiuole ai vertici. Rettangolo con vertici (1,1),(5,1),(5,3),(1,3); Nilo deve visitarli in ordine."
+p4-04_ok,success,P4-04,Registro di visita coincide con i quattro vertici ordinati.
+p4-04_hint1,hint,P4-04,"Guarda la destinazione: si trova in (1, 3). Ricorda che si scrive prima la X, poi la Y."
+p4-04_hint2,hint,P4-04,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-04_hint3,hint,P4-04,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-05,narration,P4-05,"Il perimetro luminoso. Un recinto di vertici (0,0),(4,0),(4,2),(0,2) va illuminato percorrendone ogni lato."
+p4-05_ok,success,P4-05,La traccia chiusa copre 12 unità e torna all'origine.
+p4-05_hint1,hint,P4-05,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+p4-05_hint2,hint,P4-05,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+p4-05_hint3,hint,P4-05,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+p4-06,narration,P4-06,"Scambia le coordinate. Due giardini ai punti (2,4) e (4,2) in griglia libera."
+p4-06_ok,success,P4-06,Due bandiere posizionate nei punti esatti in ordine.
+p4-06_hint1,hint,P4-06,"Guarda la destinazione: si trova in (4, 2). Ricorda che si scrive prima la X, poi la Y."
+p4-06_hint2,hint,P4-06,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-06_hint3,hint,P4-06,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-07,narration,P4-07,"La rotta delle quattro fermate. Punti A(1,1), B(3,1), C(3,4), D(5,4); occorre rispettare tappe e ordine."
+p4-07_ok,success,P4-07,"Il motore conferma la lista [A,B,C,D] e la meta finale."
+p4-07_hint1,hint,P4-07,"Guarda la destinazione: si trova in (5, 4). Ricorda che si scrive prima la X, poi la Y."
+p4-07_hint2,hint,P4-07,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-07_hint3,hint,P4-07,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-08,narration,P4-08,"L'ostacolo sulla griglia. Tra (0,0) e (4,0) c'è un blocco alle celle (2,0); passaggio possibile su y=1."
+p4-08_ok,success,P4-08,"Nessuna collisione con (2,0) e arrivo a (4,0)."
+p4-08_hint1,hint,P4-08,"Guarda la destinazione: si trova in (4, 0). Ricorda che si scrive prima la X, poi la Y."
+p4-08_hint2,hint,P4-08,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-08_hint3,hint,P4-08,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-09,narration,P4-09,"La mappa in scala. Una casella vale 2 metri; dal (0,0) la serra sta a (3,2) caselle."
+p4-09_ok,success,P4-09,Percorso di cinque celle e rapporto 2 m/cella correttamente mostrato.
+p4-09_hint1,hint,P4-09,"Guarda la destinazione: si trova in (3, 2). Ricorda che si scrive prima la X, poi la Y."
+p4-09_hint2,hint,P4-09,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-09_hint3,hint,P4-09,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p4-10,narration,P4-10,"Il museo dei poligoni. Vertici A(1,1), B(5,1), C(4,4), D(2,4); disegnare la figura visitando ogni vertice."
+p4-10_ok,success,P4-10,Compare un contorno chiuso senza attraversamenti indesiderati.
+p4-10_hint1,hint,P4-10,"Guarda la destinazione: si trova in (2, 4). Ricorda che si scrive prima la X, poi la Y."
+p4-10_hint2,hint,P4-10,Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione.
+p4-10_hint3,hint,P4-10,"Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+p5-01,narration,P5-01,"I quattro quadranti. Centro di ricerca, origine centrale, target in (-2,3) e (3,-1)."
+p5-01_ok,success,P5-01,Entrambe le destinazioni registrate con segni corretti.
+p5-01_hint1,hint,P5-01,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p5-01_hint2,hint,P5-01,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p5-01_hint3,hint,P5-01,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p5-02,narration,P5-02,"Il vettore del vento. Un vento sposta l'elefantino di (-3,+2) rispetto a (4,1)."
+p5-02_ok,success,P5-02,"Coordinate finali (1,3) e vettore visualizzato."
+p5-02_hint1,hint,P5-02,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+p5-02_hint2,hint,P5-02,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+p5-02_hint3,hint,P5-02,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+p5-03,narration,P5-03,Conta le provviste. Quattro casse da raccogliere lungo un viale; una variabile registra la quantità.
+p5-03_ok,success,P5-03,casse=4 e quattro eventi RACCOGLI distinti.
+p5-03_hint1,hint,P5-03,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p5-03_hint2,hint,P5-03,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p5-03_hint3,hint,P5-03,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p5-04,narration,P5-04,Il sensore dell'acqua. Una porta si apre solo se il sensore acqua ha valore almeno 2.
+p5-04_ok,success,P5-04,Due scenari di test (acqua=1 e acqua=3) danno eventi corretti.
+p5-04_hint1,hint,P5-04,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+p5-04_hint2,hint,P5-04,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+p5-04_hint3,hint,P5-04,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+p5-05,narration,P5-05,"La batteria prudente. Ponte accessibile se batteria > 20, altrimenti si torna alla ricarica."
+p5-05_ok,success,P5-05,Batteria=21 attraversa; batteria=20 ricarica.
+p5-05_hint1,hint,P5-05,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+p5-05_hint2,hint,P5-05,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+p5-05_hint3,hint,P5-05,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+p5-06,narration,P5-06,"Finché il vaso è pieno. Dare acqua a una pianta fino a raggiungere livello 5, partendo da 2."
+p5-06_ok,success,P5-06,Ciclo termina esattamente a 5 senza superare il limite.
+p5-06_hint1,hint,P5-06,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+p5-06_hint2,hint,P5-06,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+p5-06_hint3,hint,P5-06,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+p5-07,narration,P5-07,"Il catalogo di punti. Quattro reperti hanno coordinate (-1,2),(2,2),(2,-2),(-1,-2); vanno fotografati."
+p5-07_ok,success,P5-07,"Quattro fotografie presso punti bersaglio, nessun duplicato."
+p5-07_hint1,hint,P5-07,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p5-07_hint2,hint,P5-07,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p5-07_hint3,hint,P5-07,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p5-08,narration,P5-08,La piccola procedura. Tre stazioni identiche chiedono «AVANTI 1; SCANSIONA»; prima procedura nominata senza parametri.
+p5-08_ok,success,P5-08,Tre scansioni registrate in posizioni successive.
+p5-08_hint1,hint,P5-08,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p5-08_hint2,hint,P5-08,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p5-08_hint3,hint,P5-08,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+p5-09,narration,P5-09,"Un numero sbagliato. Programma fornito calcola posizione X con incremento errato e raggiunge (4,2) invece di (3,2)."
+p5-09_ok,success,P5-09,Il watch panel mostra x=3 al termine; target raggiunto.
+p5-09_hint1,hint,P5-09,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+p5-09_hint2,hint,P5-09,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+p5-09_hint3,hint,P5-09,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+p5-10,narration,P5-10,"Il parco autosufficiente. Scenario finale con deposito, cancello, sensore, raccolta e punti in quattro quadranti."
+p5-10_ok,success,P5-10,"Tre consegne complete, nessuna collisione, energia mai negativa."
+p5-10_hint1,hint,P5-10,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+p5-10_hint2,hint,P5-10,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+p5-10_hint3,hint,P5-10,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+s1-01,narration,S1-01,Il controllo degli ingressi. Cittadella delle funzioni: tre cancelli ricevono codice di apertura e parametri diversi.
+s1-01_ok,success,S1-01,Si attivano esattamente le tre porte richieste.
+s1-01_hint1,hint,S1-01,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+s1-01_hint2,hint,S1-01,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+s1-01_hint3,hint,S1-01,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+s1-02,narration,S1-02,La guardia logica. Una porta richiede badge valido E batteria almeno 30.
+s1-02_ok,success,S1-02,"Testare quattro combinazioni badge/batteria, tutte coerenti."
+s1-02_hint1,hint,S1-02,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-02_hint2,hint,S1-02,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-02_hint3,hint,S1-02,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-03,narration,S1-03,"La torre delle potenze. Scala modulare: 2 piani per blocco, 4 blocchi; un parametro definisce quanti passi salire."
+s1-03_ok,success,S1-03,L'elefantino raggiunge il livello 8 senza piani mancanti.
+s1-03_hint1,hint,S1-03,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-03_hint2,hint,S1-03,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-03_hint3,hint,S1-03,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-04,narration,S1-04,La barriera mobile. Cancello ciclico alterna aperto/chiuso ad ogni tick; occorre attendere finché è aperto.
+s1-04_ok,success,S1-04,Esecuzione passa soltanto durante un tick aperto.
+s1-04_hint1,hint,S1-04,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-04_hint2,hint,S1-04,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-04_hint3,hint,S1-04,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-05,narration,S1-05,"L'area dei rettangoli. Tre orti hanno coppie (base,altezza); scrivere funzione che restituisce area."
+s1-05_ok,success,S1-05,"Aree corrette per (2,3),(4,5),(6,2): 6,20,12."
+s1-05_hint1,hint,S1-05,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-05_hint2,hint,S1-05,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-05_hint3,hint,S1-05,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-06,narration,S1-06,I quadranti sorvegliati. Quattro telecamere coprono punti con segni misti; decidere il quadrante di un punto.
+s1-06_ok,success,S1-06,Test su otto coordinate incluse quelle con zero.
+s1-06_hint1,hint,S1-06,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-06_hint2,hint,S1-06,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-06_hint3,hint,S1-06,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-07,narration,S1-07,Il sensore affidabile. Tre misure successive possono oscillare; usare un controllo prima di azionare la leva.
+s1-07_ok,success,S1-07,"Valori -1 e 101 rifiutati; 0,50,100 accettati."
+s1-07_hint1,hint,S1-07,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-07_hint2,hint,S1-07,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-07_hint3,hint,S1-07,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-08,narration,S1-08,La griglia dei multipli. Una griglia 5×5 va attivata per righe e colonne con due contatori.
+s1-08_ok,success,S1-08,"25 celle visitate una volta ciascuna, senza duplicati."
+s1-08_hint1,hint,S1-08,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-08_hint2,hint,S1-08,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-08_hint3,hint,S1-08,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-09,narration,S1-09,Il ponte da riparare. Funzione di distanza assoluta è sbagliata per coordinate negative; test fallisce.
+s1-09_ok,success,S1-09,"Superati almeno cinque casi: uguali, crescenti, decrescenti, negativi, zero."
+s1-09_hint1,hint,S1-09,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-09_hint2,hint,S1-09,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-09_hint3,hint,S1-09,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s1-10,narration,S1-10,"La cittadella operativa. Quattro settori con cancelli, sensori e livelli di altezza; sistema di procedure e cicli."
+s1-10_ok,success,S1-10,"Quattro settori visitati, allarmi zero, ogni funzione testata."
+s1-10_hint1,hint,S1-10,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s1-10_hint2,hint,S1-10,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s1-10_hint3,hint,S1-10,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-01,narration,S2-01,"La lista delle consegne. Arcipelago degli algoritmi, magazzino con sei coordinate di consegna."
+s2-01_ok,success,S2-01,Sei consegne in ordine; log distingue indice e coordinata.
+s2-01_hint1,hint,S2-01,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+s2-01_hint2,hint,S2-01,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+s2-01_hint3,hint,S2-01,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+s2-02,narration,S2-02,"La media dei sensori. Cinque sensori restituiscono 8,10,12,9,11; calcolare e mostrare media."
+s2-02_ok,success,S2-02,Risultato numerico 10 e controllo corretto con elenco vuoto.
+s2-02_hint1,hint,S2-02,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-02_hint2,hint,S2-02,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-02_hint3,hint,S2-02,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-03,narration,S2-03,"Il fattore di scala. Una mappa con punti (1,2),(3,1),(4,3) deve essere ingrandita del fattore 2."
+s2-03_ok,success,S2-03,"Nuovi punti (2,4),(6,2),(8,6)."
+s2-03_hint1,hint,S2-03,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-03_hint2,hint,S2-03,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-03_hint3,hint,S2-03,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-04,narration,S2-04,"Alla ricerca del minimo. Cinque sentieri hanno lunghezze [7,4,9,3,6]; scegliere quello minimo senza usare MIN predefinito."
+s2-04_ok,success,S2-04,Indice o valore del percorso minimo corrispondente a 3.
+s2-04_hint1,hint,S2-04,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-04_hint2,hint,S2-04,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-04_hint3,hint,S2-04,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-05,narration,S2-05,Il labirinto a celle. Griglia 6×6 con muri dichiarati in una matrice booleana; trovare meta mediante tentativi informati.
+s2-05_ok,success,S2-05,Raggiungimento meta senza visitare celle bloccate; visite registrate.
+s2-05_hint1,hint,S2-05,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+s2-05_hint2,hint,S2-05,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+s2-05_hint3,hint,S2-05,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+s2-06,narration,S2-06,"La serra percentuale. Serra con tre settori; batteria passa dal 100% al 75%, poi al 60%; avvisi e consumo."
+s2-06_ok,success,S2-06,"Al 75% nessuna ricarica, al 60% sì."
+s2-06_hint1,hint,S2-06,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-06_hint2,hint,S2-06,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-06_hint3,hint,S2-06,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-07,narration,S2-07,"Le piastrelle ordinate. Sequenza di pesi [5,2,4,1,3]; un braccio può scambiare elementi adiacenti."
+s2-07_ok,success,S2-07,"Output [1,2,3,4,5], multinsieme conservato."
+s2-07_hint1,hint,S2-07,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-07_hint2,hint,S2-07,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-07_hint3,hint,S2-07,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-08,narration,S2-08,"La rotta più vantaggiosa. Tre percorsi hanno distanze e consumo diversi: A(8,4), B(6,7), C(9,3); obiettivo minimizzare distanza sotto consumo massimo 5."
+s2-08_ok,success,S2-08,"Il motore seleziona A (8,4), non B fuori vincolo."
+s2-08_hint1,hint,S2-08,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-08_hint2,hint,S2-08,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-08_hint3,hint,S2-08,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-09,narration,S2-09,"Debug dei dati mancanti. Una lista di distanze include [4, 0, NULLO, 6]; l'algoritmo della media si interrompe."
+s2-09_ok,success,S2-09,"Media calcolata sui tre numeri 4,0,6 (=10/3) e allerta sull'assenza."
+s2-09_hint1,hint,S2-09,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-09_hint2,hint,S2-09,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-09_hint3,hint,S2-09,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s2-10,narration,S2-10,"Il porto intelligente. Capstone con più navi, consegne, matrice dei canali, batterie e dati di consumo."
+s2-10_ok,success,S2-10,"Tutte le consegne assegnate, nessuna nave supera consumo massimo; test autonomi."
+s2-10_hint1,hint,S2-10,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s2-10_hint2,hint,S2-10,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s2-10_hint3,hint,S2-10,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-01,narration,S3-01,"La macchina degli stati. Metropoli dei sistemi: un ponte robotico può essere CHIUSO, APERTO o IN_MOVIMENTO."
+s3-01_ok,success,S3-01,Nessuna transizione impossibile; replay degli stati completo.
+s3-01_hint1,hint,S3-01,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-01_hint2,hint,S3-01,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-01_hint3,hint,S3-01,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-02,narration,S3-02,Il traffico a eventi. Due robot attraversano incrocio; il semaforo emette eventi a tick deterministici.
+s3-02_ok,success,S3-02,Mai due robot nel centro simultaneamente; traccia riproducibile.
+s3-02_hint1,hint,S3-02,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-02_hint2,hint,S3-02,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-02_hint3,hint,S3-02,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-03,narration,S3-03,Il grafo della città. Mappa come grafo di 7 nodi e archi pesati positivi.
+s3-03_ok,success,S3-03,Ogni collegamento visibile coincide con il grafo dei dati.
+s3-03_hint1,hint,S3-03,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-03_hint2,hint,S3-03,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-03_hint3,hint,S3-03,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-04,narration,S3-04,La ricerca in ampiezza. Labirinto non pesato con percorso minimo misurato in archi.
+s3-04_ok,success,S3-04,Il percorso trovato è minimo e coincide con l'oracolo su cinque mappe.
+s3-04_hint1,hint,S3-04,Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso.
+s3-04_hint2,hint,S3-04,Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta.
+s3-04_hint3,hint,S3-04,"Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+s3-05,narration,S3-05,"Il robot che decide. Un elefantino robot raccoglie oggetti rispettando energia, distanza e priorità."
+s3-05_ok,success,S3-05,"Scelta riproducibile per tutti i dataset, con spiegazione leggibile."
+s3-05_hint1,hint,S3-05,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-05_hint2,hint,S3-05,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-05_hint3,hint,S3-05,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-06,narration,S3-06,Tre robot in squadra. Tre agenti devono portare oggetti a depositi distinti senza collisioni.
+s3-06_ok,success,S3-06,Zero collisioni e consegne complete in tutti gli scenari di test.
+s3-06_hint1,hint,S3-06,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-06_hint2,hint,S3-06,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-06_hint3,hint,S3-06,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-07,narration,S3-07,L'algoritmo misurato. Confronto su griglie crescenti fra ricerca ingenua e BFS con metriche.
+s3-07_ok,success,S3-07,Grafico correttamente collegato a tre prove ripetibili.
+s3-07_hint1,hint,S3-07,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-07_hint2,hint,S3-07,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-07_hint3,hint,S3-07,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-08,narration,S3-08,"Il laboratorio di test. Il motore genera casi limite: lista vuota, ostacolo alla partenza, destinazione irraggiungibile."
+s3-08_ok,success,S3-08,Almeno 8/8 test verdi incluse condizioni limite.
+s3-08_hint1,hint,S3-08,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-08_hint2,hint,S3-08,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-08_hint3,hint,S3-08,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-09,narration,S3-09,"La biblioteca dei moduli. Un progetto esteso contiene navigazione, inventario e sensori, inizialmente intrecciati."
+s3-09_ok,success,S3-09,Suite di regressione invariata e moduli riutilizzabili.
+s3-09_hint1,hint,S3-09,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-09_hint2,hint,S3-09,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-09_hint3,hint,S3-09,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+s3-10,narration,S3-10,"La città di Nilo. Missione finale aperta: costruire un servizio cittadino con una mappa, robot, eventi e obiettivi autodefiniti."
+s3-10_ok,success,S3-10,"Soddisfa contratto scelto, minimo 10 test, zero eccezioni, demo riproducibile e spiegazione del compromesso scelto."
+s3-10_hint1,hint,S3-10,Leggi l'obiettivo matematico e individua quali dati hai già nella scena.
+s3-10_hint2,hint,S3-10,"Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+s3-10_hint3,hint,S3-10,"Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."

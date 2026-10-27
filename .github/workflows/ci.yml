@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  content:
+    name: Content and voice checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate missions and worlds
+        run: python3 tools/validation/validate_content.py
+      - name: Check data sync
+        run: python3 tools/content/sync_data.py --check
+      - name: Check voice manifest
+        run: python3 tools/audio/build_voice_pack.py --check
+
+  godot:
+    name: Godot tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot 4.7.2
+        run: |
+          curl -fsSL -o godot.zip \
+            https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
+          unzip -q godot.zip
+          sudo install -m 0755 Godot_v4.7.2-stable_linux.x86_64 /usr/local/bin/godot
+          godot --version
+      - name: Import project
+        run: godot --headless --path godot --editor --quit
+      - name: Unit and mission tests
+        run: godot --headless --path godot --script res://tests/test_runner.gd
+      - name: UI smoke test
+        run: godot --headless --path godot --script res://tests/ui_smoke.gd

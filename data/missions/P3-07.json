@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "P3-07",
+  "world": "borgo",
+  "school_level": "P3",
+  "age_hint": "8-9 anni",
+  "title": "Percorsi equivalenti",
+  "editor": "text",
+  "narrative": "Due codici completano lo stesso tragitto in corridoio sgombro.",
+  "coding_goal": "Confrontare descrizioni compresse e distese di una medesima procedura.",
+  "math_objective": "Equivalenza operativa e moltiplicazione.",
+  "success_text": "Entrambi i codici producono la stessa posizione e direzione finali.",
+  "extension": "Aggiungere un'azione FOTO nel mezzo e discutere quando non sono più equivalenti.",
+  "design_reference": "«AVANTI 1 x4» oppure «AVANTI 4».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p307-target",
+      "kind": "target",
+      "cell": [
+        4,
+        0
+      ],
+      "label": "Corridoio",
+      "glyph": "C"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI 1 x4",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      4,
+      0
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI 1 x4",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Aggiungere un'azione FOTO nel mezzo e discutere quando non sono più equivalenti."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p3",
+    "text"
+  ],
+  "narration_line": "Percorsi equivalenti. Due codici completano lo stesso tragitto in corridoio sgombro.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#588157",
+    "accent": "#e76f51",
+    "prop": "house"
+  }
+}

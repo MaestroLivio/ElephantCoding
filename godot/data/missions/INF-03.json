@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "INF-03",
+  "world": "savana",
+  "school_level": "INF",
+  "age_hint": "4-6 anni",
+  "title": "La curva dell'acacia",
+  "editor": "icons",
+  "narrative": "Percorso a L: un passo avanti, rotazione a destra, un passo avanti; indicatori direzionali nello scenario.",
+  "coding_goal": "Distinguere rotazione e spostamento.",
+  "math_objective": "Destra/sinistra, angolo retto vissuto corporalmente.",
+  "success_text": "La sequenza percorre esattamente le tre azioni previste.",
+  "extension": "Spostare l'albero e scoprire la curva speculare.",
+  "design_reference": "AVANTI → GIRA A DESTRA → AVANTI.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "N"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "inf03-target",
+      "kind": "target",
+      "cell": [
+        1,
+        1
+      ],
+      "label": "Acacia",
+      "glyph": "T"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI 1\nDESTRA\nAVANTI 1",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      1,
+      1
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI 1\nDESTRA\nAVANTI 1",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Spostare l'albero e scoprire la curva speculare."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "inf",
+    "icons"
+  ],
+  "narration_line": "La curva dell'acacia. Percorso a L: un passo avanti, rotazione a destra, un passo avanti; indicatori direzionali nello scenario.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#f7c873",
+    "ground": "#c9a227",
+    "accent": "#e76f51",
+    "prop": "acacia"
+  }
+}

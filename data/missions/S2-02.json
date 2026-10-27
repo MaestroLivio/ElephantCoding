@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "id": "S2-02",
+  "world": "arcipelago",
+  "school_level": "S2",
+  "age_hint": "12-13 anni",
+  "title": "La media dei sensori",
+  "editor": "data",
+  "narrative": "Cinque sensori restituiscono 8,10,12,9,11; calcolare e mostrare media.",
+  "coding_goal": "Usare accumulatore e divisione per n.",
+  "math_objective": "Media aritmetica 10 e significato del denominatore.",
+  "success_text": "Risultato numerico 10 e controllo corretto con elenco vuoto.",
+  "extension": "Aggiungere una lettura e aggiornare la media.",
+  "design_reference": "«somma=0; PER OGNI v IN letture { somma+=v }; media=somma/LUNGHEZZA(letture)».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {
+    "letture": [
+      8,
+      10,
+      12,
+      9,
+      11
+    ]
+  },
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA somma = 0\nPER OGNI v IN letture { somma = somma + v }\nIMPOSTA media = somma / LUNGHEZZA(letture)",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "media": 10
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA somma = 0\nPER OGNI v IN letture { somma = somma + v }\nIMPOSTA media = somma / LUNGHEZZA(letture)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA media = 0",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Aggiungere una lettura e aggiornare la media."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s2",
+    "data"
+  ],
+  "narration_line": "La media dei sensori. Cinque sensori restituiscono 8,10,12,9,11; calcolare e mostrare media.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#1d3557",
+    "accent": "#f1faee",
+    "prop": "boat"
+  }
+}

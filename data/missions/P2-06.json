@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "id": "P2-06",
+  "world": "officina",
+  "school_level": "P2",
+  "age_hint": "7-8 anni",
+  "title": "La stringa più economica",
+  "editor": "beads",
+  "narrative": "Due soluzioni per raggiungere una casella: una con sei perle e due svolte superflue, una con due perle.",
+  "coding_goal": "Scoprire equivalenza di risultato e preferenza per sequenze più brevi.",
+  "math_objective": "Conteggio, sottrazione 6−2=4, efficienza.",
+  "success_text": "Entrambe le stringhe valide vengono simulate; badge efficienza alla più corta.",
+  "extension": "Provare a eliminare una perla qualsiasi e osservare la differenza.",
+  "design_reference": "Scegliere [↑ ↑] invece di [↱ ↰ ↑ ↑ ↱ ↰].",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      0
+    ]
+  ],
+  "entities": [
+    {
+      "id": "p206-target",
+      "kind": "target",
+      "cell": [
+        2,
+        0
+      ],
+      "label": "Cassa",
+      "glyph": "C"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI 1\nAVANTI 1",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      2,
+      0
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI 1\nAVANTI 1",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Provare a eliminare una perla qualsiasi e osservare la differenza."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p2",
+    "beads"
+  ],
+  "narration_line": "La stringa più economica. Due soluzioni per raggiungere una casella: una con sei perle e due svolte superflue, una con due perle.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#c7b9ff",
+    "ground": "#8d7bd6",
+    "accent": "#ffb703",
+    "prop": "gear"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "id": "S3-06",
+  "world": "metropoli",
+  "school_level": "S3",
+  "age_hint": "13-14 anni",
+  "title": "Tre robot in squadra",
+  "editor": "systems",
+  "narrative": "Tre agenti devono portare oggetti a depositi distinti senza collisioni.",
+  "coding_goal": "Distribuire compiti e gestire risorse condivise.",
+  "math_objective": "Combinatoria, ricerca, conflitti e sequenze.",
+  "success_text": "Zero collisioni e consegne complete in tutti gli scenari di test.",
+  "extension": "Esaminare uno stallo e progettare prevenzione.",
+  "design_reference": "Scheduler a turni con prenotazione cella, priorità e rilascio.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA consegne = 3\nIMPOSTA collisioni = 0\nIMPOSTA turni = 6",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "consegne": 3,
+      "collisioni": 0
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA consegne = 3\nIMPOSTA collisioni = 0\nIMPOSTA turni = 6",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA collisioni = 1",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Esaminare uno stallo e progettare prevenzione."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s3",
+    "systems"
+  ],
+  "narration_line": "Tre robot in squadra. Tre agenti devono portare oggetti a depositi distinti senza collisioni.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  }
+}

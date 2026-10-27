@@ -1,0 +1,30 @@
+{
+  "code": "P1",
+  "title": "Giardino delle Frecce",
+  "age": "6-7 anni",
+  "language": "Sequenze iconiche",
+  "editor": "icons",
+  "description": "Siepi, serre e lanterne da raggiungere con sequenze ordinate.",
+  "theme": {
+    "sky": "#9bdeac",
+    "ground": "#6bbf59",
+    "accent": "#f4a261",
+    "prop": "tree"
+  },
+  "lab": "Pista delle frecce",
+  "id": "giardino",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "P1-01",
+    "P1-02",
+    "P1-03",
+    "P1-04",
+    "P1-05",
+    "P1-06",
+    "P1-07",
+    "P1-08",
+    "P1-09",
+    "P1-10"
+  ]
+}

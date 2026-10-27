@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "id": "S3-08",
+  "world": "metropoli",
+  "school_level": "S3",
+  "age_hint": "13-14 anni",
+  "title": "Il laboratorio di test",
+  "editor": "systems",
+  "narrative": "Il motore genera casi limite: lista vuota, ostacolo alla partenza, destinazione irraggiungibile.",
+  "coding_goal": "Progettare test unitari e proprietà invarianti, con feedback leggibile.",
+  "math_objective": "Logica, casi limite e controesempi.",
+  "success_text": "Almeno 8/8 test verdi incluse condizioni limite.",
+  "extension": "Scrivere un test di proprietà per la conservazione degli oggetti.",
+  "design_reference": "«ASSERT percorso non attraversa muri; ASSERT energia>=0» e test parametrizzati.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA test_superati = 0\nRIPETI x8 { test_superati = test_superati + 1 }",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "test_superati": 8
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA test_superati = 0\nRIPETI x8 { test_superati = test_superati + 1 }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA test_superati = 0",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Scrivere un test di proprietà per la conservazione degli oggetti."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s3",
+    "systems"
+  ],
+  "narration_line": "Il laboratorio di test. Il motore genera casi limite: lista vuota, ostacolo alla partenza, destinazione irraggiungibile.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "P3-10",
+  "world": "borgo",
+  "school_level": "P3",
+  "age_hint": "8-9 anni",
+  "title": "La carovana programmabile",
+  "editor": "text",
+  "narrative": "Percorso con quattro carovane e una grande piazza; occorrono ripetizioni e tre azioni diverse.",
+  "coding_goal": "Comporre algoritmo autonomo testuale, lanciarlo, confrontarlo col replay.",
+  "math_objective": "Multipli di 2, conteggio di eventi, scomposizione di problemi.",
+  "success_text": "Tre saluti, una porta attivata e meta raggiunta.",
+  "extension": "Ridurre il numero di righe mantenendo stessi eventi e posizione finale.",
+  "design_reference": "Esempio «RIPETI x3 { AVANTI 2; SALUTA }; DESTRA; AVANTI 2; TOCCA».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "N"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p3-10-activate-2_2",
+      "kind": "activate",
+      "cell": [
+        2,
+        2
+      ],
+      "label": "Porta",
+      "glyph": "!",
+      "required": true
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "RIPETI x3 { AVANTI 2; DESTRA; SALUTA }\nDESTRA\nAVANTI 2\nTOCCA",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      2,
+      2
+    ],
+    "activate_all": [
+      "p3-10-activate-2_2"
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "RIPETI x3 { AVANTI 2; DESTRA; SALUTA }\nDESTRA\nAVANTI 2\nTOCCA",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Ridurre il numero di righe mantenendo stessi eventi e posizione finale."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p3",
+    "text"
+  ],
+  "narration_line": "La carovana programmabile. Percorso con quattro carovane e una grande piazza; occorrono ripetizioni e tre azioni diverse.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#588157",
+    "accent": "#e76f51",
+    "prop": "house"
+  }
+}

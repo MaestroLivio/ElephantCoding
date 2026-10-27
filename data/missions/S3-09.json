@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "id": "S3-09",
+  "world": "metropoli",
+  "school_level": "S3",
+  "age_hint": "13-14 anni",
+  "title": "La biblioteca dei moduli",
+  "editor": "systems",
+  "narrative": "Un progetto esteso contiene navigazione, inventario e sensori, inizialmente intrecciati.",
+  "coding_goal": "Rifattorizzare in moduli e dichiarare API e dipendenze.",
+  "math_objective": "Astrazione, interfacce, composizione.",
+  "success_text": "Suite di regressione invariata e moduli riutilizzabili.",
+  "extension": "Scrivere breve documentazione per il prossimo sviluppatore.",
+  "design_reference": "navigation.find_path(); inventory.take(); sensors.read(), senza cicli di import.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA moduli = 3\nIMPOSTA dipendenze_circolari = 0\nIMPOSTA regressione_ok = VERO",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "moduli": 3,
+      "dipendenze_circolari": 0,
+      "regressione_ok": true
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA moduli = 3\nIMPOSTA dipendenze_circolari = 0\nIMPOSTA regressione_ok = VERO",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA moduli = 1",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Scrivere breve documentazione per il prossimo sviluppatore."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s3",
+    "systems"
+  ],
+  "narration_line": "La biblioteca dei moduli. Un progetto esteso contiene navigazione, inventario e sensori, inizialmente intrecciati.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  }
+}

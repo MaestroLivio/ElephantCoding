@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "id": "S1-04",
+  "world": "cittadella",
+  "school_level": "S1",
+  "age_hint": "11-12 anni",
+  "title": "La barriera mobile",
+  "editor": "structured",
+  "narrative": "Cancello ciclico alterna aperto/chiuso ad ogni tick; occorre attendere finché è aperto.",
+  "coding_goal": "Applicare un ciclo condizionato con limite di sicurezza.",
+  "math_objective": "Tempo discreto e predicati.",
+  "success_text": "Esecuzione passa soltanto durante un tick aperto.",
+  "extension": "Osservare timeout e gestione dell'attesa eccessiva.",
+  "design_reference": "«FINCHÉ NON cancello_aperto { ASPETTA 1 }; ATTRAVERSA».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {
+    "cancello_aperto": false
+  },
+  "timers": [
+    {
+      "var": "cancello_aperto",
+      "every": 1,
+      "mode": "toggle"
+    }
+  ],
+  "allowed_ops": [],
+  "reference_program": "FINCHÉ NON cancello_aperto { ASPETTA 1 }\nATTRAVERSA",
+  "starter_program": "",
+  "goal": {
+    "event_counts": {
+      "attraversa": 1
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "FINCHÉ NON cancello_aperto { ASPETTA 1 }\nATTRAVERSA",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Osservare timeout e gestione dell'attesa eccessiva."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s1",
+    "structured"
+  ],
+  "narration_line": "La barriera mobile. Cancello ciclico alterna aperto/chiuso ad ogni tick; occorre attendere finché è aperto.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#bde0fe",
+    "ground": "#457b9d",
+    "accent": "#ffd166",
+    "prop": "tower"
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "S3-04",
+  "world": "metropoli",
+  "school_level": "S3",
+  "age_hint": "13-14 anni",
+  "title": "La ricerca in ampiezza",
+  "editor": "systems",
+  "narrative": "Labirinto non pesato con percorso minimo misurato in archi.",
+  "coding_goal": "Implementare BFS con coda, insieme visitati e predecessori.",
+  "math_objective": "Distanza minima in grafo non pesato, invarianti.",
+  "success_text": "Il percorso trovato è minimo e coincide con l'oracolo su cinque mappe.",
+  "extension": "Confrontare BFS con esplorazione a caso.",
+  "design_reference": "«CODA.enqueue(start); finché coda non vuota: estrai; visita vicini nuovi».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 6,
+    "max_y": 6
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      1,
+      3
+    ]
+  ],
+  "entities": [
+    {
+      "id": "s304-target",
+      "kind": "target",
+      "cell": [
+        4,
+        4
+      ],
+      "label": "Uscita",
+      "glyph": "U"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "VAI A (1,0)\nVAI A (1,1)\nVAI A (2,1)\nVAI A (2,2)\nVAI A (4,2)\nVAI A (4,4)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      4,
+      4
+    ],
+    "visit_order": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        4
+      ]
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "VAI A (1,0)\nVAI A (1,1)\nVAI A (2,1)\nVAI A (2,2)\nVAI A (4,2)\nVAI A (4,4)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "VAI A (6,0)",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Confrontare BFS con esplorazione a caso."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s3",
+    "systems"
+  ],
+  "narration_line": "La ricerca in ampiezza. Labirinto non pesato con percorso minimo misurato in archi.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  }
+}

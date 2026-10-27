@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "P4-01",
+  "world": "isola",
+  "school_level": "P4",
+  "age_hint": "9-10 anni",
+  "title": "Benvenuto nel piano",
+  "editor": "coordinates",
+  "narrative": "Isola cartesiana con griglia nel primo quadrante, origine (0,0), assi X est e Y nord; target (2,1).",
+  "coding_goal": "Associare una coppia ordinata a una posizione; primo uso esplicito di coordinate.",
+  "math_objective": "Assi cartesiani, coppia ordinata, origine.",
+  "success_text": "Coordinate finali esattamente (2,1) visualizzate nell'HUD.",
+  "extension": "Scambiare i valori e osservare l'errore (1,2).",
+  "design_reference": "«VAI A (2,1)» su tragitto ortogonale libero.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 7,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p401-target",
+      "kind": "target",
+      "cell": [
+        2,
+        1
+      ],
+      "label": "Bandiera",
+      "glyph": "B"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "VAI A (2,1)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      2,
+      1
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Guarda la destinazione: si trova in (2, 1). Ricorda che si scrive prima la X, poi la Y."
+    },
+    {
+      "level": 2,
+      "text": "Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione."
+    },
+    {
+      "level": 3,
+      "text": "Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "VAI A (2,1)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Scambiare i valori e osservare l'errore (1,2)."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p4",
+    "coordinates"
+  ],
+  "narration_line": "Benvenuto nel piano. Isola cartesiana con griglia nel primo quadrante, origine (0,0), assi X est e Y nord; target (2,1).",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#90e0ef",
+    "ground": "#00b4d8",
+    "accent": "#ffb703",
+    "prop": "palm"
+  }
+}

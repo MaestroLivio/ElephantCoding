@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "id": "S1-10",
+  "world": "cittadella",
+  "school_level": "S1",
+  "age_hint": "11-12 anni",
+  "title": "La cittadella operativa",
+  "editor": "structured",
+  "narrative": "Quattro settori con cancelli, sensori e livelli di altezza; sistema di procedure e cicli.",
+  "coding_goal": "Scomporre il problema in funzioni verificabili e programma principale.",
+  "math_objective": "Coordinate, prodotti, disuguaglianze e modularità.",
+  "success_text": "Quattro settori visitati, allarmi zero, ogni funzione testata.",
+  "extension": "Scrivere commenti di contratto per le funzioni.",
+  "design_reference": "Programma con controllaSensore(), apri(id), visita(x,y), cicli e condizioni.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "s110-1_1",
+      "kind": "activate",
+      "cell": [
+        1,
+        1
+      ],
+      "label": "Settore",
+      "glyph": "S"
+    },
+    {
+      "id": "s110-5_1",
+      "kind": "activate",
+      "cell": [
+        5,
+        1
+      ],
+      "label": "Settore",
+      "glyph": "S"
+    },
+    {
+      "id": "s110-5_5",
+      "kind": "activate",
+      "cell": [
+        5,
+        5
+      ],
+      "label": "Settore",
+      "glyph": "S"
+    },
+    {
+      "id": "s110-1_5",
+      "kind": "activate",
+      "cell": [
+        1,
+        5
+      ],
+      "label": "Settore",
+      "glyph": "S"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA allarmi = 0\nPROCEDURA visita(x, y) { VAI A (x,y); ATTIVA }\nvisita(1,1)\nvisita(5,1)\nvisita(5,5)\nvisita(1,5)",
+  "starter_program": "",
+  "goal": {
+    "activate_all": [
+      "s110-1_1",
+      "s110-5_1",
+      "s110-5_5",
+      "s110-1_5"
+    ],
+    "vars": {
+      "allarmi": 0
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA allarmi = 0\nPROCEDURA visita(x, y) { VAI A (x,y); ATTIVA }\nvisita(1,1)\nvisita(5,1)\nvisita(5,5)\nvisita(1,5)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "visita(1,1)",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Scrivere commenti di contratto per le funzioni."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s1",
+    "structured"
+  ],
+  "narration_line": "La cittadella operativa. Quattro settori con cancelli, sensori e livelli di altezza; sistema di procedure e cicli.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#bde0fe",
+    "ground": "#457b9d",
+    "accent": "#ffd166",
+    "prop": "tower"
+  }
+}

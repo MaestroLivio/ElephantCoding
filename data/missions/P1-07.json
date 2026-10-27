@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "id": "P1-07",
+  "world": "giardino",
+  "school_level": "P1",
+  "age_hint": "6-7 anni",
+  "title": "Il mosaico alternato",
+  "editor": "icons",
+  "narrative": "Pavimento con stelle e cerchi alternati, da attivare con l'azione TOCCA.",
+  "coding_goal": "Unire spostamento e interazione in pattern ripetuti.",
+  "math_objective": "Sequenze regolari, classificazione di forme.",
+  "success_text": "Le tre piastrelle previste si illuminano in ordine.",
+  "extension": "Disegnare un diverso motivo geometrico nella sandbox.",
+  "design_reference": "[AVANTI → TOCCA] ripetuto 3 volte con icone.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p1-07-activate-1_0",
+      "kind": "activate",
+      "cell": [
+        1,
+        0
+      ],
+      "label": "Piastrella",
+      "glyph": "!",
+      "required": true
+    },
+    {
+      "id": "p1-07-activate-2_0",
+      "kind": "activate",
+      "cell": [
+        2,
+        0
+      ],
+      "label": "Piastrella",
+      "glyph": "!",
+      "required": true
+    },
+    {
+      "id": "p1-07-activate-3_0",
+      "kind": "activate",
+      "cell": [
+        3,
+        0
+      ],
+      "label": "Piastrella",
+      "glyph": "!",
+      "required": true
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI 1\nTOCCA\nAVANTI 1\nTOCCA\nAVANTI 1\nTOCCA",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      3,
+      0
+    ],
+    "activate_all": [
+      "p1-07-activate-1_0",
+      "p1-07-activate-2_0",
+      "p1-07-activate-3_0"
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI 1\nTOCCA\nAVANTI 1\nTOCCA\nAVANTI 1\nTOCCA",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Disegnare un diverso motivo geometrico nella sandbox."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p1",
+    "icons"
+  ],
+  "narration_line": "Il mosaico alternato. Pavimento con stelle e cerchi alternati, da attivare con l'azione TOCCA.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#9bdeac",
+    "ground": "#6bbf59",
+    "accent": "#f4a261",
+    "prop": "tree"
+  }
+}

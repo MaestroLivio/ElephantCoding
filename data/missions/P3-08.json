@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "P3-08",
+  "world": "borgo",
+  "school_level": "P3",
+  "age_hint": "8-9 anni",
+  "title": "I passi dell'espressione",
+  "editor": "text",
+  "narrative": "Cartello «2+3» indica la distanza fino al mercato; supporto a parentesi aritmetiche semplici.",
+  "coding_goal": "Valutare espressione intera prima del comando.",
+  "math_objective": "Addizione e parentesi.",
+  "success_text": "Interpretazione produce 5 avanzamenti e stesso risultato per entrambe le forme.",
+  "extension": "Usare «AVANTI (2×3)» nell'editor esteso.",
+  "design_reference": "«AVANTI (2+3)» oppure «AVANTI 5».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p308-target",
+      "kind": "target",
+      "cell": [
+        5,
+        0
+      ],
+      "label": "Mercato",
+      "glyph": "M"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI (2+3)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      5,
+      0
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI (2+3)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Usare «AVANTI (2×3)» nell'editor esteso."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p3",
+    "text"
+  ],
+  "narration_line": "I passi dell'espressione. Cartello «2+3» indica la distanza fino al mercato; supporto a parentesi aritmetiche semplici.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#588157",
+    "accent": "#e76f51",
+    "prop": "house"
+  }
+}

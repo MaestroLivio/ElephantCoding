@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "id": "S2-06",
+  "world": "arcipelago",
+  "school_level": "S2",
+  "age_hint": "12-13 anni",
+  "title": "La serra percentuale",
+  "editor": "data",
+  "narrative": "Serra con tre settori; batteria passa dal 100% al 75%, poi al 60%; avvisi e consumo.",
+  "coding_goal": "Applicare calcolo percentuale e condizioni soglia.",
+  "math_objective": "Percentuali, variazioni e soglia.",
+  "success_text": "Al 75% nessuna ricarica, al 60% sì.",
+  "extension": "Visualizzare la variazione in punti percentuali.",
+  "design_reference": "«SE carica_percentuale < 70 ALLORA RICARICA» con rilevamento di ogni tick.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {
+    "carica_percentuale": 60
+  },
+  "sensors": {
+    "carica_percentuale": 60
+  },
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "SE carica_percentuale < 70 ALLORA { RICARICA } ALTRIMENTI { SEGNALA }",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "ricarica": true
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "SE carica_percentuale < 70 ALLORA { RICARICA } ALTRIMENTI { SEGNALA }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "SE carica_percentuale < 70 ALLORA { SEGNALA } ALTRIMENTI { RICARICA }",
+      "expect_success": false
+    },
+    {
+      "name": "75_percent_no_recharge",
+      "program": "SE carica_percentuale < 70 ALLORA { RICARICA } ALTRIMENTI { SEGNALA }",
+      "expect_success": false,
+      "override": {
+        "initial_vars": {
+          "carica_percentuale": 75
+        },
+        "sensors": {
+          "carica_percentuale": 75
+        }
+      }
+    }
+  ],
+  "optional_extensions": [
+    "Visualizzare la variazione in punti percentuali."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s2",
+    "data"
+  ],
+  "narration_line": "La serra percentuale. Serra con tre settori; batteria passa dal 100% al 75%, poi al 60%; avvisi e consumo.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#1d3557",
+    "accent": "#f1faee",
+    "prop": "boat"
+  }
+}

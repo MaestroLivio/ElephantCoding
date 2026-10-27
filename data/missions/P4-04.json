@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "id": "P4-04",
+  "world": "isola",
+  "school_level": "P4",
+  "age_hint": "9-10 anni",
+  "title": "Le aiuole ai vertici",
+  "editor": "coordinates",
+  "narrative": "Rettangolo con vertici (1,1),(5,1),(5,3),(1,3); Nilo deve visitarli in ordine.",
+  "coding_goal": "Programmare una polilinea attraverso coordinate.",
+  "math_objective": "Rettangolo, lati paralleli, coordinate.",
+  "success_text": "Registro di visita coincide con i quattro vertici ordinati.",
+  "extension": "Chiudere il percorso tornando a (1,1).",
+  "design_reference": "Quattro «VAI A (x,y)» nell'ordine indicato, chiusura opzionale.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p404-target",
+      "kind": "target",
+      "cell": [
+        1,
+        3
+      ],
+      "label": "Vertice",
+      "glyph": "V"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "VAI A (1,1)\nVAI A (5,1)\nVAI A (5,3)\nVAI A (1,3)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      1,
+      3
+    ],
+    "visit_order": [
+      [
+        1,
+        1
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        1,
+        3
+      ]
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Guarda la destinazione: si trova in (1, 3). Ricorda che si scrive prima la X, poi la Y."
+    },
+    {
+      "level": 2,
+      "text": "Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione."
+    },
+    {
+      "level": 3,
+      "text": "Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "VAI A (1,1)\nVAI A (5,1)\nVAI A (5,3)\nVAI A (1,3)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Chiudere il percorso tornando a (1,1)."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p4",
+    "coordinates"
+  ],
+  "narration_line": "Le aiuole ai vertici. Rettangolo con vertici (1,1),(5,1),(5,3),(1,3); Nilo deve visitarli in ordine.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#90e0ef",
+    "ground": "#00b4d8",
+    "accent": "#ffb703",
+    "prop": "palm"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "code": "P2",
+  "title": "Officina dei Fili",
+  "age": "7-8 anni",
+  "language": "Stringhe analogiche e perle",
+  "editor": "beads",
+  "description": "Fili, perle e mollette: si programma infilando istruzioni.",
+  "theme": {
+    "sky": "#c7b9ff",
+    "ground": "#8d7bd6",
+    "accent": "#ffb703",
+    "prop": "gear"
+  },
+  "lab": "Atelier delle stringhe",
+  "id": "officina",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "P2-01",
+    "P2-02",
+    "P2-03",
+    "P2-04",
+    "P2-05",
+    "P2-06",
+    "P2-07",
+    "P2-08",
+    "P2-09",
+    "P2-10"
+  ]
+}

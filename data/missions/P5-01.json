@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "id": "P5-01",
+  "world": "centro",
+  "school_level": "P5",
+  "age_hint": "10-11 anni",
+  "title": "I quattro quadranti",
+  "editor": "pseudocode",
+  "narrative": "Centro di ricerca, origine centrale, target in (-2,3) e (3,-1).",
+  "coding_goal": "Gestire coordinate intere con segno e assi estesi.",
+  "math_objective": "Numeri relativi, quadranti I–IV.",
+  "success_text": "Entrambe le destinazioni registrate con segni corretti.",
+  "extension": "Descrivere il percorso che passa per (0,0).",
+  "design_reference": "«VAI A (-2,3); VAI A (3,-1)».",
+  "grid": {
+    "min_x": -6,
+    "min_y": -6,
+    "max_x": 6,
+    "max_y": 6
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p501-target",
+      "kind": "target",
+      "cell": [
+        3,
+        -1
+      ],
+      "label": "Sensore",
+      "glyph": "S"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "VAI A (-2,3)\nVAI A (3,-1)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      3,
+      -1
+    ],
+    "visit_order": [
+      [
+        -2,
+        3
+      ],
+      [
+        3,
+        -1
+      ]
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "VAI A (-2,3)\nVAI A (3,-1)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Descrivere il percorso che passa per (0,0)."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p5",
+    "pseudocode"
+  ],
+  "narration_line": "I quattro quadranti. Centro di ricerca, origine centrale, target in (-2,3) e (3,-1).",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#cdb4db",
+    "ground": "#6d597a",
+    "accent": "#ffafcc",
+    "prop": "antenna"
+  }
+}

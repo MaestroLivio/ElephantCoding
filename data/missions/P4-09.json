@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "P4-09",
+  "world": "isola",
+  "school_level": "P4",
+  "age_hint": "9-10 anni",
+  "title": "La mappa in scala",
+  "editor": "coordinates",
+  "narrative": "Una casella vale 2 metri; dal (0,0) la serra sta a (3,2) caselle.",
+  "coding_goal": "Separare coordinate in celle e misura reale con unità esplicite.",
+  "math_objective": "Scala semplice: 6 m est e 4 m nord; distanza lungo percorso 10 m.",
+  "success_text": "Percorso di cinque celle e rapporto 2 m/cella correttamente mostrato.",
+  "extension": "Provare scala 5 m per cella senza cambiare codice.",
+  "design_reference": "«MUOVI X +3; MUOVI Y +2», con conversione nell'HUD.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p409-target",
+      "kind": "target",
+      "cell": [
+        3,
+        2
+      ],
+      "label": "Serra",
+      "glyph": "S"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "MUOVI X +3\nMUOVI Y +2",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      3,
+      2
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Guarda la destinazione: si trova in (3, 2). Ricorda che si scrive prima la X, poi la Y."
+    },
+    {
+      "level": 2,
+      "text": "Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione."
+    },
+    {
+      "level": 3,
+      "text": "Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "MUOVI X +3\nMUOVI Y +2",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Provare scala 5 m per cella senza cambiare codice."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p4",
+    "coordinates"
+  ],
+  "narration_line": "La mappa in scala. Una casella vale 2 metri; dal (0,0) la serra sta a (3,2) caselle.",
+  "scale_m": 2,
+  "scene_theme": {
+    "sky": "#90e0ef",
+    "ground": "#00b4d8",
+    "accent": "#ffb703",
+    "prop": "palm"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "id": "S3-05",
+  "world": "metropoli",
+  "school_level": "S3",
+  "age_hint": "13-14 anni",
+  "title": "Il robot che decide",
+  "editor": "systems",
+  "narrative": "Un elefantino robot raccoglie oggetti rispettando energia, distanza e priorità.",
+  "coding_goal": "Realizzare sistema decisionale basato su punteggio documentato.",
+  "math_objective": "Funzioni lineari, ordinamento per punteggio e vincoli.",
+  "success_text": "Scelta riproducibile per tutti i dataset, con spiegazione leggibile.",
+  "extension": "Provare pesi diversi e discutere il compromesso.",
+  "design_reference": "«punteggio = 2*priorità - distanza - costoEnergia; scegli massimo ammissibile».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {
+    "oggetti": [
+      [
+        "A",
+        5,
+        2,
+        4
+      ],
+      [
+        "B",
+        3,
+        1,
+        2
+      ],
+      [
+        "C",
+        2,
+        3,
+        5
+      ]
+    ]
+  },
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA scelta = \"Nessuno\"\nIMPOSTA migliore = -999\nPER OGNI o IN oggetti { IMPOSTA punteggio = 2 * o[1] - o[2] - o[3]; SE punteggio > migliore ALLORA { migliore = punteggio; scelta = o[0] } }",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "scelta": "A",
+      "migliore": 4
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA scelta = \"Nessuno\"\nIMPOSTA migliore = -999\nPER OGNI o IN oggetti { IMPOSTA punteggio = 2 * o[1] - o[2] - o[3]; SE punteggio > migliore ALLORA { migliore = punteggio; scelta = o[0] } }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA scelta = \"B\"",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Provare pesi diversi e discutere il compromesso."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s3",
+    "systems"
+  ],
+  "narration_line": "Il robot che decide. Un elefantino robot raccoglie oggetti rispettando energia, distanza e priorità.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  }
+}

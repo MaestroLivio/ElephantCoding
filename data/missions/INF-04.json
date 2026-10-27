@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "INF-04",
+  "world": "savana",
+  "school_level": "INF",
+  "age_hint": "4-6 anni",
+  "title": "Il tamburo nascosto",
+  "editor": "icons",
+  "narrative": "Un tamburo è dietro una siepe sul lato sinistro di Nilo, che parte rivolto in avanti.",
+  "coding_goal": "Selezionare e combinare orientamento e avanzamento.",
+  "math_objective": "Lateralità e percezione spaziale.",
+  "success_text": "Nilo si ferma sulla piattaforma sonora e attiva il tamburo.",
+  "extension": "Far eseguire la stessa sequenza con il corpo a un compagno.",
+  "design_reference": "GIRA A SINISTRA → AVANTI → AVANTI.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "inf-04-activate-0_2",
+      "kind": "activate",
+      "cell": [
+        0,
+        2
+      ],
+      "label": "Tamburo",
+      "glyph": "!",
+      "required": true
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "SINISTRA\nAVANTI 1\nAVANTI 1\nTOCCA",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      0,
+      2
+    ],
+    "activate_all": [
+      "inf-04-activate-0_2"
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "SINISTRA\nAVANTI 1\nAVANTI 1\nTOCCA",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Far eseguire la stessa sequenza con il corpo a un compagno."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "inf",
+    "icons"
+  ],
+  "narration_line": "Il tamburo nascosto. Un tamburo è dietro una siepe sul lato sinistro di Nilo, che parte rivolto in avanti.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#f7c873",
+    "ground": "#c9a227",
+    "accent": "#e76f51",
+    "prop": "acacia"
+  }
+}

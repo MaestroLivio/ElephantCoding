@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "id": "P4-06",
+  "world": "isola",
+  "school_level": "P4",
+  "age_hint": "9-10 anni",
+  "title": "Scambia le coordinate",
+  "editor": "coordinates",
+  "narrative": "Due giardini ai punti (2,4) e (4,2) in griglia libera.",
+  "coding_goal": "Prevedere l'effetto di scambiare ascissa e ordinata.",
+  "math_objective": "Simmetria rispetto alla retta x=y, intuitiva.",
+  "success_text": "Due bandiere posizionate nei punti esatti in ordine.",
+  "extension": "Segnare altri due punti speculari.",
+  "design_reference": "«VAI A (2,4); VAI A (4,2)».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p406-target",
+      "kind": "target",
+      "cell": [
+        4,
+        2
+      ],
+      "label": "Giardino",
+      "glyph": "G"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "VAI A (2,4)\nVAI A (4,2)",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      4,
+      2
+    ],
+    "visit_order": [
+      [
+        2,
+        4
+      ],
+      [
+        4,
+        2
+      ]
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Guarda la destinazione: si trova in (4, 2). Ricorda che si scrive prima la X, poi la Y."
+    },
+    {
+      "level": 2,
+      "text": "Esegui un passo alla volta e confronta la posizione nell'HUD con la destinazione."
+    },
+    {
+      "level": 3,
+      "text": "Prova a costruire il percorso con una sequenza di VAI A, fermandoti sui punti intermedi."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "VAI A (2,4)\nVAI A (4,2)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Segnare altri due punti speculari."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p4",
+    "coordinates"
+  ],
+  "narration_line": "Scambia le coordinate. Due giardini ai punti (2,4) e (4,2) in griglia libera.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#90e0ef",
+    "ground": "#00b4d8",
+    "accent": "#ffb703",
+    "prop": "palm"
+  }
+}

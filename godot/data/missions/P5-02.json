@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "P5-02",
+  "world": "centro",
+  "school_level": "P5",
+  "age_hint": "10-11 anni",
+  "title": "Il vettore del vento",
+  "editor": "pseudocode",
+  "narrative": "Un vento sposta l'elefantino di (-3,+2) rispetto a (4,1).",
+  "coding_goal": "Comporre uno spostamento relativo in coordinate.",
+  "math_objective": "Somma di interi: (4,1)+(-3,2)=(1,3).",
+  "success_text": "Coordinate finali (1,3) e vettore visualizzato.",
+  "extension": "Scomporre lo stesso vettore in tre microspostamenti.",
+  "design_reference": "«MUOVI X -3; MUOVI Y +2» da (4,1).",
+  "grid": {
+    "min_x": -6,
+    "min_y": -6,
+    "max_x": 6,
+    "max_y": 6
+  },
+  "spawn": {
+    "cell": [
+      4,
+      1
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p502-target",
+      "kind": "target",
+      "cell": [
+        1,
+        3
+      ],
+      "label": "Vento",
+      "glyph": "V"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "MUOVI X -3\nMUOVI Y +2",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      1,
+      3
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "MUOVI X -3\nMUOVI Y +2",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Scomporre lo stesso vettore in tre microspostamenti."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p5",
+    "pseudocode"
+  ],
+  "narration_line": "Il vettore del vento. Un vento sposta l'elefantino di (-3,+2) rispetto a (4,1).",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#cdb4db",
+    "ground": "#6d597a",
+    "accent": "#ffafcc",
+    "prop": "antenna"
+  }
+}

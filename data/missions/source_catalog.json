@@ -1,0 +1,902 @@
+{
+  "INF-01": {
+    "id": "INF-01",
+    "title": "Il primo passo",
+    "scene": "Prateria con una sola casella libera fra Nilo e una farfalla; un grande pulsante avvia l'esecuzione.",
+    "coding_goal": "Associare un pittogramma a un movimento discreto; prevedere un'azione.",
+    "design_reference": "Inserire 1 tessera FRECCIA AVANTI e premere GIOCA.",
+    "math_objective": "Corrispondenza uno-a-uno, vicino/lontano.",
+    "success_text": "Nilo termina nella casella della farfalla con una sola istruzione.",
+    "extension": "Cambiare posizione alla farfalla e riprovare."
+  },
+  "INF-02": {
+    "id": "INF-02",
+    "title": "Le due impronte",
+    "scene": "Sentiero rettilineo di due passi verso un albero; predisporre due spazi vuoti nella sequenza.",
+    "coding_goal": "Ordinare due istruzioni identiche e seguirne la traccia.",
+    "design_reference": "AVANTI, AVANTI: due tessere e un'esecuzione.",
+    "math_objective": "Contare fino a 2; successione prima/dopo.",
+    "success_text": "Il personaggio raggiunge l'albero senza saltare caselle.",
+    "extension": "Mostrare le due impronte in ordine inverso e chiedere se cambia il risultato."
+  },
+  "INF-03": {
+    "id": "INF-03",
+    "title": "La curva dell'acacia",
+    "scene": "Percorso a L: un passo avanti, rotazione a destra, un passo avanti; indicatori direzionali nello scenario.",
+    "coding_goal": "Distinguere rotazione e spostamento.",
+    "design_reference": "AVANTI → GIRA A DESTRA → AVANTI.",
+    "math_objective": "Destra/sinistra, angolo retto vissuto corporalmente.",
+    "success_text": "La sequenza percorre esattamente le tre azioni previste.",
+    "extension": "Spostare l'albero e scoprire la curva speculare."
+  },
+  "INF-04": {
+    "id": "INF-04",
+    "title": "Il tamburo nascosto",
+    "scene": "Un tamburo è dietro una siepe sul lato sinistro di Nilo, che parte rivolto in avanti.",
+    "coding_goal": "Selezionare e combinare orientamento e avanzamento.",
+    "design_reference": "GIRA A SINISTRA → AVANTI → AVANTI.",
+    "math_objective": "Lateralità e percezione spaziale.",
+    "success_text": "Nilo si ferma sulla piattaforma sonora e attiva il tamburo.",
+    "extension": "Far eseguire la stessa sequenza con il corpo a un compagno."
+  },
+  "INF-05": {
+    "id": "INF-05",
+    "title": "Il ponte più corto",
+    "scene": "Due passerelle evidenziate: una di 2 caselle, l'altra di 4, entrambe portano a un'isoletta.",
+    "coding_goal": "Pianificare prima di inserire comandi.",
+    "design_reference": "Scegliere il percorso da 2 e collocare due AVANTI.",
+    "math_objective": "Confronto corto/lungo, conteggio visuale 2 e 4.",
+    "success_text": "La meta è raggiunta attraverso il ponte corto.",
+    "extension": "Provare anche il ponte lungo e confrontare il numero di azioni."
+  },
+  "INF-06": {
+    "id": "INF-06",
+    "title": "I fiori in fila",
+    "scene": "Tre aiuole in successione giallo-blu-giallo; Nilo deve visitarle una alla volta.",
+    "coding_goal": "Seguire una sequenza ordinata e riconoscere un pattern.",
+    "design_reference": "AVANTI → RACCOGLI → AVANTI → RACCOGLI → AVANTI → RACCOGLI.",
+    "math_objective": "Alternanza AB/A; ordine e colori.",
+    "success_text": "Sono raccolti tre fiori nell'ordine richiesto.",
+    "extension": "Predire e posizionare il quarto colore."
+  },
+  "INF-07": {
+    "id": "INF-07",
+    "title": "La pausa del riccio",
+    "scene": "Due segnali di stop su un viale con tre caselle; l'icona PAUSA blocca solo l'animazione per un battito.",
+    "coding_goal": "Comprendere che ogni simbolo produce un evento osservabile.",
+    "design_reference": "AVANTI → PAUSA → AVANTI → PAUSA → AVANTI.",
+    "math_objective": "Ritmo, successione, prima/dopo.",
+    "success_text": "Entrambi i segnali attivano un suono di pausa.",
+    "extension": "Riprodurre il ritmo con battiti di mani."
+  },
+  "INF-08": {
+    "id": "INF-08",
+    "title": "Lo specchio delle orecchie",
+    "scene": "Due mini-percorsi speculari, uno con curva a destra e uno a sinistra, ma una sola meta è illuminata.",
+    "coding_goal": "Scegliere la direzione rispetto all'orientamento iniziale.",
+    "design_reference": "GIRA A SINISTRA → AVANTI oppure speculare secondo la meta.",
+    "math_objective": "Simmetria intuitiva, lato destro/lato sinistro.",
+    "success_text": "La traccia finale corrisponde al lato illuminato.",
+    "extension": "Cambiare il punto di vista della camera e mantenere corretta la lateralità di Nilo."
+  },
+  "INF-09": {
+    "id": "INF-09",
+    "title": "Le tre pietre",
+    "scene": "Tre pietre numerate con pallini 1, 2, 3 disposte in linea; Nilo deve toccarle nell'ordine.",
+    "coding_goal": "Comporre sequenze di movimento e interazione.",
+    "design_reference": "AVANTI → TOCCA, AVANTI → TOCCA, AVANTI → TOCCA.",
+    "math_objective": "Ordinamento crescente fino a 3.",
+    "success_text": "Registro degli eventi [1,2,3] senza inversioni.",
+    "extension": "Riordinare le pietre senza cambiare il loro valore."
+  },
+  "INF-10": {
+    "id": "INF-10",
+    "title": "La festa della savana",
+    "scene": "Piccolo itinerario con due curve, tre passi e un campanello conclusivo; tabellone di massimo 7 icone.",
+    "coding_goal": "Pianificare ed eseguire una procedura semplice completa.",
+    "design_reference": "AVANTI → DESTRA → AVANTI → SINISTRA → AVANTI → SUONA.",
+    "math_objective": "Conteggio, orientamento, memoria di lavoro.",
+    "success_text": "Nilo arriva alla festa e suona il campanello, senza uscire dal sentiero.",
+    "extension": "Inventare una nuova breve sequenza in modalità laboratorio."
+  },
+  "P1-01": {
+    "id": "P1-01",
+    "title": "Quattro passi nel giardino",
+    "scene": "Quattro caselle verso la serra; il percorso è interamente visibile dall'alto.",
+    "coding_goal": "Costruire una sequenza iconica e verificarla con l'anteprima.",
+    "design_reference": "AVANTI ripetuto 4 volte, senza teletrasporto.",
+    "math_objective": "Cardinalità 4, stima della distanza.",
+    "success_text": "La serra viene raggiunta con quattro avanzamenti.",
+    "extension": "Aggiungere una casella e aggiornare la sequenza."
+  },
+  "P1-02": {
+    "id": "P1-02",
+    "title": "Il ponte dei cinque",
+    "scene": "Due tronchi di lunghezza 2 e 3 formano un unico attraversamento.",
+    "coding_goal": "Comporre segmenti di programma contigui.",
+    "design_reference": "AVANTI ×2, poi AVANTI ×3 tramite 5 tessere visibili.",
+    "math_objective": "Addizione 2+3=5 come lunghezza.",
+    "success_text": "Cinque caselle attraversate senza interruzioni.",
+    "extension": "Usare 1+4 e confrontare il totale."
+  },
+  "P1-03": {
+    "id": "P1-03",
+    "title": "La piazza degli angoli",
+    "scene": "Quattro insegne agli angoli di una piazza; Nilo deve orientarsi e raccoglierne una specifica.",
+    "coding_goal": "Gestire turni di 90 gradi senza confonderli con passi.",
+    "design_reference": "DESTRA → AVANTI → RACCOGLI.",
+    "math_objective": "Rotazioni di un quarto di giro; orientamento.",
+    "success_text": "Viene raccolto soltanto il segnale bersaglio.",
+    "extension": "Provare due rotazioni di 90° e osservare il mezzo giro."
+  },
+  "P1-04": {
+    "id": "P1-04",
+    "title": "La ricetta in cinque mosse",
+    "scene": "Banco di cucina in cui occorre raggiungere acqua, semi e pentola rispettando una strada guidata.",
+    "coding_goal": "Ordinare un algoritmo di cinque azioni e riconoscere una precondizione.",
+    "design_reference": "AVANTI → PRENDI → DESTRA → AVANTI → DEPOSITA.",
+    "math_objective": "Sequenza temporale e conteggio delle azioni.",
+    "success_text": "La pentola riceve i semi soltanto dopo il prelievo.",
+    "extension": "Chiedere cosa accade invertendo PRENDI e DEPOSITA."
+  },
+  "P1-05": {
+    "id": "P1-05",
+    "title": "La pista delle decine",
+    "scene": "Doppia corsia di 10 caselle con segni ogni 5; la meta è alla casella 8.",
+    "coding_goal": "Suddividere un traguardo in parti verificabili.",
+    "design_reference": "5 icone AVANTI + altre 3 icone AVANTI.",
+    "math_objective": "Numeri fino a 10, decomposizione 8=5+3.",
+    "success_text": "L'elefantino si ferma alla casella 8, non alla 10.",
+    "extension": "Portare il traguardo a 9 e modificare il piano."
+  },
+  "P1-06": {
+    "id": "P1-06",
+    "title": "Gira e rigira",
+    "scene": "Due corridoi identici con due curve ripetute; compare un'icona visiva «ripeti 2» facoltativa.",
+    "coding_goal": "Intuire la ripetizione come abbreviazione di una coppia di azioni.",
+    "design_reference": "[AVANTI, DESTRA] due volte; tessera RIPETI 2 se pronta.",
+    "math_objective": "Pattern ABAB e raggruppamento per 2.",
+    "success_text": "La traccia copre tutte le quattro azioni nella giusta direzione.",
+    "extension": "Confrontare quattro icone singole e un gruppo ripetuto."
+  },
+  "P1-07": {
+    "id": "P1-07",
+    "title": "Il mosaico alternato",
+    "scene": "Pavimento con stelle e cerchi alternati, da attivare con l'azione TOCCA.",
+    "coding_goal": "Unire spostamento e interazione in pattern ripetuti.",
+    "design_reference": "[AVANTI → TOCCA] ripetuto 3 volte con icone.",
+    "math_objective": "Sequenze regolari, classificazione di forme.",
+    "success_text": "Le tre piastrelle previste si illuminano in ordine.",
+    "extension": "Disegnare un diverso motivo geometrico nella sandbox."
+  },
+  "P1-08": {
+    "id": "P1-08",
+    "title": "Il bivio dei numeri",
+    "scene": "Due porte contengono 6 e 9 gettoni, l'obiettivo è la porta con più gettoni.",
+    "coding_goal": "Scegliere un percorso a partire da un confronto effettuato dal bambino, non da un SE automatico.",
+    "design_reference": "Tracciare la strada verso la porta 9 e premere APRI.",
+    "math_objective": "Maggiore/minore fino a 20.",
+    "success_text": "Si apre la porta con il gruppo più numeroso.",
+    "extension": "Invertire le quantità mantenendo la stessa scena."
+  },
+  "P1-09": {
+    "id": "P1-09",
+    "title": "L'errore del gufo",
+    "scene": "Un gufo consegna cinque tessere già inserite; una svolta è sbagliata e porta contro un recinto.",
+    "coding_goal": "Fare debugging sostituendo un'istruzione errata.",
+    "design_reference": "Correggere DESTRA in SINISTRA nella posizione segnalata dal replay.",
+    "math_objective": "Posizioni ordinali e anticipazione.",
+    "success_text": "L'esecuzione corretta elimina la collisione.",
+    "extension": "Spiegare verbalmente perché la prima versione falliva."
+  },
+  "P1-10": {
+    "id": "P1-10",
+    "title": "La mappa delle lanterne",
+    "scene": "Percorso di sette azioni tra caselle, curve e due lanterne che richiedono ACCENDI.",
+    "coding_goal": "Combinare quanto appreso in autonomia con debug e replay.",
+    "design_reference": "AVANTI → ACCENDI → DESTRA → AVANTI → SINISTRA → AVANTI → ACCENDI.",
+    "math_objective": "Composizione, conteggio, orientamento.",
+    "success_text": "Accese esattamente due lanterne e raggiunta la seconda.",
+    "extension": "Ridurre le azioni inutili, se introdotte in fase di prova."
+  },
+  "P2-01": {
+    "id": "P2-01",
+    "title": "La prima stringa",
+    "scene": "Officina dei fili con una cordicella orizzontale e quattro perle verdi con freccia; un gancio ne definisce il verso.",
+    "coding_goal": "Programmazione analogica: infilare istruzioni in ordine lungo una stringa fisica visiva.",
+    "design_reference": "Perle [↑ ↑ ↑ ↑] infilate da sinistra a destra; AVVIA legge i simboli sul filo.",
+    "math_objective": "Lunghezza come numero di elementi; ordine lineare.",
+    "success_text": "Il motore legge esattamente quattro perle e muove Nilo di quattro caselle.",
+    "extension": "Togliere una perla e prevedere dove si fermerà."
+  },
+  "P2-02": {
+    "id": "P2-02",
+    "title": "Perle che girano",
+    "scene": "Una pista a L; perle blu rappresentano svolte, verdi passi e l'estremità del filo è marcata INIZIO.",
+    "coding_goal": "Associare codice cromatico, simbolo e azione mantenendo la direzionalità.",
+    "design_reference": "Stringa [↑ ↱ ↑ ↑] con legenda sempre accessibile.",
+    "math_objective": "Ordinamento e geometria intuitiva delle svolte.",
+    "success_text": "Percorso a L realizzato con quattro perle valide.",
+    "extension": "Invertire il verso fisico del filo e osservare l'errore."
+  },
+  "P2-03": {
+    "id": "P2-03",
+    "title": "Due fili da confrontare",
+    "scene": "Due fili pronti, con 3 e 5 perle AVANTI; la meta richiede 5 caselle.",
+    "coding_goal": "Confrontare lunghezze di sequenze e selezionare quella pertinente.",
+    "design_reference": "Selezionare la stringa di 5 perle, poi AVVIA.",
+    "math_objective": "Confronto 3<5; differenza 2.",
+    "success_text": "Il filo scelto raggiunge la piattaforma lontana.",
+    "extension": "Aggiungere due perle al filo corto e dimostrare l'equivalenza."
+  },
+  "P2-04": {
+    "id": "P2-04",
+    "title": "La molletta del due",
+    "scene": "Un segmento di filo contiene [↑ ↱]; una molletta numerata 2 incornicia il segmento da riprodurre.",
+    "coding_goal": "Introdurre ripetizione analogica di un sottogruppo senza testo.",
+    "design_reference": "Filo [MOLLETTA 2 {↑ ↱}].",
+    "math_objective": "Raddoppio, gruppi di 2, moltiplicazione intuitiva.",
+    "success_text": "Il lettore effettua quattro istruzioni nell'ordine previsto.",
+    "extension": "Sostituire la molletta 2 con 3 e descrivere la nuova traiettoria."
+  },
+  "P2-05": {
+    "id": "P2-05",
+    "title": "Il filo allo specchio",
+    "scene": "Un percorso è riflesso rispetto a una linea; è necessario sostituire le perle di svolta.",
+    "coding_goal": "Trasformare un algoritmo analogico in uno speculare.",
+    "design_reference": "Sostituire ogni ↱ con ↰ lasciando invariati i passi.",
+    "math_objective": "Simmetria assiale e relazioni spaziali.",
+    "success_text": "Il nuovo tragitto arriva alla meta speculare.",
+    "extension": "Confrontare visivamente le due stringhe affiancate."
+  },
+  "P2-06": {
+    "id": "P2-06",
+    "title": "La stringa più economica",
+    "scene": "Due soluzioni per raggiungere una casella: una con sei perle e due svolte superflue, una con due perle.",
+    "coding_goal": "Scoprire equivalenza di risultato e preferenza per sequenze più brevi.",
+    "design_reference": "Scegliere [↑ ↑] invece di [↱ ↰ ↑ ↑ ↱ ↰].",
+    "math_objective": "Conteggio, sottrazione 6−2=4, efficienza.",
+    "success_text": "Entrambe le stringhe valide vengono simulate; badge efficienza alla più corta.",
+    "extension": "Provare a eliminare una perla qualsiasi e osservare la differenza."
+  },
+  "P2-07": {
+    "id": "P2-07",
+    "title": "Le decine di perle",
+    "scene": "Un filo a moduli 5+5 e un target a 10 caselle; clip separano due gruppi.",
+    "coding_goal": "Raggruppare istruzioni, leggere una struttura ripetitiva.",
+    "design_reference": "[↑↑↑↑↑] + [↑↑↑↑↑] fissate con due clip.",
+    "math_objective": "Addizione 5+5 e passaggio alla decina.",
+    "success_text": "Il sensore certifica dieci movimenti e due gruppi di cinque.",
+    "extension": "Usare una clip doppia applicata al gruppo 5."
+  },
+  "P2-08": {
+    "id": "P2-08",
+    "title": "La perla fuori posto",
+    "scene": "Stringa iniziale [↑ ↱ ↑ ↰ ↑] ma il campo richiede [↑ ↰ ↑ ↱ ↑].",
+    "coding_goal": "Localizzare e riparare un difetto di sequenza per confronto di trace.",
+    "design_reference": "Scambiare le due perle di svolta; mantenere le altre tre.",
+    "math_objective": "Posizione ordinale, inversione e confronto.",
+    "success_text": "Replay passo-passo mostra percorso corretto e nessuna collisione.",
+    "extension": "Introdurre un secondo errore creato dall'alunno."
+  },
+  "P2-09": {
+    "id": "P2-09",
+    "title": "Due fili, due incarichi",
+    "scene": "Primo filo apre un cancello, secondo porta Nilo al pozzo; i fili si eseguono in successione.",
+    "coding_goal": "Comprendere sequenze concatenate e ordine di esecuzione.",
+    "design_reference": "Filo A [↑, TOCCA]; Filo B [↱, ↑, ↑].",
+    "math_objective": "Composizione di ordini e sequenze.",
+    "success_text": "La porta si apre prima dell'attraversamento; i due log restano separati.",
+    "extension": "Scambiare i fili e spiegare la precondizione violata."
+  },
+  "P2-10": {
+    "id": "P2-10",
+    "title": "La grande tessitura",
+    "scene": "Laboratorio finale con tre sottostringhe rimovibili: strada, cancello, fontana e due mollette di ripetizione.",
+    "coding_goal": "Progettare una stringa modulare e documentarne la logica con simboli.",
+    "design_reference": "Montare STRADA [↑×3], CANCELLO [TOCCA], FONTANA [↱ ↑×2], combinando perle e clip.",
+    "math_objective": "Somme di lunghezze, raggruppamenti, primi multipli.",
+    "success_text": "Missione completata con i tre segmenti nel corretto ordine e una meta raggiunta.",
+    "extension": "Condividere un modello di stringa stampabile e ricrearlo senza schermo."
+  },
+  "P3-01": {
+    "id": "P3-01",
+    "title": "La prima frase comando",
+    "scene": "Borgo dei comandi con editor a righe; il sentiero ha tre caselle verso la fontana.",
+    "coding_goal": "Tradurre una frase operativa in comando testuale naturale.",
+    "design_reference": "Scrivere «AVANTI 3» e premere ESEGUI.",
+    "math_objective": "Numeri naturali, quantità e distanza.",
+    "success_text": "Parser accetta il comando e raggiunge la fontana.",
+    "extension": "Cambiare 3 in 2 e prevedere lo scarto."
+  },
+  "P3-02": {
+    "id": "P3-02",
+    "title": "Una svolta scritta",
+    "scene": "Un incrocio con destinazione due caselle a destra dopo la rotazione.",
+    "coding_goal": "Costruire istruzioni testuali separate da punto e virgola o righe.",
+    "design_reference": "«DESTRA; AVANTI 2».",
+    "math_objective": "Rotazioni di 90°, composizione di azioni.",
+    "success_text": "Traccia raggiunge la casella bersaglio rispettando l'orientamento.",
+    "extension": "Riformulare con SINISTRA tre volte e confrontare."
+  },
+  "P3-03": {
+    "id": "P3-03",
+    "title": "Il potere di x3",
+    "scene": "Un corridoio di sei caselle; l'editor mostra una coppia di righe equivalenti.",
+    "coding_goal": "Usare suffisso di ripetizione x3 con significato deterministico.",
+    "design_reference": "«AVANTI 2 x3» equivale a tre esecuzioni di «AVANTI 2».",
+    "math_objective": "Moltiplicazione 2×3 e addizione ripetuta.",
+    "success_text": "La traccia presenta sei passi e tre gruppi nel replay.",
+    "extension": "Confrontare con «AVANTI 3 x2»."
+  },
+  "P3-04": {
+    "id": "P3-04",
+    "title": "La parentesi del guardiano",
+    "scene": "Tre angoli uguali lungo un percorso a zig-zag; introdurre gruppi delimitati.",
+    "coding_goal": "Ripetere un blocco di più istruzioni.",
+    "design_reference": "«RIPETI x3 { AVANTI 2; DESTRA }».",
+    "math_objective": "Pattern, parentesi e fattore 3.",
+    "success_text": "Sono eseguiti tre segmenti completi prima della fine.",
+    "extension": "Cambiare DESTRA in SINISTRA e simulare la simmetria."
+  },
+  "P3-05": {
+    "id": "P3-05",
+    "title": "Le tre torri",
+    "scene": "Tre torri su una linea, ogni torre dista due caselle e va fotografata.",
+    "coding_goal": "Comporre un blocco con azione di interazione.",
+    "design_reference": "«RIPETI x3 { AVANTI 2; FOTO }».",
+    "math_objective": "Progressioni regolari 2,4,6.",
+    "success_text": "Foto nelle tre posizioni attese e nessuna duplicazione.",
+    "extension": "Provare «AVANTI 2 x3; FOTO» e confrontare gli eventi."
+  },
+  "P3-06": {
+    "id": "P3-06",
+    "title": "Il mulino quadrato",
+    "scene": "Un recinto quadrato con lato tre caselle, Nilo parte da un angolo rivolto lungo un lato.",
+    "coding_goal": "Costruire un ciclo chiuso tramite ripetizione.",
+    "design_reference": "«RIPETI x4 { AVANTI 3; DESTRA }».",
+    "math_objective": "Perimetro quadrato 4×3; quattro angoli retti.",
+    "success_text": "Nilo torna a partenza con orientamento iniziale.",
+    "extension": "Ripetere su lati di lunghezza 4 e confrontare perimetri."
+  },
+  "P3-07": {
+    "id": "P3-07",
+    "title": "Percorsi equivalenti",
+    "scene": "Due codici completano lo stesso tragitto in corridoio sgombro.",
+    "coding_goal": "Confrontare descrizioni compresse e distese di una medesima procedura.",
+    "design_reference": "«AVANTI 1 x4» oppure «AVANTI 4».",
+    "math_objective": "Equivalenza operativa e moltiplicazione.",
+    "success_text": "Entrambi i codici producono la stessa posizione e direzione finali.",
+    "extension": "Aggiungere un'azione FOTO nel mezzo e discutere quando non sono più equivalenti."
+  },
+  "P3-08": {
+    "id": "P3-08",
+    "title": "I passi dell'espressione",
+    "scene": "Cartello «2+3» indica la distanza fino al mercato; supporto a parentesi aritmetiche semplici.",
+    "coding_goal": "Valutare espressione intera prima del comando.",
+    "design_reference": "«AVANTI (2+3)» oppure «AVANTI 5».",
+    "math_objective": "Addizione e parentesi.",
+    "success_text": "Interpretazione produce 5 avanzamenti e stesso risultato per entrambe le forme.",
+    "extension": "Usare «AVANTI (2×3)» nell'editor esteso."
+  },
+  "P3-09": {
+    "id": "P3-09",
+    "title": "Il punto e virgola perduto",
+    "scene": "Programma precompilato con un separatore mancante e un gruppo non chiuso.",
+    "coding_goal": "Distinguere errore di sintassi da errore di traiettoria.",
+    "design_reference": "Correggere «RIPETI x2 { AVANTI 2; DESTRA }».",
+    "math_objective": "Struttura di un linguaggio, sequenza.",
+    "success_text": "L'editor segnala riga e token problematico; dopo la correzione il programma parte.",
+    "extension": "Creare un errore intenzionale per il compagno e scrivere un indizio."
+  },
+  "P3-10": {
+    "id": "P3-10",
+    "title": "La carovana programmabile",
+    "scene": "Percorso con quattro carovane e una grande piazza; occorrono ripetizioni e tre azioni diverse.",
+    "coding_goal": "Comporre algoritmo autonomo testuale, lanciarlo, confrontarlo col replay.",
+    "design_reference": "Esempio «RIPETI x3 { AVANTI 2; SALUTA }; DESTRA; AVANTI 2; TOCCA».",
+    "math_objective": "Multipli di 2, conteggio di eventi, scomposizione di problemi.",
+    "success_text": "Tre saluti, una porta attivata e meta raggiunta.",
+    "extension": "Ridurre il numero di righe mantenendo stessi eventi e posizione finale."
+  },
+  "P4-01": {
+    "id": "P4-01",
+    "title": "Benvenuto nel piano",
+    "scene": "Isola cartesiana con griglia nel primo quadrante, origine (0,0), assi X est e Y nord; target (2,1).",
+    "coding_goal": "Associare una coppia ordinata a una posizione; primo uso esplicito di coordinate.",
+    "design_reference": "«VAI A (2,1)» su tragitto ortogonale libero.",
+    "math_objective": "Assi cartesiani, coppia ordinata, origine.",
+    "success_text": "Coordinate finali esattamente (2,1) visualizzate nell'HUD.",
+    "extension": "Scambiare i valori e osservare l'errore (1,2)."
+  },
+  "P4-02": {
+    "id": "P4-02",
+    "title": "Prima X, poi Y",
+    "scene": "Posto di raccolta al punto (3,2), con nastro guida che invita a muoversi lungo assi separati.",
+    "coding_goal": "Distinguere componente orizzontale e verticale.",
+    "design_reference": "«MUOVI X +3; MUOVI Y +2».",
+    "math_objective": "Traslazioni orizzontali e verticali.",
+    "success_text": "Il registro mostra (0,0)→(3,0)→(3,2).",
+    "extension": "Invertire l'ordine di X e Y in un'area libera."
+  },
+  "P4-03": {
+    "id": "P4-03",
+    "title": "Due strade, stesso punto",
+    "scene": "Griglia vuota 5×5; una destinazione (4,3) può essere raggiunta con due ordini di spostamento.",
+    "coding_goal": "Riconoscere equivalenza di posizione ma differenza di traiettoria.",
+    "design_reference": "«MUOVI X +4; MUOVI Y +3» vs «MUOVI Y +3; MUOVI X +4».",
+    "math_objective": "Proprietà degli spostamenti su assi ortogonali.",
+    "success_text": "Entrambi i programmi giungono a (4,3), replay mostra due tracce.",
+    "extension": "Posizionare un ostacolo e scoprire perché l'ordine conta."
+  },
+  "P4-04": {
+    "id": "P4-04",
+    "title": "Le aiuole ai vertici",
+    "scene": "Rettangolo con vertici (1,1),(5,1),(5,3),(1,3); Nilo deve visitarli in ordine.",
+    "coding_goal": "Programmare una polilinea attraverso coordinate.",
+    "design_reference": "Quattro «VAI A (x,y)» nell'ordine indicato, chiusura opzionale.",
+    "math_objective": "Rettangolo, lati paralleli, coordinate.",
+    "success_text": "Registro di visita coincide con i quattro vertici ordinati.",
+    "extension": "Chiudere il percorso tornando a (1,1)."
+  },
+  "P4-05": {
+    "id": "P4-05",
+    "title": "Il perimetro luminoso",
+    "scene": "Un recinto di vertici (0,0),(4,0),(4,2),(0,2) va illuminato percorrendone ogni lato.",
+    "coding_goal": "Tradurre misure geometriche in movimenti su griglia.",
+    "design_reference": "«MUOVI X +4; MUOVI Y +2; MUOVI X -4; MUOVI Y -2».",
+    "math_objective": "Perimetro 2×(4+2)=12; differenze orientate.",
+    "success_text": "La traccia chiusa copre 12 unità e torna all'origine.",
+    "extension": "Cambiare lati in 5 e 3 e confrontare i perimetri."
+  },
+  "P4-06": {
+    "id": "P4-06",
+    "title": "Scambia le coordinate",
+    "scene": "Due giardini ai punti (2,4) e (4,2) in griglia libera.",
+    "coding_goal": "Prevedere l'effetto di scambiare ascissa e ordinata.",
+    "design_reference": "«VAI A (2,4); VAI A (4,2)».",
+    "math_objective": "Simmetria rispetto alla retta x=y, intuitiva.",
+    "success_text": "Due bandiere posizionate nei punti esatti in ordine.",
+    "extension": "Segnare altri due punti speculari."
+  },
+  "P4-07": {
+    "id": "P4-07",
+    "title": "La rotta delle quattro fermate",
+    "scene": "Punti A(1,1), B(3,1), C(3,4), D(5,4); occorre rispettare tappe e ordine.",
+    "coding_goal": "Pianificare sequenze di coordinate e lettura di tabelle.",
+    "design_reference": "«VAI A (1,1); VAI A (3,1); VAI A (3,4); VAI A (5,4)».",
+    "math_objective": "Coordinate, sequenze ordinate, distanze lungo assi.",
+    "success_text": "Il motore conferma la lista [A,B,C,D] e la meta finale.",
+    "extension": "Cambiare l'ordine e misurare la strada percorsa."
+  },
+  "P4-08": {
+    "id": "P4-08",
+    "title": "L'ostacolo sulla griglia",
+    "scene": "Tra (0,0) e (4,0) c'è un blocco alle celle (2,0); passaggio possibile su y=1.",
+    "coding_goal": "Sostituire linea diretta con percorso valido composto da waypoint.",
+    "design_reference": "«VAI A (1,0); VAI A (1,1); VAI A (3,1); VAI A (3,0); VAI A (4,0)».",
+    "math_objective": "Reticolo, percorsi ortogonali, distanza.",
+    "success_text": "Nessuna collisione con (2,0) e arrivo a (4,0).",
+    "extension": "Cercare altro aggiramento e confrontare lunghezze."
+  },
+  "P4-09": {
+    "id": "P4-09",
+    "title": "La mappa in scala",
+    "scene": "Una casella vale 2 metri; dal (0,0) la serra sta a (3,2) caselle.",
+    "coding_goal": "Separare coordinate in celle e misura reale con unità esplicite.",
+    "design_reference": "«MUOVI X +3; MUOVI Y +2», con conversione nell'HUD.",
+    "math_objective": "Scala semplice: 6 m est e 4 m nord; distanza lungo percorso 10 m.",
+    "success_text": "Percorso di cinque celle e rapporto 2 m/cella correttamente mostrato.",
+    "extension": "Provare scala 5 m per cella senza cambiare codice."
+  },
+  "P4-10": {
+    "id": "P4-10",
+    "title": "Il museo dei poligoni",
+    "scene": "Vertici A(1,1), B(5,1), C(4,4), D(2,4); disegnare la figura visitando ogni vertice.",
+    "coding_goal": "Programmazione di coordinate come rappresentazione di un poligono.",
+    "design_reference": "«TRACCIA (1,1); TRACCIA (5,1); TRACCIA (4,4); TRACCIA (2,4); CHIUDI».",
+    "math_objective": "Vertici, segmenti, poligoni e contorno.",
+    "success_text": "Compare un contorno chiuso senza attraversamenti indesiderati.",
+    "extension": "Modificare C e osservare come cambia la figura."
+  },
+  "P5-01": {
+    "id": "P5-01",
+    "title": "I quattro quadranti",
+    "scene": "Centro di ricerca, origine centrale, target in (-2,3) e (3,-1).",
+    "coding_goal": "Gestire coordinate intere con segno e assi estesi.",
+    "design_reference": "«VAI A (-2,3); VAI A (3,-1)».",
+    "math_objective": "Numeri relativi, quadranti I–IV.",
+    "success_text": "Entrambe le destinazioni registrate con segni corretti.",
+    "extension": "Descrivere il percorso che passa per (0,0)."
+  },
+  "P5-02": {
+    "id": "P5-02",
+    "title": "Il vettore del vento",
+    "scene": "Un vento sposta l'elefantino di (-3,+2) rispetto a (4,1).",
+    "coding_goal": "Comporre uno spostamento relativo in coordinate.",
+    "design_reference": "«MUOVI X -3; MUOVI Y +2» da (4,1).",
+    "math_objective": "Somma di interi: (4,1)+(-3,2)=(1,3).",
+    "success_text": "Coordinate finali (1,3) e vettore visualizzato.",
+    "extension": "Scomporre lo stesso vettore in tre microspostamenti."
+  },
+  "P5-03": {
+    "id": "P5-03",
+    "title": "Conta le provviste",
+    "scene": "Quattro casse da raccogliere lungo un viale; una variabile registra la quantità.",
+    "coding_goal": "Dichiarare e aggiornare una variabile intera.",
+    "design_reference": "«IMPOSTA casse = 0; RIPETI x4 { AVANTI 1; RACCOGLI; casse = casse + 1 }».",
+    "math_objective": "Variabili, addizione ripetuta, conteggio.",
+    "success_text": "casse=4 e quattro eventi RACCOGLI distinti.",
+    "extension": "Provare con cinque casse e cambiare il numero di iterazioni."
+  },
+  "P5-04": {
+    "id": "P5-04",
+    "title": "Il sensore dell'acqua",
+    "scene": "Una porta si apre solo se il sensore acqua ha valore almeno 2.",
+    "coding_goal": "Usare condizione semplice con confronto.",
+    "design_reference": "«SE acqua >= 2 ALLORA APRI ALTRIMENTI ASPETTA».",
+    "math_objective": "Relazioni d'ordine e comparazioni.",
+    "success_text": "Due scenari di test (acqua=1 e acqua=3) danno eventi corretti.",
+    "extension": "Cambiare la soglia e annotare risultati."
+  },
+  "P5-05": {
+    "id": "P5-05",
+    "title": "La batteria prudente",
+    "scene": "Ponte accessibile se batteria > 20, altrimenti si torna alla ricarica.",
+    "coding_goal": "Combinare confronto e scelta tra due azioni.",
+    "design_reference": "«SE batteria > 20 ALLORA ATTRAVERSA ALTRIMENTI RICARICA».",
+    "math_objective": "Disuguaglianze con numeri interi.",
+    "success_text": "Batteria=21 attraversa; batteria=20 ricarica.",
+    "extension": "Spiegare la differenza tra > e >=."
+  },
+  "P5-06": {
+    "id": "P5-06",
+    "title": "Finché il vaso è pieno",
+    "scene": "Dare acqua a una pianta fino a raggiungere livello 5, partendo da 2.",
+    "coding_goal": "Introdurre ripetizione condizionata con termine assicurato.",
+    "design_reference": "«FINCHÉ acqua < 5 { VERSA 1 }».",
+    "math_objective": "Successione 2,3,4,5; differenza 3.",
+    "success_text": "Ciclo termina esattamente a 5 senza superare il limite.",
+    "extension": "Cambiare partenza a 0 e contare le iterazioni."
+  },
+  "P5-07": {
+    "id": "P5-07",
+    "title": "Il catalogo di punti",
+    "scene": "Quattro reperti hanno coordinate (-1,2),(2,2),(2,-2),(-1,-2); vanno fotografati.",
+    "coding_goal": "Collegare dati tabellari e sequenza automatizzata.",
+    "design_reference": "«PER OGNI punto IN elenco_punti { VAI A punto; FOTO }» con lista preimpostata visivamente.",
+    "math_objective": "Lettura di tabelle, quadranti, coordinate.",
+    "success_text": "Quattro fotografie presso punti bersaglio, nessun duplicato.",
+    "extension": "Modificare un punto in una tabella semplice."
+  },
+  "P5-08": {
+    "id": "P5-08",
+    "title": "La piccola procedura",
+    "scene": "Tre stazioni identiche chiedono «AVANTI 1; SCANSIONA»; prima procedura nominata senza parametri.",
+    "coding_goal": "Comprendere riuso di una sequenza come sottoprogramma.",
+    "design_reference": "«PROCEDURA controlla { AVANTI 1; SCANSIONA }; controlla() x3».",
+    "math_objective": "Generalizzazione di pattern e moltiplicazione.",
+    "success_text": "Tre scansioni registrate in posizioni successive.",
+    "extension": "Confrontare codice ripetuto e chiamate della procedura."
+  },
+  "P5-09": {
+    "id": "P5-09",
+    "title": "Un numero sbagliato",
+    "scene": "Programma fornito calcola posizione X con incremento errato e raggiunge (4,2) invece di (3,2).",
+    "coding_goal": "Usare il debugger per monitorare variabile e stato a ogni istruzione.",
+    "design_reference": "Sostituire «x = x + 2» con «x = x + 1» nel punto segnalato.",
+    "math_objective": "Operazioni su interi e verifica dei risultati.",
+    "success_text": "Il watch panel mostra x=3 al termine; target raggiunto.",
+    "extension": "Creare un test con valore iniziale diverso."
+  },
+  "P5-10": {
+    "id": "P5-10",
+    "title": "Il parco autosufficiente",
+    "scene": "Scenario finale con deposito, cancello, sensore, raccolta e punti in quattro quadranti.",
+    "coding_goal": "Integrare coordinate, variabili, SE, ciclo, procedura e validazione.",
+    "design_reference": "Definire «PROCEDURA consegna», usare «SE energia >= 3», raggiungere i waypoint e aggiornare un contatore.",
+    "math_objective": "Piano cartesiano, conteggio, confronti e astrazione.",
+    "success_text": "Tre consegne complete, nessuna collisione, energia mai negativa.",
+    "extension": "Realizzare una seconda soluzione e documentarne i vantaggi."
+  },
+  "S1-01": {
+    "id": "S1-01",
+    "title": "Il controllo degli ingressi",
+    "scene": "Cittadella delle funzioni: tre cancelli ricevono codice di apertura e parametri diversi.",
+    "coding_goal": "Definire procedura parametrica «apri(id)» e chiamarla da più punti.",
+    "design_reference": "«PROCEDURA apri(id) { VAI A cancello[id]; ATTIVA id }; apri(1); apri(2); apri(3)».",
+    "math_objective": "Parametri e sostituzione di valori; corrispondenza.",
+    "success_text": "Si attivano esattamente le tre porte richieste.",
+    "extension": "Aggiungere un cancello senza copiare il corpo della funzione."
+  },
+  "S1-02": {
+    "id": "S1-02",
+    "title": "La guardia logica",
+    "scene": "Una porta richiede badge valido E batteria almeno 30.",
+    "coding_goal": "Usare AND e negazioni in condizioni booleane.",
+    "design_reference": "«SE badge_valido E batteria >= 30 ALLORA APRI ALTRIMENTI SEGNALA».",
+    "math_objective": "Logica proposizionale; tabelle di verità.",
+    "success_text": "Testare quattro combinazioni badge/batteria, tutte coerenti.",
+    "extension": "Cambiare E in O e analizzare il rischio."
+  },
+  "S1-03": {
+    "id": "S1-03",
+    "title": "La torre delle potenze",
+    "scene": "Scala modulare: 2 piani per blocco, 4 blocchi; un parametro definisce quanti passi salire.",
+    "coding_goal": "Usare funzione parametrica e iterazione numerica.",
+    "design_reference": "«PROCEDURA sali(n) { RIPETI n VOLTE { SU 1 } }; sali(2) x4».",
+    "math_objective": "Prodotti, potenze introduttive, moltiplicazione ripetuta.",
+    "success_text": "L'elefantino raggiunge il livello 8 senza piani mancanti.",
+    "extension": "Confrontare 2×4 e 4×2 in termini di percorso."
+  },
+  "S1-04": {
+    "id": "S1-04",
+    "title": "La barriera mobile",
+    "scene": "Cancello ciclico alterna aperto/chiuso ad ogni tick; occorre attendere finché è aperto.",
+    "coding_goal": "Applicare un ciclo condizionato con limite di sicurezza.",
+    "design_reference": "«FINCHÉ NON cancello_aperto { ASPETTA 1 }; ATTRAVERSA».",
+    "math_objective": "Tempo discreto e predicati.",
+    "success_text": "Esecuzione passa soltanto durante un tick aperto.",
+    "extension": "Osservare timeout e gestione dell'attesa eccessiva."
+  },
+  "S1-05": {
+    "id": "S1-05",
+    "title": "L'area dei rettangoli",
+    "scene": "Tre orti hanno coppie (base,altezza); scrivere funzione che restituisce area.",
+    "coding_goal": "Introdurre funzione con valore di ritorno e riuso in simulazione.",
+    "design_reference": "«FUNZIONE area(b,h) { RITORNA b*h }» e chiamate sui tre orti.",
+    "math_objective": "Area rettangolo, prodotto e uso di parametri.",
+    "success_text": "Aree corrette per (2,3),(4,5),(6,2): 6,20,12.",
+    "extension": "Confrontare aree uguali ottenute con basi diverse."
+  },
+  "S1-06": {
+    "id": "S1-06",
+    "title": "I quadranti sorvegliati",
+    "scene": "Quattro telecamere coprono punti con segni misti; decidere il quadrante di un punto.",
+    "coding_goal": "Nidificare condizioni con AND su X e Y.",
+    "design_reference": "«SE x>0 E y>0 ... ALTRIMENTI SE x<0 E y>0 ...» con casi assi separati.",
+    "math_objective": "Interi relativi, quadranti e assi.",
+    "success_text": "Test su otto coordinate incluse quelle con zero.",
+    "extension": "Aggiungere etichette sulle due semirette."
+  },
+  "S1-07": {
+    "id": "S1-07",
+    "title": "Il sensore affidabile",
+    "scene": "Tre misure successive possono oscillare; usare un controllo prima di azionare la leva.",
+    "coding_goal": "Separare acquisizione, validazione e azione in una procedura.",
+    "design_reference": "«LEGGI sensore; SE valore IN [0,100] ... ALTRIMENTI ERRORE».",
+    "math_objective": "Intervalli numerici chiusi e stima.",
+    "success_text": "Valori -1 e 101 rifiutati; 0,50,100 accettati.",
+    "extension": "Usare condizioni composte invece dell'operatore intervallo."
+  },
+  "S1-08": {
+    "id": "S1-08",
+    "title": "La griglia dei multipli",
+    "scene": "Una griglia 5×5 va attivata per righe e colonne con due contatori.",
+    "coding_goal": "Introdurre cicli annidati con coordinate di riga e colonna.",
+    "design_reference": "«PER y DA 0 A 4 { PER x DA 0 A 4 { ATTIVA (x,y) } }».",
+    "math_objective": "Prodotto cartesiano 5×5=25.",
+    "success_text": "25 celle visitate una volta ciascuna, senza duplicati.",
+    "extension": "Invertire gli ordini dei cicli e confrontare la traccia."
+  },
+  "S1-09": {
+    "id": "S1-09",
+    "title": "Il ponte da riparare",
+    "scene": "Funzione di distanza assoluta è sbagliata per coordinate negative; test fallisce.",
+    "coding_goal": "Debug guidato con assert, controesempio e watch.",
+    "design_reference": "«FUNZIONE distanzaX(a,b) { RITORNA ASS(b-a) }» con test (−2,3)→5.",
+    "math_objective": "Valore assoluto e distanza sulla retta.",
+    "success_text": "Superati almeno cinque casi: uguali, crescenti, decrescenti, negativi, zero.",
+    "extension": "Scrivere un nuovo test che prima falliva."
+  },
+  "S1-10": {
+    "id": "S1-10",
+    "title": "La cittadella operativa",
+    "scene": "Quattro settori con cancelli, sensori e livelli di altezza; sistema di procedure e cicli.",
+    "coding_goal": "Scomporre il problema in funzioni verificabili e programma principale.",
+    "design_reference": "Programma con controllaSensore(), apri(id), visita(x,y), cicli e condizioni.",
+    "math_objective": "Coordinate, prodotti, disuguaglianze e modularità.",
+    "success_text": "Quattro settori visitati, allarmi zero, ogni funzione testata.",
+    "extension": "Scrivere commenti di contratto per le funzioni."
+  },
+  "S2-01": {
+    "id": "S2-01",
+    "title": "La lista delle consegne",
+    "scene": "Arcipelago degli algoritmi, magazzino con sei coordinate di consegna.",
+    "coding_goal": "Iterare su una struttura dati indicizzata.",
+    "design_reference": "«PER OGNI punto IN consegne { VAI A punto; LASCIA }».",
+    "math_objective": "Liste ordinate, indici a base 0 presentati esplicitamente.",
+    "success_text": "Sei consegne in ordine; log distingue indice e coordinata.",
+    "extension": "Cambiare ordine delle tappe e confrontare costo di viaggio."
+  },
+  "S2-02": {
+    "id": "S2-02",
+    "title": "La media dei sensori",
+    "scene": "Cinque sensori restituiscono 8,10,12,9,11; calcolare e mostrare media.",
+    "coding_goal": "Usare accumulatore e divisione per n.",
+    "design_reference": "«somma=0; PER OGNI v IN letture { somma+=v }; media=somma/LUNGHEZZA(letture)».",
+    "math_objective": "Media aritmetica 10 e significato del denominatore.",
+    "success_text": "Risultato numerico 10 e controllo corretto con elenco vuoto.",
+    "extension": "Aggiungere una lettura e aggiornare la media."
+  },
+  "S2-03": {
+    "id": "S2-03",
+    "title": "Il fattore di scala",
+    "scene": "Una mappa con punti (1,2),(3,1),(4,3) deve essere ingrandita del fattore 2.",
+    "coding_goal": "Applicare una trasformazione a una lista di punti.",
+    "design_reference": "«PER OGNI p IN punti { CREA_PUNTO(2*p.x, 2*p.y) }».",
+    "math_objective": "Proporzionalità, scala, coordinate.",
+    "success_text": "Nuovi punti (2,4),(6,2),(8,6).",
+    "extension": "Scegliere scala 1/2 e discutere numeri non interi."
+  },
+  "S2-04": {
+    "id": "S2-04",
+    "title": "Alla ricerca del minimo",
+    "scene": "Cinque sentieri hanno lunghezze [7,4,9,3,6]; scegliere quello minimo senza usare MIN predefinito.",
+    "coding_goal": "Programmare scansione lineare con variabile minimo.",
+    "design_reference": "«min=lunghezze[0]; PER OGNI d IN lunghezze { SE d<min { min=d } }».",
+    "math_objective": "Ordinamento, confronto, minimo 3.",
+    "success_text": "Indice o valore del percorso minimo corrispondente a 3.",
+    "extension": "Gestire due sentieri di stessa lunghezza minima."
+  },
+  "S2-05": {
+    "id": "S2-05",
+    "title": "Il labirinto a celle",
+    "scene": "Griglia 6×6 con muri dichiarati in una matrice booleana; trovare meta mediante tentativi informati.",
+    "coding_goal": "Usare matrice, controllo dei vicini e memoria delle celle visitate.",
+    "design_reference": "Algoritmo di ricerca semplificato con coda di frontiera fornita dall'interfaccia.",
+    "math_objective": "Grafi su griglia, coordinate, adiacenza ortogonale.",
+    "success_text": "Raggiungimento meta senza visitare celle bloccate; visite registrate.",
+    "extension": "Confrontare percorso trovato e lunghezza minima verificata dal motore."
+  },
+  "S2-06": {
+    "id": "S2-06",
+    "title": "La serra percentuale",
+    "scene": "Serra con tre settori; batteria passa dal 100% al 75%, poi al 60%; avvisi e consumo.",
+    "coding_goal": "Applicare calcolo percentuale e condizioni soglia.",
+    "design_reference": "«SE carica_percentuale < 70 ALLORA RICARICA» con rilevamento di ogni tick.",
+    "math_objective": "Percentuali, variazioni e soglia.",
+    "success_text": "Al 75% nessuna ricarica, al 60% sì.",
+    "extension": "Visualizzare la variazione in punti percentuali."
+  },
+  "S2-07": {
+    "id": "S2-07",
+    "title": "Le piastrelle ordinate",
+    "scene": "Sequenza di pesi [5,2,4,1,3]; un braccio può scambiare elementi adiacenti.",
+    "coding_goal": "Implementare algoritmo di ordinamento visivo semplice.",
+    "design_reference": "Bubble sort guidato con due cicli e comando SCAMBIA(i,i+1).",
+    "math_objective": "Relazioni d'ordine, permutazioni.",
+    "success_text": "Output [1,2,3,4,5], multinsieme conservato.",
+    "extension": "Confrontare il numero di scambi con una lista già ordinata."
+  },
+  "S2-08": {
+    "id": "S2-08",
+    "title": "La rotta più vantaggiosa",
+    "scene": "Tre percorsi hanno distanze e consumo diversi: A(8,4), B(6,7), C(9,3); obiettivo minimizzare distanza sotto consumo massimo 5.",
+    "coding_goal": "Applicare filtraggio con vincolo e scelta ottima.",
+    "design_reference": "«filtra consumo<=5; poi scegli distanza minima» su dati A,B,C.",
+    "math_objective": "Ottimizzazione vincolata, coppie ordinate.",
+    "success_text": "Il motore seleziona A (8,4), non B fuori vincolo.",
+    "extension": "Cambiare budget a 7 e verificare la nuova scelta B."
+  },
+  "S2-09": {
+    "id": "S2-09",
+    "title": "Debug dei dati mancanti",
+    "scene": "Una lista di distanze include [4, 0, NULLO, 6]; l'algoritmo della media si interrompe.",
+    "coding_goal": "Separare validazione e calcolo su valori disponibili.",
+    "design_reference": "Ignorare NULLO con avviso; decidere esplicitamente se 0 è dato valido.",
+    "math_objective": "Gestione del dato mancante, media e qualità dei dati.",
+    "success_text": "Media calcolata sui tre numeri 4,0,6 (=10/3) e allerta sull'assenza.",
+    "extension": "Confrontare con l'errore di interpretare NULLO come 0."
+  },
+  "S2-10": {
+    "id": "S2-10",
+    "title": "Il porto intelligente",
+    "scene": "Capstone con più navi, consegne, matrice dei canali, batterie e dati di consumo.",
+    "coding_goal": "Integrare liste, funzioni, condizioni, cicli annidati e ricerca.",
+    "design_reference": "Scrivere pianificaRotta(), verificaEnergia(), eseguiConsegne() con dataset fornito.",
+    "math_objective": "Dati, ottimizzazione, reticoli e percentuali.",
+    "success_text": "Tutte le consegne assegnate, nessuna nave supera consumo massimo; test autonomi.",
+    "extension": "Confrontare una soluzione veloce e una più efficiente."
+  },
+  "S3-01": {
+    "id": "S3-01",
+    "title": "La macchina degli stati",
+    "scene": "Metropoli dei sistemi: un ponte robotico può essere CHIUSO, APERTO o IN_MOVIMENTO.",
+    "coding_goal": "Modellare uno stato finito con transizioni lecite.",
+    "design_reference": "Definire stati e tabella degli eventi APRI, CHIUDI, FINE_MOVIMENTO.",
+    "math_objective": "Insiemi finiti, relazioni, grafi orientati.",
+    "success_text": "Nessuna transizione impossibile; replay degli stati completo.",
+    "extension": "Aggiungere stato GUASTO con uscita controllata."
+  },
+  "S3-02": {
+    "id": "S3-02",
+    "title": "Il traffico a eventi",
+    "scene": "Due robot attraversano incrocio; il semaforo emette eventi a tick deterministici.",
+    "coding_goal": "Gestire eventi e priorità senza affidarsi a tempi reali non riproducibili.",
+    "design_reference": "«QUANDO semaforo_verde { ACCODA attraversamento }» e coda eventi.",
+    "math_objective": "Sequenze temporali e logica delle priorità.",
+    "success_text": "Mai due robot nel centro simultaneamente; traccia riproducibile.",
+    "extension": "Cambiare il calendario del semaforo e ripetere i test."
+  },
+  "S3-03": {
+    "id": "S3-03",
+    "title": "Il grafo della città",
+    "scene": "Mappa come grafo di 7 nodi e archi pesati positivi.",
+    "coding_goal": "Separare modello dati del grafo dalla sua vista 3D.",
+    "design_reference": "Dichiarare nodi, archi e peso, usare visita dei vicini.",
+    "math_objective": "Grafi, pesi e percorsi.",
+    "success_text": "Ogni collegamento visibile coincide con il grafo dei dati.",
+    "extension": "Rimuovere un arco e verificare raggiungibilità."
+  },
+  "S3-04": {
+    "id": "S3-04",
+    "title": "La ricerca in ampiezza",
+    "scene": "Labirinto non pesato con percorso minimo misurato in archi.",
+    "coding_goal": "Implementare BFS con coda, insieme visitati e predecessori.",
+    "design_reference": "«CODA.enqueue(start); finché coda non vuota: estrai; visita vicini nuovi».",
+    "math_objective": "Distanza minima in grafo non pesato, invarianti.",
+    "success_text": "Il percorso trovato è minimo e coincide con l'oracolo su cinque mappe.",
+    "extension": "Confrontare BFS con esplorazione a caso."
+  },
+  "S3-05": {
+    "id": "S3-05",
+    "title": "Il robot che decide",
+    "scene": "Un elefantino robot raccoglie oggetti rispettando energia, distanza e priorità.",
+    "coding_goal": "Realizzare sistema decisionale basato su punteggio documentato.",
+    "design_reference": "«punteggio = 2*priorità - distanza - costoEnergia; scegli massimo ammissibile».",
+    "math_objective": "Funzioni lineari, ordinamento per punteggio e vincoli.",
+    "success_text": "Scelta riproducibile per tutti i dataset, con spiegazione leggibile.",
+    "extension": "Provare pesi diversi e discutere il compromesso."
+  },
+  "S3-06": {
+    "id": "S3-06",
+    "title": "Tre robot in squadra",
+    "scene": "Tre agenti devono portare oggetti a depositi distinti senza collisioni.",
+    "coding_goal": "Distribuire compiti e gestire risorse condivise.",
+    "design_reference": "Scheduler a turni con prenotazione cella, priorità e rilascio.",
+    "math_objective": "Combinatoria, ricerca, conflitti e sequenze.",
+    "success_text": "Zero collisioni e consegne complete in tutti gli scenari di test.",
+    "extension": "Esaminare uno stallo e progettare prevenzione."
+  },
+  "S3-07": {
+    "id": "S3-07",
+    "title": "L'algoritmo misurato",
+    "scene": "Confronto su griglie crescenti fra ricerca ingenua e BFS con metriche.",
+    "coding_goal": "Misurare tempo astratto, nodi visitati, memoria occupata, non solo animazione.",
+    "design_reference": "Raccogli metriche per n=10,20,40 con seed fissato.",
+    "math_objective": "Crescita delle risorse, grafici, analisi di complessità introduttiva.",
+    "success_text": "Grafico correttamente collegato a tre prove ripetibili.",
+    "extension": "Individuare limiti dell'analisi empirica."
+  },
+  "S3-08": {
+    "id": "S3-08",
+    "title": "Il laboratorio di test",
+    "scene": "Il motore genera casi limite: lista vuota, ostacolo alla partenza, destinazione irraggiungibile.",
+    "coding_goal": "Progettare test unitari e proprietà invarianti, con feedback leggibile.",
+    "design_reference": "«ASSERT percorso non attraversa muri; ASSERT energia>=0» e test parametrizzati.",
+    "math_objective": "Logica, casi limite e controesempi.",
+    "success_text": "Almeno 8/8 test verdi incluse condizioni limite.",
+    "extension": "Scrivere un test di proprietà per la conservazione degli oggetti."
+  },
+  "S3-09": {
+    "id": "S3-09",
+    "title": "La biblioteca dei moduli",
+    "scene": "Un progetto esteso contiene navigazione, inventario e sensori, inizialmente intrecciati.",
+    "coding_goal": "Rifattorizzare in moduli e dichiarare API e dipendenze.",
+    "design_reference": "navigation.find_path(); inventory.take(); sensors.read(), senza cicli di import.",
+    "math_objective": "Astrazione, interfacce, composizione.",
+    "success_text": "Suite di regressione invariata e moduli riutilizzabili.",
+    "extension": "Scrivere breve documentazione per il prossimo sviluppatore."
+  },
+  "S3-10": {
+    "id": "S3-10",
+    "title": "La città di Nilo",
+    "scene": "Missione finale aperta: costruire un servizio cittadino con una mappa, robot, eventi e obiettivi autodefiniti.",
+    "coding_goal": "Progettare, implementare, verificare e presentare un sistema completo riusando i moduli.",
+    "design_reference": "Progetto con specifica, dataset, state machine, pianificazione, test e report di efficienza.",
+    "math_objective": "Modellizzazione matematica, grafi, variabili, proporzionalità e ottimizzazione.",
+    "success_text": "Soddisfa contratto scelto, minimo 10 test, zero eccezioni, demo riproducibile e spiegazione del compromesso scelto.",
+    "extension": "Esportare scenario e codice in formato aperto, importabile nel laboratorio docente."
+  }
+}

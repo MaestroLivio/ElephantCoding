@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "id": "S1-08",
+  "world": "cittadella",
+  "school_level": "S1",
+  "age_hint": "11-12 anni",
+  "title": "La griglia dei multipli",
+  "editor": "structured",
+  "narrative": "Una griglia 5×5 va attivata per righe e colonne con due contatori.",
+  "coding_goal": "Introdurre cicli annidati con coordinate di riga e colonna.",
+  "math_objective": "Prodotto cartesiano 5×5=25.",
+  "success_text": "25 celle visitate una volta ciascuna, senza duplicati.",
+  "extension": "Invertire gli ordini dei cicli e confrontare la traccia.",
+  "design_reference": "«PER y DA 0 A 4 { PER x DA 0 A 4 { ATTIVA (x,y) } }».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 4,
+    "max_y": 4
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "s108-0_0",
+      "kind": "activate",
+      "cell": [
+        0,
+        0
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-1_0",
+      "kind": "activate",
+      "cell": [
+        1,
+        0
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-2_0",
+      "kind": "activate",
+      "cell": [
+        2,
+        0
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-3_0",
+      "kind": "activate",
+      "cell": [
+        3,
+        0
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-4_0",
+      "kind": "activate",
+      "cell": [
+        4,
+        0
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-0_1",
+      "kind": "activate",
+      "cell": [
+        0,
+        1
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-1_1",
+      "kind": "activate",
+      "cell": [
+        1,
+        1
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-2_1",
+      "kind": "activate",
+      "cell": [
+        2,
+        1
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-3_1",
+      "kind": "activate",
+      "cell": [
+        3,
+        1
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-4_1",
+      "kind": "activate",
+      "cell": [
+        4,
+        1
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-0_2",
+      "kind": "activate",
+      "cell": [
+        0,
+        2
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-1_2",
+      "kind": "activate",
+      "cell": [
+        1,
+        2
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-2_2",
+      "kind": "activate",
+      "cell": [
+        2,
+        2
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-3_2",
+      "kind": "activate",
+      "cell": [
+        3,
+        2
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-4_2",
+      "kind": "activate",
+      "cell": [
+        4,
+        2
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-0_3",
+      "kind": "activate",
+      "cell": [
+        0,
+        3
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-1_3",
+      "kind": "activate",
+      "cell": [
+        1,
+        3
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-2_3",
+      "kind": "activate",
+      "cell": [
+        2,
+        3
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-3_3",
+      "kind": "activate",
+      "cell": [
+        3,
+        3
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-4_3",
+      "kind": "activate",
+      "cell": [
+        4,
+        3
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-0_4",
+      "kind": "activate",
+      "cell": [
+        0,
+        4
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-1_4",
+      "kind": "activate",
+      "cell": [
+        1,
+        4
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-2_4",
+      "kind": "activate",
+      "cell": [
+        2,
+        4
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-3_4",
+      "kind": "activate",
+      "cell": [
+        3,
+        4
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    },
+    {
+      "id": "s108-4_4",
+      "kind": "activate",
+      "cell": [
+        4,
+        4
+      ],
+      "label": "Cella",
+      "glyph": "C"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "PER y DA 0 A 4 { PER x DA 0 A 4 { VAI A (x,y); ATTIVA } }",
+  "starter_program": "",
+  "goal": {
+    "activate_all": [
+      "s108-0_0",
+      "s108-1_0",
+      "s108-2_0",
+      "s108-3_0",
+      "s108-4_0",
+      "s108-0_1",
+      "s108-1_1",
+      "s108-2_1",
+      "s108-3_1",
+      "s108-4_1",
+      "s108-0_2",
+      "s108-1_2",
+      "s108-2_2",
+      "s108-3_2",
+      "s108-4_2",
+      "s108-0_3",
+      "s108-1_3",
+      "s108-2_3",
+      "s108-3_3",
+      "s108-4_3",
+      "s108-0_4",
+      "s108-1_4",
+      "s108-2_4",
+      "s108-3_4",
+      "s108-4_4"
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "PER y DA 0 A 4 { PER x DA 0 A 4 { VAI A (x,y); ATTIVA } }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "VAI A (0,0)\nATTIVA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Invertire gli ordini dei cicli e confrontare la traccia."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s1",
+    "structured"
+  ],
+  "narration_line": "La griglia dei multipli. Una griglia 5×5 va attivata per righe e colonne con due contatori.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#bde0fe",
+    "ground": "#457b9d",
+    "accent": "#ffd166",
+    "prop": "tower"
+  }
+}

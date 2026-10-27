@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "id": "S1-05",
+  "world": "cittadella",
+  "school_level": "S1",
+  "age_hint": "11-12 anni",
+  "title": "L'area dei rettangoli",
+  "editor": "structured",
+  "narrative": "Tre orti hanno coppie (base,altezza); scrivere funzione che restituisce area.",
+  "coding_goal": "Introdurre funzione con valore di ritorno e riuso in simulazione.",
+  "math_objective": "Area rettangolo, prodotto e uso di parametri.",
+  "success_text": "Aree corrette per (2,3),(4,5),(6,2): 6,20,12.",
+  "extension": "Confrontare aree uguali ottenute con basi diverse.",
+  "design_reference": "«FUNZIONE area(b,h) { RITORNA b*h }» e chiamate sui tre orti.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "FUNZIONE area(b, h) { RITORNA b * h }\nIMPOSTA a1 = area(2,3)\nIMPOSTA a2 = area(4,5)\nIMPOSTA a3 = area(6,2)",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "a1": 6,
+      "a2": 20,
+      "a3": 12
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "FUNZIONE area(b, h) { RITORNA b * h }\nIMPOSTA a1 = area(2,3)\nIMPOSTA a2 = area(4,5)\nIMPOSTA a3 = area(6,2)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA a1 = 6",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Confrontare aree uguali ottenute con basi diverse."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s1",
+    "structured"
+  ],
+  "narration_line": "L'area dei rettangoli. Tre orti hanno coppie (base,altezza); scrivere funzione che restituisce area.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#bde0fe",
+    "ground": "#457b9d",
+    "accent": "#ffd166",
+    "prop": "tower"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "code": "P3",
+  "title": "Borgo dei Comandi",
+  "age": "8-9 anni",
+  "language": "Testo italiano, x2/x3, RIPETI",
+  "editor": "text",
+  "description": "Il primo linguaggio scritto: frasi comando chiare e verificabili.",
+  "theme": {
+    "sky": "#a8dadc",
+    "ground": "#588157",
+    "accent": "#e76f51",
+    "prop": "house"
+  },
+  "lab": "Pista delle frecce",
+  "id": "borgo",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "P3-01",
+    "P3-02",
+    "P3-03",
+    "P3-04",
+    "P3-05",
+    "P3-06",
+    "P3-07",
+    "P3-08",
+    "P3-09",
+    "P3-10"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "id": "S1-09",
+  "world": "cittadella",
+  "school_level": "S1",
+  "age_hint": "11-12 anni",
+  "title": "Il ponte da riparare",
+  "editor": "structured",
+  "narrative": "Funzione di distanza assoluta è sbagliata per coordinate negative; test fallisce.",
+  "coding_goal": "Debug guidato con assert, controesempio e watch.",
+  "math_objective": "Valore assoluto e distanza sulla retta.",
+  "success_text": "Superati almeno cinque casi: uguali, crescenti, decrescenti, negativi, zero.",
+  "extension": "Scrivere un nuovo test che prima falliva.",
+  "design_reference": "«FUNZIONE distanzaX(a,b) { RITORNA ASS(b-a) }» con test (−2,3)→5.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "FUNZIONE distanzaX(a, b) { RITORNA ASS(b - a) }\nIMPOSTA d1 = distanzaX(-2,3)\nIMPOSTA d2 = distanzaX(0,0)\nIMPOSTA d3 = distanzaX(5,2)\nIMPOSTA d4 = distanzaX(-4,-1)\nIMPOSTA d5 = distanzaX(6,6)",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "d1": 5,
+      "d2": 0,
+      "d3": 3,
+      "d4": 3,
+      "d5": 0
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "FUNZIONE distanzaX(a, b) { RITORNA ASS(b - a) }\nIMPOSTA d1 = distanzaX(-2,3)\nIMPOSTA d2 = distanzaX(0,0)\nIMPOSTA d3 = distanzaX(5,2)\nIMPOSTA d4 = distanzaX(-4,-1)\nIMPOSTA d5 = distanzaX(6,6)",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA d1 = 0",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Scrivere un nuovo test che prima falliva."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s1",
+    "structured"
+  ],
+  "narration_line": "Il ponte da riparare. Funzione di distanza assoluta è sbagliata per coordinate negative; test fallisce.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#bde0fe",
+    "ground": "#457b9d",
+    "accent": "#ffd166",
+    "prop": "tower"
+  }
+}

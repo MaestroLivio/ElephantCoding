@@ -1,0 +1,30 @@
+{
+  "code": "P4",
+  "title": "Isola Cartesiana",
+  "age": "9-10 anni",
+  "language": "Coordinate e piano XY",
+  "editor": "coordinates",
+  "description": "Un'isola a quadretti dove ogni punto ha un nome: (x, y).",
+  "theme": {
+    "sky": "#90e0ef",
+    "ground": "#00b4d8",
+    "accent": "#ffb703",
+    "prop": "palm"
+  },
+  "lab": "Museo delle coordinate",
+  "id": "isola",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "P4-01",
+    "P4-02",
+    "P4-03",
+    "P4-04",
+    "P4-05",
+    "P4-06",
+    "P4-07",
+    "P4-08",
+    "P4-09",
+    "P4-10"
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "id": "S2-03",
+  "world": "arcipelago",
+  "school_level": "S2",
+  "age_hint": "12-13 anni",
+  "title": "Il fattore di scala",
+  "editor": "data",
+  "narrative": "Una mappa con punti (1,2),(3,1),(4,3) deve essere ingrandita del fattore 2.",
+  "coding_goal": "Applicare una trasformazione a una lista di punti.",
+  "math_objective": "Proporzionalità, scala, coordinate.",
+  "success_text": "Nuovi punti (2,4),(6,2),(8,6).",
+  "extension": "Scegliere scala 1/2 e discutere numeri non interi.",
+  "design_reference": "«PER OGNI p IN punti { CREA_PUNTO(2*p.x, 2*p.y) }».",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {
+    "punti": [
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        4,
+        3
+      ]
+    ]
+  },
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA scalati = []\nPER OGNI p IN punti { AGGIUNGI(scalati, [p.x * 2, p.y * 2]) }",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "scalati": [
+        [
+          2,
+          4
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          8,
+          6
+        ]
+      ]
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA scalati = []\nPER OGNI p IN punti { AGGIUNGI(scalati, [p.x * 2, p.y * 2]) }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA scalati = []",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Scegliere scala 1/2 e discutere numeri non interi."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s2",
+    "data"
+  ],
+  "narration_line": "Il fattore di scala. Una mappa con punti (1,2),(3,1),(4,3) deve essere ingrandita del fattore 2.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#1d3557",
+    "accent": "#f1faee",
+    "prop": "boat"
+  }
+}

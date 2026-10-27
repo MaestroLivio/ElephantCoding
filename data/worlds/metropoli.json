@@ -1,0 +1,30 @@
+{
+  "code": "S3",
+  "title": "Metropoli dei Sistemi",
+  "age": "13-14 anni",
+  "language": "Stati, eventi, grafi",
+  "editor": "systems",
+  "description": "Una città di sistemi interconnessi: progettare, testare, spiegare.",
+  "theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  },
+  "lab": "Sala dei sistemi",
+  "id": "metropoli",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "S3-01",
+    "S3-02",
+    "S3-03",
+    "S3-04",
+    "S3-05",
+    "S3-06",
+    "S3-07",
+    "S3-08",
+    "S3-09",
+    "S3-10"
+  ]
+}

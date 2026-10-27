@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "P2-08",
+  "world": "officina",
+  "school_level": "P2",
+  "age_hint": "7-8 anni",
+  "title": "La perla fuori posto",
+  "editor": "beads",
+  "narrative": "Stringa iniziale [↑ ↱ ↑ ↰ ↑] ma il campo richiede [↑ ↰ ↑ ↱ ↑].",
+  "coding_goal": "Localizzare e riparare un difetto di sequenza per confronto di trace.",
+  "math_objective": "Posizione ordinale, inversione e confronto.",
+  "success_text": "Replay passo-passo mostra percorso corretto e nessuna collisione.",
+  "extension": "Introdurre un secondo errore creato dall'alunno.",
+  "design_reference": "Scambiare le due perle di svolta; mantenere le altre tre.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p208-target",
+      "kind": "target",
+      "cell": [
+        2,
+        2
+      ],
+      "label": "Meta",
+      "glyph": "M"
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "AVANTI 1\nSINISTRA\nAVANTI 1\nDESTRA\nAVANTI 1\nSINISTRA\nAVANTI 1",
+  "starter_program": "AVANTI 1\nSINISTRA\nAVANTI 1\nSINISTRA\nAVANTI 1",
+  "goal": {
+    "reach": [
+      2,
+      2
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "AVANTI 1\nSINISTRA\nAVANTI 1\nDESTRA\nAVANTI 1\nSINISTRA\nAVANTI 1",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Introdurre un secondo errore creato dall'alunno."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p2",
+    "beads"
+  ],
+  "narration_line": "La perla fuori posto. Stringa iniziale [↑ ↱ ↑ ↰ ↑] ma il campo richiede [↑ ↰ ↑ ↱ ↑].",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#c7b9ff",
+    "ground": "#8d7bd6",
+    "accent": "#ffb703",
+    "prop": "gear"
+  }
+}

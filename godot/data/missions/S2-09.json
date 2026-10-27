@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "id": "S2-09",
+  "world": "arcipelago",
+  "school_level": "S2",
+  "age_hint": "12-13 anni",
+  "title": "Debug dei dati mancanti",
+  "editor": "data",
+  "narrative": "Una lista di distanze include [4, 0, NULLO, 6]; l'algoritmo della media si interrompe.",
+  "coding_goal": "Separare validazione e calcolo su valori disponibili.",
+  "math_objective": "Gestione del dato mancante, media e qualità dei dati.",
+  "success_text": "Media calcolata sui tre numeri 4,0,6 (=10/3) e allerta sull'assenza.",
+  "extension": "Confrontare con l'errore di interpretare NULLO come 0.",
+  "design_reference": "Ignorare NULLO con avviso; decidere esplicitamente se 0 è dato valido.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {
+    "distanze": [
+      4,
+      0,
+      null,
+      6
+    ]
+  },
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA somma = 0\nIMPOSTA conteggio = 0\nPER OGNI d IN distanze { SE d != NULLO ALLORA { somma = somma + d; conteggio = conteggio + 1 } }\nIMPOSTA media = somma / conteggio",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "media": 3.3333333,
+      "conteggio": 3
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA somma = 0\nIMPOSTA conteggio = 0\nPER OGNI d IN distanze { SE d != NULLO ALLORA { somma = somma + d; conteggio = conteggio + 1 } }\nIMPOSTA media = somma / conteggio",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA media = 2.5",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Confrontare con l'errore di interpretare NULLO come 0."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s2",
+    "data"
+  ],
+  "narration_line": "Debug dei dati mancanti. Una lista di distanze include [4, 0, NULLO, 6]; l'algoritmo della media si interrompe.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#a8dadc",
+    "ground": "#1d3557",
+    "accent": "#f1faee",
+    "prop": "boat"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "id": "S3-01",
+  "world": "metropoli",
+  "school_level": "S3",
+  "age_hint": "13-14 anni",
+  "title": "La macchina degli stati",
+  "editor": "systems",
+  "narrative": "Metropoli dei sistemi: un ponte robotico può essere CHIUSO, APERTO o IN_MOVIMENTO.",
+  "coding_goal": "Modellare uno stato finito con transizioni lecite.",
+  "math_objective": "Insiemi finiti, relazioni, grafi orientati.",
+  "success_text": "Nessuna transizione impossibile; replay degli stati completo.",
+  "extension": "Aggiungere stato GUASTO con uscita controllata.",
+  "design_reference": "Definire stati e tabella degli eventi APRI, CHIUDI, FINE_MOVIMENTO.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA stato = \"CHIUSO\"\nSE stato == \"CHIUSO\" ALLORA { stato = \"IN_MOVIMENTO\" }\nSE stato == \"IN_MOVIMENTO\" ALLORA { stato = \"APERTO\" }",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "stato": "APERTO"
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA stato = \"CHIUSO\"\nSE stato == \"CHIUSO\" ALLORA { stato = \"IN_MOVIMENTO\" }\nSE stato == \"IN_MOVIMENTO\" ALLORA { stato = \"APERTO\" }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA stato = \"CHIUSO\"",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Aggiungere stato GUASTO con uscita controllata."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s3",
+    "systems"
+  ],
+  "narration_line": "La macchina degli stati. Metropoli dei sistemi: un ponte robotico può essere CHIUSO, APERTO o IN_MOVIMENTO.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#22223b",
+    "ground": "#4a4e69",
+    "accent": "#f2e9e4",
+    "prop": "skyscraper"
+  }
+}

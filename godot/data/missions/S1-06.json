@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "S1-06",
+  "world": "cittadella",
+  "school_level": "S1",
+  "age_hint": "11-12 anni",
+  "title": "I quadranti sorvegliati",
+  "editor": "structured",
+  "narrative": "Quattro telecamere coprono punti con segni misti; decidere il quadrante di un punto.",
+  "coding_goal": "Nidificare condizioni con AND su X e Y.",
+  "math_objective": "Interi relativi, quadranti e assi.",
+  "success_text": "Test su otto coordinate incluse quelle con zero.",
+  "extension": "Aggiungere etichette sulle due semirette.",
+  "design_reference": "«SE x>0 E y>0 ... ALTRIMENTI SE x<0 E y>0 ...» con casi assi separati.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 8,
+    "max_y": 8
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [],
+  "initial_vars": {
+    "x1": 2,
+    "y1": 3,
+    "x2": -4,
+    "y2": 2,
+    "x3": -1,
+    "y3": -5,
+    "x4": 6,
+    "y4": -1
+  },
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "IMPOSTA q1 = 0\nIMPOSTA q2 = 0\nIMPOSTA q3 = 0\nIMPOSTA q4 = 0\nSE x1 > 0 E y1 > 0 ALLORA { q1 = 1 }\nSE x2 < 0 E y2 > 0 ALLORA { q2 = 2 }\nSE x3 < 0 E y3 < 0 ALLORA { q3 = 3 }\nSE x4 > 0 E y4 < 0 ALLORA { q4 = 4 }",
+  "starter_program": "",
+  "goal": {
+    "vars": {
+      "q1": 1,
+      "q2": 2,
+      "q3": 3,
+      "q4": 4
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Leggi l'obiettivo matematico e individua quali dati hai già nella scena."
+    },
+    {
+      "level": 2,
+      "text": "Controlla una variabile alla volta: esegui, osserva il pannello e correggi la prima differenza."
+    },
+    {
+      "level": 3,
+      "text": "Scrivi prima il caso più semplice, verificalo, poi aggiungi condizioni e cicli."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "IMPOSTA q1 = 0\nIMPOSTA q2 = 0\nIMPOSTA q3 = 0\nIMPOSTA q4 = 0\nSE x1 > 0 E y1 > 0 ALLORA { q1 = 1 }\nSE x2 < 0 E y2 > 0 ALLORA { q2 = 2 }\nSE x3 < 0 E y3 < 0 ALLORA { q3 = 3 }\nSE x4 > 0 E y4 < 0 ALLORA { q4 = 4 }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "IMPOSTA q1 = 1",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Aggiungere etichette sulle due semirette."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "s1",
+    "structured"
+  ],
+  "narration_line": "I quadranti sorvegliati. Quattro telecamere coprono punti con segni misti; decidere il quadrante di un punto.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#bde0fe",
+    "ground": "#457b9d",
+    "accent": "#ffd166",
+    "prop": "tower"
+  }
+}

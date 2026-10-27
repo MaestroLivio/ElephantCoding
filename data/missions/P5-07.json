@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "id": "P5-07",
+  "world": "centro",
+  "school_level": "P5",
+  "age_hint": "10-11 anni",
+  "title": "Il catalogo di punti",
+  "editor": "pseudocode",
+  "narrative": "Quattro reperti hanno coordinate (-1,2),(2,2),(2,-2),(-1,-2); vanno fotografati.",
+  "coding_goal": "Collegare dati tabellari e sequenza automatizzata.",
+  "math_objective": "Lettura di tabelle, quadranti, coordinate.",
+  "success_text": "Quattro fotografie presso punti bersaglio, nessun duplicato.",
+  "extension": "Modificare un punto in una tabella semplice.",
+  "design_reference": "«PER OGNI punto IN elenco_punti { VAI A punto; FOTO }» con lista preimpostata visivamente.",
+  "grid": {
+    "min_x": -6,
+    "min_y": -6,
+    "max_x": 6,
+    "max_y": 6
+  },
+  "spawn": {
+    "cell": [
+      0,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "p5-07-photo--1_2",
+      "kind": "photo",
+      "cell": [
+        -1,
+        2
+      ],
+      "label": "Reperto",
+      "glyph": "o",
+      "required": true
+    },
+    {
+      "id": "p5-07-photo-2_2",
+      "kind": "photo",
+      "cell": [
+        2,
+        2
+      ],
+      "label": "Reperto",
+      "glyph": "o",
+      "required": true
+    },
+    {
+      "id": "p5-07-photo-2_-2",
+      "kind": "photo",
+      "cell": [
+        2,
+        -2
+      ],
+      "label": "Reperto",
+      "glyph": "o",
+      "required": true
+    },
+    {
+      "id": "p5-07-photo--1_-2",
+      "kind": "photo",
+      "cell": [
+        -1,
+        -2
+      ],
+      "label": "Reperto",
+      "glyph": "o",
+      "required": true
+    }
+  ],
+  "initial_vars": {
+    "elenco_punti": [
+      [
+        -1,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        -2
+      ],
+      [
+        -1,
+        -2
+      ]
+    ]
+  },
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "PER OGNI punto IN elenco_punti { VAI A punto; FOTO }",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      -1,
+      -2
+    ],
+    "photo_all": [
+      "p5-07-photo--1_2",
+      "p5-07-photo-2_2",
+      "p5-07-photo-2_-2",
+      "p5-07-photo--1_-2"
+    ],
+    "visit_order": [
+      [
+        -1,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        -2
+      ],
+      [
+        -1,
+        -2
+      ]
+    ],
+    "event_counts": {
+      "foto": 4
+    }
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "PER OGNI punto IN elenco_punti { VAI A punto; FOTO }",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Modificare un punto in una tabella semplice."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "p5",
+    "pseudocode"
+  ],
+  "narration_line": "Il catalogo di punti. Quattro reperti hanno coordinate (-1,2),(2,2),(2,-2),(-1,-2); vanno fotografati.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#cdb4db",
+    "ground": "#6d597a",
+    "accent": "#ffafcc",
+    "prop": "antenna"
+  }
+}

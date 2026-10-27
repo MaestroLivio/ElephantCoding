@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "INF-08",
+  "world": "savana",
+  "school_level": "INF",
+  "age_hint": "4-6 anni",
+  "title": "Lo specchio delle orecchie",
+  "editor": "icons",
+  "narrative": "Due mini-percorsi speculari, uno con curva a destra e uno a sinistra, ma una sola meta è illuminata.",
+  "coding_goal": "Scegliere la direzione rispetto all'orientamento iniziale.",
+  "math_objective": "Simmetria intuitiva, lato destro/lato sinistro.",
+  "success_text": "La traccia finale corrisponde al lato illuminato.",
+  "extension": "Cambiare il punto di vista della camera e mantenere corretta la lateralità di Nilo.",
+  "design_reference": "GIRA A SINISTRA → AVANTI oppure speculare secondo la meta.",
+  "grid": {
+    "min_x": 0,
+    "min_y": 0,
+    "max_x": 9,
+    "max_y": 7
+  },
+  "spawn": {
+    "cell": [
+      1,
+      0
+    ],
+    "heading": "E"
+  },
+  "obstacles": [],
+  "entities": [
+    {
+      "id": "inf-08-collect-1_1",
+      "kind": "collect",
+      "cell": [
+        1,
+        1
+      ],
+      "label": "Lucciola",
+      "glyph": "*",
+      "required": true
+    }
+  ],
+  "initial_vars": {},
+  "sensors": {},
+  "timers": [],
+  "allowed_ops": [],
+  "reference_program": "SINISTRA\nAVANTI 1\nRACCOGLI",
+  "starter_program": "",
+  "goal": {
+    "reach": [
+      1,
+      1
+    ],
+    "collect_all": [
+      "inf-08-collect-1_1"
+    ]
+  },
+  "hints": [
+    {
+      "level": 1,
+      "text": "Osserva la meta e la direzione in cui guarda Nilo: AVANTI è sempre rispetto al suo muso."
+    },
+    {
+      "level": 2,
+      "text": "Ripeti il percorso con il passo-passo e cerca la prima istruzione in cui la traccia si allontana dalla meta."
+    },
+    {
+      "level": 3,
+      "text": "Scomponi il percorso: prima raggiungi la prima svolta, poi conta le caselle e completa la sequenza."
+    }
+  ],
+  "tests": [
+    {
+      "name": "reference_succeeds",
+      "program": "SINISTRA\nAVANTI 1\nRACCOGLI",
+      "expect_success": true
+    },
+    {
+      "name": "incomplete_fails",
+      "program": "DESTRA",
+      "expect_success": false
+    }
+  ],
+  "optional_extensions": [
+    "Cambiare il punto di vista della camera e mantenere corretta la lateralità di Nilo."
+  ],
+  "accessibility_notes": "Comandi grandi, nessun timer obbligatorio, replay passo-passo, sottotitoli e narrazione facoltativa.",
+  "completion_badges": [
+    "missione_completata"
+  ],
+  "estimated_minutes": 10,
+  "tags": [
+    "inf",
+    "icons"
+  ],
+  "narration_line": "Lo specchio delle orecchie. Due mini-percorsi speculari, uno con curva a destra e uno a sinistra, ma una sola meta è illuminata.",
+  "scale_m": 1,
+  "scene_theme": {
+    "sky": "#f7c873",
+    "ground": "#c9a227",
+    "accent": "#e76f51",
+    "prop": "acacia"
+  }
+}

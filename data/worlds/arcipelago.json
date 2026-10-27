@@ -1,0 +1,30 @@
+{
+  "code": "S2",
+  "title": "Arcipelago degli Algoritmi",
+  "age": "12-13 anni",
+  "language": "Liste, matrici, dati",
+  "editor": "data",
+  "description": "Isole, rotte e magazzini: gli algoritmi lavorano sui dati.",
+  "theme": {
+    "sky": "#a8dadc",
+    "ground": "#1d3557",
+    "accent": "#f1faee",
+    "prop": "boat"
+  },
+  "lab": "Porto delle strategie",
+  "id": "arcipelago",
+  "max_x": 9,
+  "max_y": 7,
+  "mission_ids": [
+    "S2-01",
+    "S2-02",
+    "S2-03",
+    "S2-04",
+    "S2-05",
+    "S2-06",
+    "S2-07",
+    "S2-08",
+    "S2-09",
+    "S2-10"
+  ]
+}

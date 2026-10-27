@@ -116,7 +116,7 @@ func _build_ui() -> void:
 	grow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	grow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	footer.add_child(grow)
-	footer.add_child(Palette.label("v0.1.0 · CC BY 4.0", 13, Palette.MUTED))
+	footer.add_child(Palette.label("v0.1.1 · CC BY 4.0", 13, Palette.MUTED))
 
 	# top-right profile card
 	var profile := PanelContainer.new()

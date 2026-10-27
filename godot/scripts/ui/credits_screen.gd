@@ -3,7 +3,7 @@ extends AppScreen
 ## Credits, license and attribution. Deliberately explicit about what is
 ## original, what comes from Godot and what is not bundled.
 
-const CREDITS_TEXT := """ELEPHANTCODING · v0.1.0
+const CREDITS_TEXT := """ELEPHANTCODING · v0.1.1
 Un gioco educativo originale per imparare a programmare con Nilo.
 
 CONTENUTI ORIGINALI

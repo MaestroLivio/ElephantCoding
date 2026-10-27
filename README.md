@@ -67,7 +67,7 @@ il web, più `SHA256SUMS.txt`. Istruzioni, requisiti e limiti in
 [`docs/DISTRIBUTION.md`](docs/DISTRIBUTION.md).
 
 Le build verificate di questa versione sono pubblicate nella
-[release v0.1.0](https://github.com/MaestroLivio/ElephantCoding/releases/tag/v0.1.0).
+[release v0.1.1](https://github.com/MaestroLivio/ElephantCoding/releases/tag/v0.1.1).
 
 ## Comandi
 

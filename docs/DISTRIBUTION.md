@@ -1,7 +1,7 @@
 # Distribuzioni
 
 Le build di questa versione sono allegate alla
-[release v0.1.0](https://github.com/MaestroLivio/ElephantCoding/releases/tag/v0.1.0).
+[release v0.1.1](https://github.com/MaestroLivio/ElephantCoding/releases/tag/v0.1.1).
 
 Le build distributive si generano da macOS con:
 
@@ -31,14 +31,14 @@ La variabile `GODOT_BIN` permette di indicare un binario Godot diverso da
 
 | Piattaforma | File | Note |
 | --- | --- | --- |
-| macOS | `ElephantCoding-0.1.0-macOS-universal.dmg` | Installer con app e collegamento ad Applicazioni |
-| macOS | `ElephantCoding-0.1.0-macOS-universal.zip` | App portabile |
-| Windows | `ElephantCoding-0.1.0-Windows-x86_64-Setup.exe` | Installer NSIS per utente, senza admin |
-| Windows | `ElephantCoding-0.1.0-Windows-x86_64-portable.zip` | Eseguibile portabile |
-| Linux | `ElephantCoding-0.1.0-Linux-x86_64.deb` | Pacchetto Debian/Ubuntu |
-| Linux | `ElephantCoding-0.1.0-Linux-x86_64.tar.gz` | Archivio portabile con `install.sh` |
-| Android | `ElephantCoding-0.1.0-Android-arm64-debug.apk` | Sideload, firmato con chiave di debug |
-| Web | `ElephantCoding-0.1.0-Web.zip` | Sito statico, nessun server applicativo |
+| macOS | `ElephantCoding-0.1.1-macOS-universal.dmg` | Installer con app e collegamento ad Applicazioni |
+| macOS | `ElephantCoding-0.1.1-macOS-universal.zip` | App portabile |
+| Windows | `ElephantCoding-0.1.1-Windows-x86_64-Setup.exe` | Installer NSIS per utente, senza admin |
+| Windows | `ElephantCoding-0.1.1-Windows-x86_64-portable.zip` | Eseguibile portabile |
+| Linux | `ElephantCoding-0.1.1-Linux-x86_64.deb` | Pacchetto Debian/Ubuntu |
+| Linux | `ElephantCoding-0.1.1-Linux-x86_64.tar.gz` | Archivio portabile con `install.sh` |
+| Android | `ElephantCoding-0.1.1-Android-arm64-debug.apk` | Sideload, firmato con chiave di debug |
+| Web | `ElephantCoding-0.1.1-Web.zip` | Sito statico, nessun server applicativo |
 | Tutti | `SHA256SUMS.txt` | Checksum SHA-256 |
 
 ## Installazione
@@ -55,7 +55,7 @@ xattr -dr com.apple.quarantine /Applications/ElephantCoding.app
 
 ### Windows
 
-Eseguire `ElephantCoding-0.1.0-Windows-x86_64-Setup.exe`. L'installer non
+Eseguire `ElephantCoding-0.1.1-Windows-x86_64-Setup.exe`. L'installer non
 richiede privilegi di amministratore, installa in
 `%LOCALAPPDATA%\Programs\ElephantCoding`, crea i collegamenti nel menu Start e
 sul desktop e registra la voce di disinstallazione. In alternativa scompattare
@@ -64,9 +64,9 @@ lo ZIP portabile e avviare `ElephantCoding.exe`.
 ### Linux
 
 ```bash
-sudo dpkg -i ElephantCoding-0.1.0-Linux-x86_64.deb
+sudo dpkg -i ElephantCoding-0.1.1-Linux-x86_64.deb
 # oppure, senza root:
-tar -xzf ElephantCoding-0.1.0-Linux-x86_64.tar.gz
+tar -xzf ElephantCoding-0.1.1-Linux-x86_64.tar.gz
 cd ElephantCoding && ./install.sh
 ```
 
@@ -80,7 +80,7 @@ L'APK è una build **debug** firmata con la chiave di debug di Godot, pensata
 per il sideload su tablet e telefoni (Android 6+), non per Google Play:
 
 ```bash
-adb install ElephantCoding-0.1.0-Android-arm64-debug.apk
+adb install ElephantCoding-0.1.1-Android-arm64-debug.apk
 ```
 
 Per pubblicare sullo store servono una chiave di release e un AAB firmato
@@ -98,19 +98,26 @@ python3 -m http.server 8000
 
 ## Verifiche eseguite
 
-Su questa macchina (macOS, Godot 4.7.2):
+Su questa macchina (macOS, Godot 4.7.2), per la versione **0.1.1**:
 
-- tutte le esportazioni completate senza errori;
-- i PCK di macOS, Windows, Linux e Web contengono 90 missioni e 9 mondi e li
-  caricano con `--main-pack` da una cartella esterna al repository;
+- verifiche di contenuto e test verdi prima della build: 90 missioni e 9 mondi,
+  dati sincronizzati, `PASS: 272 FAIL: 0`, `UI SMOKE: 0 failures`;
+- tutte le esportazioni completate senza errori e gli 8 artefatti più
+  `SHA256SUMS.txt` rigenerati in `dist/` con la versione 0.1.1;
+- coerenza di versione su tutti gli artefatti: `Info.plist` macOS 0.1.1,
+  `versionCode 2` / `versionName 0.1.1` dell'APK, `Version: 0.1.1` nel
+  control del `.deb`, stringa `0.1.1` nei PCK Linux e Web;
 - app macOS firmata ad-hoc, verificata con `codesign --verify --deep --strict`
-  e avviata sia dallo ZIP sia dal DMG;
-- ZIP web aperto in Chromium: menu caricato e profilo “0 / 90 missioni”;
+  e avviata con `--headless --quit`; DMG montato in sola lettura e controllato
+  (app + collegamento ad Applicazioni);
+- ZIP web servito in locale e aperto in Chromium: menu caricato, versione
+  0.1.1 e profilo “0 / 90 missioni” (solo avvisi attesi su MSAA 2D e voce);
+- PCK Linux caricato con `--main-pack` da una cartella esterna al repository;
 - installer Windows generato da NSIS e riconosciuto come self-extracting
   archive; non eseguito su Windows;
-- pacchetto `.deb` controllato nella struttura (`ar`, control, data, permessi);
+- pacchetto `.deb` controllato nella struttura (control, data, dipendenze);
   non installato su una macchina Linux;
-- APK Android firmato e verificato con `apksigner` (schemi v2/v3), package
+- APK Android firmato e verificato con `apksigner`, package
   `org.elephantcoding.nilo`, `minSdk 24`; non installato su un dispositivo.
 
 ## Limiti noti

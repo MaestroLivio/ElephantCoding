@@ -92,9 +92,8 @@ una consegna verificare:
 3. controllo del voice pack;
 4. test headless e smoke test UI con Godot 4.7.2 scaricato dal sito ufficiale.
 
-Il workflow è incluso nel repository ma non è stato eseguito su GitHub Actions
-in questa fase di sviluppo: trattarlo come una verifica da attivare al primo
-push.
+Il workflow è incluso nel repository ed è stato eseguito con successo al primo
+push su GitHub Actions (controlli contenuti e test Godot).
 
 ## Export
 
@@ -137,6 +136,5 @@ Checklist per una build:
 
 - I test headless non verificano il rendering: usare `screenshots.gd` e una
   prova manuale.
-- La CI non è stata eseguita su GitHub Actions.
 - Non sono state prodotte build per dispositivi fisici.
 - Il voice pack è vuoto: la copertura è 0/462 per scelta.

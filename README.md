@@ -201,13 +201,13 @@ Verificato su questa macchina con Godot 4.7.2:
 - Esportazioni Linux, macOS (universal) e Web completate; le build macOS e
   Linux caricano 90 missioni e 9 mondi dal PCK, la build Web si avvia in
   Chromium. Dettagli e comandi in [`docs/TESTING.md`](docs/TESTING.md).
+- CI GitHub Actions verde al primo push: controlli contenuti e test Godot.
 
 Non ancora verificato:
 
 - Build su dispositivi fisici (Android/iOS) e su una lavagna interattiva reale.
 - Voice pack registrato: il manifest e la pipeline sono pronti, ma nessun clip
   di terze parti è incluso o verificato.
-- Il workflow di CI è incluso ma non è stato eseguito su GitHub Actions.
 
 ## Licenza
 

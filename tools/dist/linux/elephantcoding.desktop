@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=ElephantCoding
+GenericName=Coding per bambini
+Comment=Nilo l'elefantino che programma
+Exec=/opt/elephantcoding/ElephantCoding
+Icon=elephantcoding
+Terminal=false
+Categories=Education;Game;
+Keywords=coding;programmazione;scuola;bambini;

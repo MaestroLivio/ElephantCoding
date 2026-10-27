@@ -53,6 +53,19 @@ Il progetto parte dalla scena `godot/scenes/main.tscn`. La risoluzione di
 progetto è 1600×900, ridimensionabile; il layout è pensato per touch screen e
 lavagne interattive.
 
+## Distribuzioni
+
+Le build per macOS, Windows, Linux, Android (sideload) e web si generano con:
+
+```bash
+./tools/dist/build_distributions.sh
+```
+
+Gli artefatti finiscono in `dist/`: DMG e ZIP per macOS, installer NSIS e ZIP
+portatile per Windows, `.deb` e `.tar.gz` per Linux, APK per Android, ZIP per
+il web, più `SHA256SUMS.txt`. Istruzioni, requisiti e limiti in
+[`docs/DISTRIBUTION.md`](docs/DISTRIBUTION.md).
+
 ## Comandi
 
 | Azione | Touch | Mouse / tastiera |
@@ -103,6 +116,8 @@ data/                     contenuti canonici (JSON)
   locales/it/             manifest della voce + copione di registrazione
   schemas/                schemi descrittivi
 docs/                     architettura, curricolo, guida docente, voce, test
+docs/DISTRIBUTION.md      build, installer e limiti delle distribuzioni
+dist/                     artefatti di build (esclusa da git)
 godot/                    progetto Godot
   assets/                 icona e cartella di destinazione del voice pack
   data/                   copia runtime di data/missions e data/worlds
@@ -113,6 +128,7 @@ godot/                    progetto Godot
   scripts/input/          joystick e controlli touch
   tests/                  test headless, smoke UI, screenshot
 tools/                    pipeline Python (contenuti, voce, validazione)
+tools/dist/               export e packaging delle distribuzioni
 .github/workflows/ci.yml  integrazione continua
 ```
 
@@ -198,14 +214,19 @@ Verificato su questa macchina con Godot 4.7.2:
   eseguiti attraverso l'interfaccia).
 - Importazione headless senza errori di script.
 - Screenshot di tutte le schermate riviste manualmente.
-- Esportazioni Linux, macOS (universal) e Web completate; le build macOS e
-  Linux caricano 90 missioni e 9 mondi dal PCK, la build Web si avvia in
-  Chromium. Dettagli e comandi in [`docs/TESTING.md`](docs/TESTING.md).
+- Esportazioni Linux, macOS (universal), Windows, Android arm64 e Web
+  completate. I PCK di macOS, Windows, Linux e Web caricano 90 missioni e 9
+  mondi; l'app macOS è firmata ad-hoc e avviata da ZIP e DMG; la build Web si
+  avvia in Chromium; l'APK Android è firmato e verificato con `apksigner`.
+  Dettagli in [`docs/DISTRIBUTION.md`](docs/DISTRIBUTION.md).
 - CI GitHub Actions verde al primo push: controlli contenuti e test Godot.
 
 Non ancora verificato:
 
-- Build su dispositivi fisici (Android/iOS) e su una lavagna interattiva reale.
+- Installer Windows e pacchetti Linux eseguiti sui rispettivi sistemi
+  operativi (struttura verificata, non installazione reale).
+- APK Android installato su un dispositivo fisico o su una lavagna interattiva.
+- iOS non è incluso: richiede certificato e provisioning profile Apple.
 - Voice pack registrato: il manifest e la pipeline sono pronti, ma nessun clip
   di terze parti è incluso o verificato.
 

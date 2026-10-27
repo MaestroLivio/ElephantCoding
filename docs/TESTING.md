@@ -98,43 +98,62 @@ push su GitHub Actions (controlli contenuti e test Godot).
 ## Export
 
 Per esportare servono i template di esportazione di Godot 4.7.2 installati
-nell'editor. I preset sono in `godot/export_presets.cfg`: **Linux**,
-**macOS** (universal) e **Web** (single-thread, senza SharedArrayBuffer).
+nell'editor. I preset sono in `godot/export_presets.cfg`: **Linux**, **macOS**
+(universal), **Windows**, **Android** (arm64) e **Web** (single-thread, senza
+SharedArrayBuffer). Il modo consigliato è lo script di distribuzione:
 
 ```bash
-mkdir -p godot/build/linux godot/build/macos godot/build/web
-godot --headless --path godot --export-release "Linux" build/linux/ElephantCoding.x86_64
-godot --headless --path godot --export-release "macOS" build/macos/ElephantCoding.zip
-godot --headless --path godot --export-release "Web" build/web/index.html
+./tools/dist/build_distributions.sh
+```
+
+Lo script esporta in `build/`, crea DMG/ZIP macOS, installer NSIS e ZIP
+Windows, `.deb` e `.tar.gz` Linux, APK Android e ZIP web, e scrive
+`dist/SHA256SUMS.txt`. Vedi [`DISTRIBUTION.md`](DISTRIBUTION.md).
+
+Export manuale (dalla radice del repository):
+
+```bash
+mkdir -p build/linux build/macos build/web
+godot --headless --path godot --export-release "Linux" "$PWD/build/linux/ElephantCoding.x86_64"
+godot --headless --path godot --export-release "macOS" "$PWD/build/macos/ElephantCoding.zip"
+godot --headless --path godot --export-release "Windows" "$PWD/build/windows/ElephantCoding.exe"
+godot --headless --path godot --export-debug "Android" "$PWD/build/android/ElephantCoding.apk"
+godot --headless --path godot --export-release "Web" "$PWD/build/web/index.html"
 ```
 
 Le build leggono i dati dal PCK con percorsi `res://data`: `MissionRepository`
 prova prima `res://data`, poi le copie su disco usate in sviluppo. La build
 macOS universal richiede `rendering/textures/vram_compression/import_etc2_astc=true`
-in `project.godot`. `godot/build/` è esclusa da git.
+in `project.godot`. `build/` è esclusa da git ed è fuori da `godot/`, così i
+file esportati non vengono importati e impacchettati di nuovo.
 
-Verificato su questa macchina: le tre esportazioni completano; i PCK di
-macOS e Linux contengono 90 missioni e 9 mondi e li caricano se aperti con
-`--main-pack` da una cartella esterna al repository; la build web si avvia in
-Chromium e mostra il menu. Non sono state provate su dispositivi fisici.
+Verificato su questa macchina: tutte le esportazioni completano; i PCK di
+macOS, Windows, Linux e Web contengono 90 missioni e 9 mondi e li caricano se
+aperti con `--main-pack` da una cartella esterna al repository; l'app macOS è
+avviata da ZIP e DMG; la build web si avvia in Chromium; l'APK Android è
+firmato e verificato con `apksigner`. L'installer Windows e i pacchetti Linux
+non sono stati eseguiti sui rispettivi sistemi operativi.
 
 Checklist per una build:
 
 - [x] `data/missions` e `data/worlds` sono presenti in `godot/data/`
       (`sync_data.py --check`).
-- [x] La build parte dalla scena `main.tscn` e carica le 90 missioni dal PCK.
+- [x] La build parte dalla scena `main.tscn` e carica le 90 missioni.
 - [x] La cartella `assets/audio/voice/it/` è inclusa anche se vuota (o con il
       pack dichiarato).
-- [ ] I file `LICENSE`, `THIRD_PARTY_NOTICES.md` e `docs/ATTRIBUTION.md` sono
-      distribuiti con la build (non sono ancora inclusi automaticamente:
-      aggiungerli al pacchetto di distribuzione).
+- [x] `LICENSE`, `THIRD_PARTY_NOTICES.md` e `docs/ATTRIBUTION.md` sono inclusi
+      nei pacchetti da `tools/dist/build_distributions.sh`.
 - [x] Su web: build single-thread; non servono COOP/COEP per l'avvio.
-- [ ] Su Android: orientamento orizzontale, touch, immersività.
-- [ ] Su iOS: asset catalog e firma configurati dall'utente.
+- [x] Su Android: APK arm64 installabile via sideload; orientamento orizzontale
+      e touch sono definiti nel progetto.
+- [ ] Su iOS: asset catalog e firma configurati dall'utente (build non inclusa).
 
 ## Limiti noti
 
 - I test headless non verificano il rendering: usare `screenshots.gd` e una
   prova manuale.
-- Non sono state prodotte build per dispositivi fisici.
+- Installer Windows e pacchetti Linux non sono stati provati sui rispettivi
+  sistemi operativi.
+- L'APK Android non è stato installato su un dispositivo fisico.
+- iOS non è incluso: richiede certificato e provisioning profile Apple.
 - Il voice pack è vuoto: la copertura è 0/462 per scelta.

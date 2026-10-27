@@ -13,6 +13,10 @@ dist/
 *.pck
 *.zip
 
+# Keep the distribution tooling, despite the rules above.
+!tools/dist/
+!tools/dist/**
+
 # Python tooling
 __pycache__/
 *.py[cod]

@@ -101,9 +101,12 @@ def build(root: Path, out: Path, version: str, arch: str, epoch: int) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("wb") as handle:
         handle.write(AR_MAGIC)
-        handle.write(_ar_member("debian-binary/", b"2.0\n", epoch))
-        handle.write(_ar_member("control.tar.gz/", control_tar, epoch))
-        handle.write(_ar_member("data.tar.gz/", data_tar, epoch))
+        # Member names must not carry the trailing slash GNU ar uses for its
+        # own archives: dpkg looks up "control.tar.gz" literally and rejects
+        # the package otherwise.
+        handle.write(_ar_member("debian-binary", b"2.0\n", epoch))
+        handle.write(_ar_member("control.tar.gz", control_tar, epoch))
+        handle.write(_ar_member("data.tar.gz", data_tar, epoch))
     print(f"wrote {out}")
 
 

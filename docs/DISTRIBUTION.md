@@ -25,7 +25,32 @@ importati di nuovo nel PCK) e crea pacchetti, installer e checksum.
   trasforma l'avviso in errore.
 
 La variabile `GODOT_BIN` permette di indicare un binario Godot diverso da
-`/Applications/Godot.app/Contents/MacOS/Godot`.
+`/Applications/Godot.app/Contents/MacOS/Godot`; `MAKENSIS` indica un `makensis`
+diverso da quello nel `PATH`.
+
+### makensis su macOS 14 o successivo
+
+NSIS 3.13, compresa la bottiglia Homebrew, va in crash con `std::bad_alloc`
+appena compila uno script con `Unicode true`: `iconv` interpreta l'encoding
+`wchar_t` come UCS-2 mentre su macOS è UTF-32 (bug upstream
+[#1333](https://sourceforge.net/p/nsis/bugs/1333)). La build si ferma con
+`Abort trap: 6` durante la fase Windows. La patch
+[nsis-macos-iconv.patch](tools/dist/nsis-macos-iconv.patch) corregge la sorgente
+ufficiale e il binario compilato si passa con `MAKENSIS`:
+
+```bash
+tar -xjf nsis-3.13-src.tar.bz2 && cd nsis-3.13-src
+patch -p1 < ../ElephantCoding/tools/dist/nsis-macos-iconv.patch
+python3 -m venv .venv && .venv/bin/pip install scons
+.venv/bin/scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all makensis
+
+MAKENSIS="$PWD/build/urelease/makensis/makensis" \
+NSISDIR=/opt/homebrew/share/nsis \
+./tools/dist/build_distributions.sh
+```
+
+`NSISDIR` serve quando il binario appena compilato non trova `Stubs/` e
+`Include/` nel percorso predefinito.
 
 ## Firma e notarizzazione (facoltative)
 
@@ -166,6 +191,26 @@ Su questa macchina (macOS, Godot 4.7.2), per la versione **0.1.1**:
   non installato su una macchina Linux;
 - APK Android firmato e verificato con `apksigner`, package
   `org.elephantcoding.nilo`, `minSdk 24`; non installato su un dispositivo.
+
+### Ricostruzione del 28 ottobre 2026
+
+Gli artefatti della release v0.1.1 sono stati rigenerati dopo le correzioni di
+camera, orientamento, tavolozza e colori della savana:
+
+- build completata con `BUILD_EXIT=0` usando il `makensis` corretto (la
+  bottiglia Homebrew andava in crash sul bug #1333);
+- `shasum -a 256 -c SHA256SUMS.txt` verde su tutti e nove gli artefatti;
+- DMG montato in sola lettura: app, collegamento ad Applicazioni e
+  `LEGGIMI.txt` presenti, `codesign --verify --deep --strict` superato (firma
+  ad-hoc), `Info.plist` 0.1.1, app avviata con `--headless --quit` e uscita 0;
+- `.deb` con i membri `ar` corretti (`debian-binary`, `control.tar.gz`,
+  `data.tar.gz` senza slash finale: prima `dpkg` non li riconosceva), control
+  con `Version: 0.1.1`, binario `0755` in `/opt/elephantcoding`;
+- installer Windows di 27 MB riconosciuto come archivio self-extracting NSIS;
+- APK firmato con la chiave di debug (`apksigner verify`), package
+  `org.elephantcoding.nilo`;
+- `spctl` continua a rifiutare l'app perché la firma resta ad-hoc: serve un
+  Developer ID per togliere l'avviso di Gatekeeper.
 
 ## Limiti noti
 

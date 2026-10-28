@@ -3,7 +3,9 @@
 #
 # Requirements (macOS build host):
 #   - Godot 4.7.2 with the export templates installed
-#   - NSIS (makensis) for the Windows installer
+#   - NSIS (makensis) for the Windows installer. NSIS 3.13 crashes with
+#     std::bad_alloc on any Unicode script on macOS (upstream bug #1333); set
+#     MAKENSIS to a patched build, see docs/DISTRIBUTION.md.
 #   - hdiutil, ditto, zip, shasum (macOS system tools)
 #   - Python 3.11+
 #
@@ -21,6 +23,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 GODOT_BIN="${GODOT_BIN:-/Applications/Godot.app/Contents/MacOS/Godot}"
+MAKENSIS_BIN="${MAKENSIS:-makensis}"
 VERSION="$(sed -n 's/^config\/version="\(.*\)"/\1/p' "$ROOT/godot/project.godot" | head -1)"
 NAME="ElephantCoding"
 BUILD="$ROOT/build/dist"
@@ -34,7 +37,9 @@ say() { printf '\n==> %s\n' "$*"; }
 fail() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
 
 [[ -x "$GODOT_BIN" ]] || fail "Godot not found: $GODOT_BIN (set GODOT_BIN)"
-command -v makensis >/dev/null || fail "makensis (NSIS) not found"
+if ! command -v "$MAKENSIS_BIN" >/dev/null && [[ ! -x "$MAKENSIS_BIN" ]]; then
+  fail "makensis (NSIS) not found: $MAKENSIS_BIN (set MAKENSIS)"
+fi
 command -v hdiutil >/dev/null || fail "hdiutil not found (macOS required)"
 command -v python3 >/dev/null || fail "python3 not found"
 [[ -f "$ROOT/godot/assets/icons/icon.ico" ]] || fail "missing godot/assets/icons/icon.ico"
@@ -193,12 +198,16 @@ sign_windows "$WIN_DIR/$NAME.exe"
 stage_licenses "$WIN_DIR/licenses"
 (cd "$STAGE/windows" && zip -qr -X "$OUT/$NAME-$VERSION-Windows-x86_64-portable.zip" "$NAME")
 
-makensis -V2 \
+if ! "$MAKENSIS_BIN" -V2 \
   -DPRODUCT_VERSION="$VERSION" \
   -DSOURCE_DIR="$WIN_DIR" \
   -DOUTPUT="$OUT/$NAME-$VERSION-Windows-x86_64-Setup.exe" \
   -DICON="$ROOT/godot/assets/icons/icon.ico" \
-  "$ROOT/tools/dist/windows_installer.nsi"
+  "$ROOT/tools/dist/windows_installer.nsi"; then
+  fail "makensis failed. NSIS 3.13 aborts with std::bad_alloc on Unicode scripts\
+ on macOS 14 and later (upstream bug #1333); build a patched makensis and pass\
+ it with MAKENSIS, see docs/DISTRIBUTION.md"
+fi
 sign_windows "$OUT/$NAME-$VERSION-Windows-x86_64-Setup.exe"
 
 say "Packaging Linux (portable tar.gz and .deb)"

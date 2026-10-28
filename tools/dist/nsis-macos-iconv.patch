@@ -1,0 +1,130 @@
+makensis 3.13 su macOS non compila script Unicode: iconv mappa "wchar_t"
+su UCS-2 mentre wchar_t e' UTF-32, quindi CharEncConv::Convert() restituisce
+NULL e ExeHeadStringList::add() lancia std::bad_alloc (bug upstream #1333).
+La patch usa "UTF-32LE" quando sizeof(wchar_t) == 4.
+
+Applicazione sulla sorgente NSIS 3.13:
+
+  tar -xjf nsis-3.13-src.tar.bz2
+  cd nsis-3.13-src
+  patch -p1 < nsis-macos-iconv.patch
+  scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all makensis
+
+Il binario prodotto si passa alla build con MAKENSIS=... (vedi
+DISTRIBUTION.md).
+
+--- a/Source/util.h
++++ b/Source/util.h
+@@ -32,6 +32,25 @@
+ #include <stdarg.h>
+ #include <stdio.h>
+ 
++#ifndef _WIN32
++// iconv on macOS maps "wchar_t" to UCS-2 while the platform wchar_t is
++// UTF-32, so makensis aborts with std::bad_alloc on any Unicode script
++// (NSIS bug #1333). Ask iconv for the encoding wchar_t really is.
++#ifndef NSIS_ICONV_WCHAR
++#if defined(__SIZEOF_WCHAR_T__) && __SIZEOF_WCHAR_T__ == 4
++#if defined(__BYTE_ORDER__) && defined(__ORDER_BIG_ENDIAN__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
++#define NSIS_ICONV_WCHAR "UTF-32BE"
++#else
++#define NSIS_ICONV_WCHAR "UTF-32LE"
++#endif
++#else
++#define NSIS_ICONV_WCHAR "wchar_t"
++#endif
++#endif
++#endif
++
++
++
+ static inline bool ui_add(unsigned int &r, unsigned int a, unsigned int b) { return (r = a + b) >= a; }
+ static inline bool si_add(int &r, int a, int b)
+ {
+--- a/Source/utf.cpp
++++ b/Source/utf.cpp
+@@ -78,7 +78,7 @@
+   return 0;
+ #else
+   iconvdescriptor iconvd;
+-  if (!iconvd.Open("wchar_t",iconvdescriptor::GetHostEndianUCS4Code())) return 0;
++  if (!iconvd.Open(NSIS_ICONV_WCHAR,iconvdescriptor::GetHostEndianUCS4Code())) return 0;
+   size_t inleft = 4;
+   UINT cchW = iconvd.Convert(&CodPt,&inleft,Dest,cchDest*sizeof(wchar_t)) / sizeof(wchar_t);
+   return !inleft ? cchW : 0;
+@@ -121,8 +121,8 @@
+   return (IsWE(m_FE) || IsValidCodePage(FromEnc)) && (IsWE(m_TE) || IsValidCodePage(ToEnc));
+ #else
+   char f[50], t[COUNTOF(f)];
+-  if (IsWE(m_FE)) strcpy(f, "wchar_t"); else create_code_page_string(f, COUNTOF(f), m_FE);
+-  if (IsWE(m_TE)) strcpy(t, "wchar_t"); else create_code_page_string(t, COUNTOF(t), m_TE);
++  if (IsWE(m_FE)) strcpy(f, NSIS_ICONV_WCHAR); else create_code_page_string(f, COUNTOF(f), m_FE);
++  if (IsWE(m_TE)) strcpy(t, NSIS_ICONV_WCHAR); else create_code_page_string(t, COUNTOF(t), m_TE);
+   return m_TE == m_FE || m_iconvd.Open(t, f);
+ #endif
+ }
+@@ -536,7 +536,7 @@
+   else if (StreamEncoding().IsUTF16())
+   {
+ #ifndef _WIN32
+-    if (!iconvd.Open("wchar_t", iconvdescriptor::GetHostEndianUCS4Code())) goto l_unsupportedencoding;
++    if (!iconvd.Open(NSIS_ICONV_WCHAR, iconvdescriptor::GetHostEndianUCS4Code())) goto l_unsupportedencoding;
+ #endif
+     const bool utf16be = StreamEncoding().IsUTF16BE();
+     unsigned short lead, trail, cchWC;
+--- a/Source/util.cpp
++++ b/Source/util.cpp
+@@ -243,7 +243,7 @@
+ {
+   iconvdescriptor id;
+   g_nrt_iconv_narrowloc = const_cast<char*>(""); // Use "" and not "char", "char" is a GNU extension?
+-  if (!id.Open("wchar_t", g_nrt_iconv_narrowloc)) 
++  if (!id.Open(NSIS_ICONV_WCHAR, g_nrt_iconv_narrowloc)) 
+   {
+     unsigned int cchmax = COUNTOF(g_nrt_iconv_narrowlocbuf);
+     const char *tmp = "";
+@@ -252,7 +252,7 @@
+     if (strlen(tmp) >= cchmax) tmp = "";
+ #endif
+     strcpy(g_nrt_iconv_narrowloc = g_nrt_iconv_narrowlocbuf, tmp);
+-    if (!id.Open("wchar_t", g_nrt_iconv_narrowloc))
++    if (!id.Open(NSIS_ICONV_WCHAR, g_nrt_iconv_narrowloc))
+     {
+       // Unable to determine the iconv narrow string code, UTF-8 is the best we can do
+       create_code_page_string(g_nrt_iconv_narrowloc, cchmax, CP_UTF8);
+@@ -451,7 +451,7 @@
+   if (!ucs4)
+   {
+     iconvdescriptor id;
+-#define NRT_TMP_IGHEUC(s) if (id.Open("wchar_t", (s))) return ucs4 = (s)
++#define NRT_TMP_IGHEUC(s) if (id.Open(NSIS_ICONV_WCHAR, (s))) return ucs4 = (s)
+     NRT_TMP_IGHEUC("UCS-4-INTERNAL");
+     NRT_TMP_IGHEUC(Platform_IsBigEndian() ? "UCS-4BE" : "UCS-4LE");
+     NRT_TMP_IGHEUC(Platform_IsBigEndian() ? "UTF-32BE" : "UTF-32LE");
+@@ -516,7 +516,7 @@
+ 
+   char cp[CODEPAGESTR_MAXLEN];
+   create_code_page_string(cp, COUNTOF(cp), CodePage);
+-  iconv_t cd = iconv_open(cp, "wchar_t");
++  iconv_t cd = iconv_open(cp, NSIS_ICONV_WCHAR);
+   size_t cchNull = 0;
+   if (cd == (iconv_t) -1) return 0;
+   if (cchWideChar < 0) cchWideChar = (int) wcslen(lpWideCharStr), ++cchNull;
+@@ -541,7 +541,7 @@
+ 
+   char cp[CODEPAGESTR_MAXLEN];
+   create_code_page_string(cp, COUNTOF(cp), CodePage);
+-  iconv_t cd = iconv_open("wchar_t", cp);
++  iconv_t cd = iconv_open(NSIS_ICONV_WCHAR, cp);
+   size_t cchNull = 0; // iconv on MacOS 14 & 15 does not parse the \0, we have to keep track of it.
+   if (cd == (iconv_t) -1) return 0;
+   if (cbMultiByte < 0) cbMultiByte = strlen(lpMultiByteStr), ++cchNull;
+@@ -564,7 +564,7 @@
+ {
+   char cp[CODEPAGESTR_MAXLEN];
+   create_code_page_string(cp, COUNTOF(cp), CodePage);
+-  iconv_t cd = iconv_open("wchar_t", cp);
++  iconv_t cd = iconv_open(NSIS_ICONV_WCHAR, cp);
+   if (cd == (iconv_t) -1) return FALSE;
+   iconv_close(cd);
+   return TRUE;

@@ -69,6 +69,12 @@ il web, più `SHA256SUMS.txt`. Istruzioni, requisiti e limiti in
 Le build verificate di questa versione sono pubblicate nella
 [release v0.1.1](https://github.com/MaestroLivio/ElephantCoding/releases/tag/v0.1.1).
 
+Gli artefatti non hanno una firma commerciale, quindi al primo avvio il sistema
+può bloccarli: su macOS si sbloccano da *Impostazioni di Sistema → Privacy e
+Sicurezza → Apri comunque* (il DMG contiene un `LEGGIMI.txt` con i passi), su
+Windows da *Ulteriori informazioni → Esegui comunque*. Dettagli e pipeline di
+notarizzazione in [`docs/DISTRIBUTION.md`](docs/DISTRIBUTION.md).
+
 ## Comandi
 
 | Azione | Touch | Mouse / tastiera |

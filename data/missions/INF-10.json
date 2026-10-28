@@ -98,9 +98,9 @@
   "narration_line": "La festa della savana. Piccolo itinerario con due curve, tre passi e un campanello conclusivo; tabellone di massimo 7 icone.",
   "scale_m": 1,
   "scene_theme": {
-    "sky": "#f7c873",
-    "ground": "#c9a227",
-    "accent": "#e76f51",
+    "sky": "#b1ccd8",
+    "ground": "#829b71",
+    "accent": "#6f9385",
     "prop": "acacia"
   }
 }

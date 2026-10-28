@@ -14,6 +14,9 @@ const FIT_MARGIN := 0.86
 
 var mode: int = Mode.FIXED
 var target: Node3D
+## Field framing only makes sense with a narrow lens; the two closer views need
+## a wider one or the character fills the whole screen.
+var base_fov := 32.0
 var bounds := Rect2(-6, -5, 12, 10)
 var safe_rect := Rect2(0.0, 0.0, 1.0, 1.0)
 var orbit_yaw := 0.0
@@ -26,18 +29,21 @@ var _initialised := false
 func setup_for_bounds(p_bounds: Rect2, p_target: Node3D = null) -> void:
 	bounds = p_bounds
 	target = p_target
+	base_fov = fov
 	_initialised = true
 	_apply_mode(true)
 
 
 func set_mode(m: int) -> void:
 	mode = clampi(m, 0, 2)
-	_apply_mode(false)
+	# Snap on a mode change: the previous framing (and its frustum shift) is
+	# meaningless for the new one, so interpolating would look like a drift.
+	_apply_mode(true)
 
 
 func cycle_mode() -> int:
 	mode = (mode + 1) % 3
-	_apply_mode(false)
+	_apply_mode(true)
 	return mode
 
 
@@ -57,8 +63,8 @@ func _apply_mode(immediate: bool) -> void:
 
 
 func orbit_by(delta_x: float, delta_y: float) -> void:
-	orbit_yaw -= delta_x * 0.006
-	orbit_pitch = clampf(orbit_pitch + delta_y * 0.004, -0.5, 0.4)
+	orbit_yaw = wrapf(orbit_yaw - delta_x * 0.006, -PI, PI)
+	orbit_pitch = clampf(orbit_pitch + delta_y * 0.004, -0.55, 0.55)
 
 
 func zoom_by(factor: float) -> void:
@@ -83,8 +89,15 @@ func _reposition(weight: float) -> void:
 	var center := Vector3(0, 0, 0)
 	if target != null:
 		center = target.global_position
+	# Only the fixed field composes itself through a frustum shift. Any other
+	# mode must start from a neutral frustum, otherwise the shift computed for
+	# the field also pushes the character out of the middle of the screen.
+	if mode != Mode.FIXED:
+		h_offset = 0.0
+		v_offset = 0.0
 	match mode:
 		Mode.FIXED:
+			fov = base_fov
 			var view := get_viewport()
 			var view_size: Vector2 = view.get_visible_rect().size if view != null else Vector2(1600, 900)
 			var aspect: float = view_size.x / maxf(view_size.y, 1.0)
@@ -113,8 +126,9 @@ func _reposition(weight: float) -> void:
 		Mode.CHASE:
 			if target == null:
 				return
+			fov = base_fov * 1.45
 			var b := target.global_transform.basis
-			var behind := b.z * (5.4 * zoom) + Vector3(0, 3.05 * zoom, 0)
+			var behind := b.z * (6.6 * zoom) + Vector3(0, 3.4 * zoom, 0)
 			behind = behind.rotated(Vector3.UP, orbit_yaw)
 			var desired2 := target.global_position + behind
 			global_position = global_position.lerp(desired2, weight)
@@ -122,10 +136,20 @@ func _reposition(weight: float) -> void:
 		Mode.FIRST:
 			if target == null:
 				return
+			fov = base_fov * 1.9
 			var fwd := -target.global_transform.basis.z
-			var eye := target.global_position + Vector3(0, 1.55, 0) + fwd * 0.30
-			global_position = global_position.lerp(eye, weight)
-			look_at(eye + fwd * 5.0, Vector3.UP)
+			fwd.y = 0.0
+			fwd = Vector3.FORWARD if fwd.length_squared() < 0.0001 else fwd.normalized()
+			# Look where the elephant looks, turned by the drag gesture so the
+			# player can glance around while the body keeps its heading.
+			var yawed := fwd.rotated(Vector3.UP, orbit_yaw)
+			var right := yawed.cross(Vector3.UP).normalized()
+			var look_dir := yawed.rotated(right, -orbit_pitch).normalized()
+			var eye := target.global_position + Vector3(0.0, 1.55, 0.0) + fwd * 0.30
+			global_position = global_position.lerp(eye, weight) if weight < 1.0 else eye
+			# Look along the composed direction from the *current* eye position:
+			# aiming at the lagging position would tilt the whole view.
+			look_at(global_position + look_dir * 8.0, Vector3.UP)
 
 
 ## Bounding box (viewport pixels) of the four field corners projected on screen.

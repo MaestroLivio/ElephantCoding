@@ -106,7 +106,9 @@ func _build_stage() -> void:
 	rig.fov = 32.0
 	rig.safe_rect = _safe_rect()
 	rig.setup_for_bounds(bounds, builder.nilo)
-	rig.mode = _camera_mode
+	# set_mode snaps the chosen view straight away: assigning `mode` would leave
+	# the first frame composed with the fixed-field frustum.
+	rig.set_mode(_camera_mode)
 	rig.zoom = 1.0
 	rig.current = true
 

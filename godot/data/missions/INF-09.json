@@ -119,9 +119,9 @@
   "narration_line": "Le tre pietre. Tre pietre numerate con pallini 1, 2, 3 disposte in linea; Nilo deve toccarle nell'ordine.",
   "scale_m": 1,
   "scene_theme": {
-    "sky": "#f7c873",
-    "ground": "#c9a227",
-    "accent": "#e76f51",
+    "sky": "#b1ccd8",
+    "ground": "#829b71",
+    "accent": "#6f9385",
     "prop": "acacia"
   }
 }

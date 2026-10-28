@@ -104,9 +104,9 @@
   "narration_line": "Il ponte più corto. Due passerelle evidenziate: una di 2 caselle, l'altra di 4, entrambe portano a un'isoletta.",
   "scale_m": 1,
   "scene_theme": {
-    "sky": "#f7c873",
-    "ground": "#c9a227",
-    "accent": "#e76f51",
+    "sky": "#b1ccd8",
+    "ground": "#829b71",
+    "accent": "#6f9385",
     "prop": "acacia"
   }
 }

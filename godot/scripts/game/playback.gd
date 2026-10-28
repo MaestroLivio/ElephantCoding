@@ -114,7 +114,10 @@ func _apply_event(ev: Dictionary) -> void:
 			if builder != null and builder.nilo != null:
 				var c = ev.get("cell", [0, 0])
 				var heading := int(ev.get("heading", 1))
-				builder.nilo.move_to_world(builder.cell_to_world(Vector2i(int(c[0]), int(c[1])), 0.04), heading, _event_duration * 0.9)
+				# Fit the walk inside the playback beat so a fast replay never cuts
+				# a step in half: every command must be visible where it happens.
+				var beat: float = 0.9 / maxf(speed, 0.001)
+				builder.nilo.move_to_world(builder.cell_to_world(Vector2i(int(c[0]), int(c[1])), 0.04), heading, minf(_event_duration * 0.9, beat))
 			_draw_progress(ev)
 		"turn":
 			if builder != null and builder.nilo != null:

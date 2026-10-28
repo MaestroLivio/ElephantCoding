@@ -27,6 +27,34 @@ importati di nuovo nel PCK) e crea pacchetti, installer e checksum.
 La variabile `GODOT_BIN` permette di indicare un binario Godot diverso da
 `/Applications/Godot.app/Contents/MacOS/Godot`.
 
+## Firma e notarizzazione (facoltative)
+
+Senza credenziali gli artefatti funzionano, ma il sistema operativo li blocca
+la prima volta che vengono aperti. Lo script firma e notarizza da solo quando
+trova queste variabili:
+
+| Variabile | Uso |
+| --- | --- |
+| `EC_MACOS_IDENTITY` | identità `Developer ID Application: Nome (TEAMID)` |
+| `EC_NOTARY_PROFILE` | profilo keychain creato con `xcrun notarytool store-credentials` |
+| `EC_WINDOWS_PFX` | certificato Authenticode `.pfx` (richiede `osslsigncode`) |
+| `EC_WINDOWS_PASSWORD` | password del `.pfx` |
+
+```bash
+xcrun notarytool store-credentials EC-notary \
+  --apple-id "tuo@id.apple" --team-id TEAMID --password "app-password"
+
+EC_MACOS_IDENTITY="Developer ID Application: Nome (TEAMID)" \
+EC_NOTARY_PROFILE=EC-notary \
+./tools/dist/build_distributions.sh
+```
+
+Con le credenziali lo script firma app e DMG con `--options runtime`, invia
+entrambi a `notarytool`, applica lo stapler, verifica il risultato con `spctl`
+e scrive un `LEGGIMI.txt` nel DMG che invita al doppio clic. Senza credenziali
+ripiega sulla firma ad-hoc e lo dichiara nell'output, perché in quel caso il
+blocco di Gatekeeper resta.
+
 ## Artefatti
 
 | Piattaforma | File | Note |
@@ -45,13 +73,27 @@ La variabile `GODOT_BIN` permette di indicare un binario Godot diverso da
 
 ### macOS
 
-Aprire il DMG e trascinare `ElephantCoding` in `Applicazioni`. La build è
-firmata ad-hoc ma **non notarizzata**: al primo avvio Gatekeeper può chiedere
-di confermare con tasto destro → Apri, oppure:
+Aprire il DMG, trascinare `ElephantCoding` in `Applicazioni` e avviarla.
+
+Se la build non è firmata con un Developer ID (è il caso degli artefatti
+pubblicati senza certificato Apple) macOS la **blocca al primo avvio** con un
+avviso del tipo «Apple non è in grado di verificare l'app», «in attesa di
+controllo» o «app danneggiata», e non mostra il pulsante *Apri*. È Gatekeeper
+che protegge il sistema, non un errore dell'app. Per sbloccarla:
+
+1. avviare l'app una volta e chiudere l'avviso;
+2. *Impostazioni di Sistema → Privacy e Sicurezza*, scorrere fino al messaggio
+   su ElephantCoding e premere **Apri comunque** (macOS 13 e precedenti: tasto
+   destro sull'app → *Apri* → *Apri*);
+3. in alternativa, dal Terminale:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/ElephantCoding.app
 ```
+
+Il DMG riporta gli stessi passi nel file `LEGGIMI.txt`. Il consenso resta
+memorizzato: l'avviso non ricompare. Per distribuirlo senza questo passaggio
+serve una build firmata e notarizzata (vedi *Firma e notarizzazione*).
 
 ### Windows
 
@@ -60,6 +102,11 @@ richiede privilegi di amministratore, installa in
 `%LOCALAPPDATA%\Programs\ElephantCoding`, crea i collegamenti nel menu Start e
 sul desktop e registra la voce di disinstallazione. In alternativa scompattare
 lo ZIP portabile e avviare `ElephantCoding.exe`.
+
+Senza firma Authenticode SmartScreen mostra «Windows ha protetto il PC»: si
+procede con **Ulteriori informazioni → Esegui comunque**. Il pacchetto non
+contiene malware — i sorgenti sono pubblici — ma Windows non può verificare
+l'autore. L'installer si firma con `EC_WINDOWS_PFX`.
 
 ### Linux
 
@@ -122,7 +169,10 @@ Su questa macchina (macOS, Godot 4.7.2), per la versione **0.1.1**:
 
 ## Limiti noti
 
-- macOS non è notarizzato: nessun certificato Apple Developer è disponibile.
+- Gli artefatti distribuiti non sono notarizzati né firmati con un certificato
+  commerciale (nessun certificato Apple Developer o Authenticode disponibile):
+  al primo avvio vanno sbloccati a mano come descritto sopra. La pipeline di
+  firma e notarizzazione è pronta e si attiva con le variabili `EC_*`.
 - L'installer Windows e i pacchetti Linux non sono stati provati sui rispettivi
   sistemi operativi.
 - L'APK Android è una build debug, non una build di produzione.

@@ -26,7 +26,7 @@ WORLD_DEFS = {
         "code": "INF", "title": "Savana delle Impronte", "age": "4-6 anni",
         "language": "Pittogrammi e direzioni", "editor": "icons",
         "description": "Impronte, acacie e tamburi: i primi passi del pensiero computazionale.",
-        "theme": {"sky": "#f7c873", "ground": "#c9a227", "accent": "#e76f51", "prop": "acacia"},
+        "theme": {"sky": "#b1ccd8", "ground": "#829b71", "accent": "#6f9385", "prop": "acacia"},
         "lab": "Pista delle frecce",
     },
     "giardino": {

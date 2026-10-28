@@ -11,6 +11,12 @@
 # the canonical data or the Godot project; it exports into build/ at the
 # repository root, outside the Godot project so build artifacts are not
 # scanned and packed again.
+#
+# Optional code signing (without it the OS warns on first launch):
+#   EC_MACOS_IDENTITY  "Developer ID Application: Name (TEAMID)"
+#   EC_NOTARY_PROFILE  keychain profile created with notarytool store-credentials
+#   EC_WINDOWS_PFX     .pfx for the Windows installer (needs osslsigncode)
+#   EC_WINDOWS_PASSWORD password of that .pfx
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -81,17 +87,37 @@ mkdir -p "$MACOS_DIR"
 ditto -x -k "$BUILD/macos/$NAME.zip" "$MACOS_DIR"
 APP="$MACOS_DIR/$NAME.app"
 [[ -d "$APP" ]] || fail "macOS export did not contain $NAME.app"
+MACOS_IDENTITY="${EC_MACOS_IDENTITY:-}"
+NOTARY_PROFILE="${EC_NOTARY_PROFILE:-}"
+NOTARIZED=0
 
 # Keep the licence files inside the bundle so they travel with the app.
 stage_licenses "$APP/Contents/Resources/licenses"
 
-# Ad-hoc signature: the bundle is distributable but not notarised.  Staging
-# happens outside the iCloud-synced project folder, otherwise macOS re-adds
-# FinderInfo to the bundle and codesign --strict rejects it.
-if command -v codesign >/dev/null 2>&1; then
-  xattr -cr "$APP"
+# Staging happens outside the iCloud-synced project folder, otherwise macOS
+# re-adds FinderInfo to the bundle and codesign --strict rejects it.
+xattr -cr "$APP"
+if [[ -n "$MACOS_IDENTITY" ]]; then
+  say "Signing macOS bundle as $MACOS_IDENTITY"
+  codesign --force --options runtime --timestamp --sign "$MACOS_IDENTITY" "$APP" \
+    || fail "Developer ID signing failed"
+else
+  # Ad-hoc signature: the bundle launches, but Gatekeeper rejects it because no
+  # Developer ID backs it. Users must allow it once in Privacy & Security.
+  echo "No EC_MACOS_IDENTITY: signing ad-hoc, Gatekeeper will warn on first launch."
   codesign --force --deep --sign - "$APP" >/dev/null 2>&1 || fail "codesign failed"
-  codesign --verify --deep --strict "$APP" || fail "codesign verification failed"
+fi
+codesign --verify --deep --strict "$APP" || fail "codesign verification failed"
+
+# Notarise before packaging so the stapled ticket travels inside the DMG.
+if [[ -n "$MACOS_IDENTITY" && -n "$NOTARY_PROFILE" ]]; then
+  say "Notarizing macOS app (this can take a few minutes)"
+  ditto -c -k --sequesterRsrc --keepParent "$APP" "$WORK/notarize.zip"
+  xcrun notarytool submit "$WORK/notarize.zip" --keychain-profile "$NOTARY_PROFILE" --wait \
+    || fail "notarization failed; check EC_NOTARY_PROFILE"
+  xcrun stapler staple "$APP" || fail "stapling the app failed"
+  spctl -a -vvv -t exec "$APP" || fail "Gatekeeper still rejects the app after notarization"
+  NOTARIZED=1
 fi
 
 ditto -c -k --sequesterRsrc --keepParent "$APP" "$OUT/$NAME-$VERSION-macOS-universal.zip"
@@ -100,13 +126,70 @@ DMGROOT="$STAGE/dmg"
 mkdir -p "$DMGROOT"
 cp -R "$APP" "$DMGROOT/"
 ln -s /Applications "$DMGROOT/Applications"
+if [[ "$NOTARIZED" == "1" ]]; then
+  cat > "$DMGROOT/LEGGIMI.txt" <<EOF
+$NAME $VERSION - macOS
+
+La build e' firmata con Developer ID e notarizzata da Apple: trascina
+$NAME in Applicazioni e avviala con un doppio clic.
+
+Requisiti: macOS 10.15 o successivo.
+EOF
+else
+  cat > "$DMGROOT/LEGGIMI.txt" <<EOF
+$NAME $VERSION - macOS
+
+Questa build NON e' notarizzata: al primo avvio macOS la blocca con un
+avviso tipo "Apple non puo' verificare l'app" o "in attesa di controllo".
+E' una protezione del sistema, non un errore dell'app.
+
+Per aprirla:
+ 1. trascina $NAME nella cartella Applicazioni;
+ 2. aprilo una volta e chiudi l'avviso;
+ 3. Impostazioni di Sistema > Privacy e Sicurezza, scorri fino al
+    messaggio su $NAME e premi "Apri comunque";
+    su macOS 13 e precedenti: tasto destro sull'app > Apri > Apri.
+
+In alternativa, dal Terminale:
+  xattr -dr com.apple.quarantine /Applications/$NAME.app
+
+Il messaggio sparisce per sempre dopo il primo avvio consentito.
+Se hai scaricato lo ZIP, la stessa procedura vale per l'app scompattata.
+EOF
+fi
 hdiutil create -quiet -volname "$NAME" -srcfolder "$DMGROOT" -ov -format UDZO \
   "$OUT/$NAME-$VERSION-macOS-universal.dmg"
+if [[ "$NOTARIZED" == "1" ]]; then
+  # The DMG itself must be signed and notarised, otherwise Gatekeeper refuses
+  # the disk image before the (already notarised) app is ever copied out.
+  codesign --force --timestamp --sign "$MACOS_IDENTITY" "$OUT/$NAME-$VERSION-macOS-universal.dmg" \
+    || fail "signing the DMG failed"
+  xcrun notarytool submit "$OUT/$NAME-$VERSION-macOS-universal.dmg" \
+    --keychain-profile "$NOTARY_PROFILE" --wait || fail "notarizing the DMG failed"
+  xcrun stapler staple "$OUT/$NAME-$VERSION-macOS-universal.dmg" || fail "stapling the DMG failed"
+fi
 
 say "Packaging Windows (portable zip and NSIS installer)"
 WIN_DIR="$STAGE/windows/$NAME"
 mkdir -p "$WIN_DIR"
 cp "$BUILD/windows/$NAME.exe" "$BUILD/windows/$NAME.pck" "$WIN_DIR/"
+
+# Optional Authenticode signature: SmartScreen only stops warning about an
+# installer whose publisher is trusted.
+sign_windows() {
+  local target="$1"
+  if [[ -z "${EC_WINDOWS_PFX:-}" ]]; then
+    return 0
+  fi
+  command -v osslsigncode >/dev/null || fail "osslsigncode is required to sign with EC_WINDOWS_PFX"
+  local signed="$target.signed"
+  osslsigncode sign -pkcs12 "$EC_WINDOWS_PFX" -pass "${EC_WINDOWS_PASSWORD:-}" \
+    -n "$NAME" -i "https://github.com/MaestroLivio/ElephantCoding" \
+    -t "http://timestamp.digicert.com" -in "$target" -out "$signed" \
+    || fail "signing $(basename "$target") failed"
+  mv "$signed" "$target"
+}
+sign_windows "$WIN_DIR/$NAME.exe"
 stage_licenses "$WIN_DIR/licenses"
 (cd "$STAGE/windows" && zip -qr -X "$OUT/$NAME-$VERSION-Windows-x86_64-portable.zip" "$NAME")
 
@@ -116,6 +199,7 @@ makensis -V2 \
   -DOUTPUT="$OUT/$NAME-$VERSION-Windows-x86_64-Setup.exe" \
   -DICON="$ROOT/godot/assets/icons/icon.ico" \
   "$ROOT/tools/dist/windows_installer.nsi"
+sign_windows "$OUT/$NAME-$VERSION-Windows-x86_64-Setup.exe"
 
 say "Packaging Linux (portable tar.gz and .deb)"
 LINUX_DIR="$STAGE/linux/$NAME"

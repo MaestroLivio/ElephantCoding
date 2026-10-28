@@ -95,9 +95,9 @@
   "narration_line": "Lo specchio delle orecchie. Due mini-percorsi speculari, uno con curva a destra e uno a sinistra, ma una sola meta è illuminata.",
   "scale_m": 1,
   "scene_theme": {
-    "sky": "#f7c873",
-    "ground": "#c9a227",
-    "accent": "#e76f51",
+    "sky": "#b1ccd8",
+    "ground": "#829b71",
+    "accent": "#6f9385",
     "prop": "acacia"
   }
 }

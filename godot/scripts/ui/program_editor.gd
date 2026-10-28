@@ -261,10 +261,11 @@ func _rebuild_palette() -> void:
 func _palette_entries() -> Array:
 	if _graphic:
 		return _graphic_entries()
+	# Reading order of the three movement commands: left, forward, right.
 	var simple := [
+		{"label": "SINISTRA", "op": "SINISTRA", "color": Palette.BLUE},
 		{"label": "AVANTI", "op": "AVANTI", "color": Palette.TEAL},
 		{"label": "DESTRA", "op": "DESTRA", "color": Palette.BLUE},
-		{"label": "SINISTRA", "op": "SINISTRA", "color": Palette.BLUE},
 	]
 	var actions := [
 		{"label": "RACCOGLI", "op": "RACCOGLI", "color": Palette.YELLOW},
@@ -291,9 +292,9 @@ func _palette_entries() -> Array:
 ## need, so the tray stays short and every tile fits on a touch screen.
 func _graphic_entries() -> Array:
 	var all := [
+		{"label": "SINISTRA", "op": "SINISTRA", "icon": "left", "color": Palette.BLUE},
 		{"label": "AVANTI", "op": "AVANTI", "icon": "forward", "color": Palette.TEAL},
 		{"label": "DESTRA", "op": "DESTRA", "icon": "right", "color": Palette.BLUE},
-		{"label": "SINISTRA", "op": "SINISTRA", "icon": "left", "color": Palette.BLUE},
 		{"label": "RACCOGLI", "op": "RACCOGLI", "icon": "collect", "color": Palette.YELLOW},
 		{"label": "PRENDI", "op": "PRENDI", "icon": "prendi", "color": Palette.YELLOW},
 		{"label": "DEPOSITA", "op": "DEPOSITA", "icon": "deposita", "color": Palette.YELLOW},
@@ -459,7 +460,9 @@ func _rebuild() -> void:
 		_target_label.text = ("Dentro " if _graphic else "Sto aggiungendo a: ") + _target_name
 	if _target_bar != null:
 		_target_bar.visible = not _graphic or not is_same(_target, blocks)
-	_rebuild_palette()
+	# The tray is rebuilt only when the mission changes: recreating the tiles on
+	# every edit left the old buttons alive until the end of the frame, so a
+	# quick second tap could hit a dying tile and append the command twice.
 
 
 func _render_into(arr: Array, parent: VBoxContainer, depth: int) -> void:
@@ -852,9 +855,9 @@ func _serialize(arr: Array, depth: int) -> String:
 # ---------------------------------------------------------------------------
 func _fill_text_palette(palette: FlowContainer) -> void:
 	var snippets := [
+		{"label": "SINISTRA", "text": "SINISTRA\n"},
 		{"label": "AVANTI", "text": "AVANTI "},
 		{"label": "DESTRA", "text": "DESTRA\n"},
-		{"label": "SINISTRA", "text": "SINISTRA\n"},
 		{"label": "RIPETI x3", "text": "RIPETI x3 {\n\t\n}\n"},
 		{"label": "SE … ALLORA", "text": "SE \nALLORA {\n\t\n}\n"},
 		{"label": "FINCHÉ", "text": "FINCHÉ  {\n\t\n}\n"},

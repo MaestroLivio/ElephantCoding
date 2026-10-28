@@ -226,7 +226,7 @@ func _process(delta: float) -> void:
 	var b: Rect2 = Rect2(-8.4, -5.8, 16.8, 11.6)
 	builder.nilo.position.x = clampf(builder.nilo.position.x, b.position.x, b.position.x + b.size.x)
 	builder.nilo.position.z = clampf(builder.nilo.position.z, b.position.y, b.position.y + b.size.y)
-	builder.nilo.rotation.y = atan2(-dir.x, -dir.z)
+	builder.nilo.face_direction(dir)
 	builder.nilo.walking = true
 
 

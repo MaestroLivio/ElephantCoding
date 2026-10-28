@@ -43,7 +43,9 @@ restringe o si allarga insieme all'interfaccia. L'inquadratura centra il
 rettangolo *proiettato* del campo (non il pivot 3D): con la camera inclinata il
 bordo vicino proietta molto più in basso di quello lontano, e centrare solo il
 pivot lo farebbe scivolare sotto i pannelli. Lo stesso ragionamento vale per
-il diorama del menu, spostato nell'area libera a destra.
+il diorama del menu, spostato nell'area libera a destra. Lo spostamento del
+frustum è esclusivo del campo fisso: inseguimento e prima persona lo azzerano,
+altrimenti il personaggio finirebbe fuori dal centro dell'inquadratura.
 
 ## Servizi
 
@@ -94,7 +96,9 @@ con il programma di riferimento.
 - `nilo.gd` genera l'elefantino procedurale (corpo, testa, orecchie, proboscide,
   zampe, coda) con animazione di camminata e celebrazione.
 - `camera_rig.gd` implementa le tre viste: campo fisso con inquadratura
-  adattiva, inseguimento con smorzamento, prima persona.
+  adattiva, inseguimento con smorzamento, prima persona con sguardo
+  orientabile dal trascinamento. Ogni vista usa l'ottica che le serve: il
+  campo un obiettivo stretto, le viste ravvicinate uno più ampio.
 - `playback.gd` interpola il movimento tra le celle e sincronizza gli eventi con
   la scena (oggetti raccolti, anelli di obiettivo, traccia).
 

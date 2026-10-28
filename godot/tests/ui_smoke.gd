@@ -48,7 +48,7 @@ func _run() -> void:
 	scr.editor._rebuild()
 	scr.editor._palette.get_child(0).pressed.emit()
 	_check(scr.editor.blocks.size() == 1, "a command tile appends a block")
-	_check(scr.editor.get_source() == "AVANTI", "the first tile serialises AVANTI")
+	_check(scr.editor.get_source() == "SINISTRA", "the first tile serialises SINISTRA")
 	var field_open: float = scr.rig.safe_rect.size.x
 	scr._toggle_left_panel()
 	await process_frame
@@ -84,7 +84,7 @@ func _run() -> void:
 	main.show_screen("mission", {"world_id": "savana", "mission_id": "INF-01"})
 	await _wait(0.5)
 	scr = main.current
-	scr.editor._palette.get_child(0).pressed.emit()
+	_check(_press_tile(scr.editor, "AVANTI"), "graphic tray exposes AVANTI")
 	scr._execute(false)
 	await _wait(0.1)
 	var graphic_guard := 0
@@ -120,6 +120,16 @@ func _run() -> void:
 
 func _wait(seconds: float) -> void:
 	await create_timer(seconds).timeout
+
+
+## Presses the graphic command tile with the given caption.
+func _press_tile(editor, caption: String) -> bool:
+	for i in range(editor._palette.get_child_count()):
+		var tile: Button = editor._palette.get_child(i)
+		if tile.tooltip_text == caption:
+			tile.pressed.emit()
+			return true
+	return false
 
 
 func _check(condition: bool, label: String) -> void:

@@ -4,6 +4,9 @@ extends Node3D
 ## Original low-poly Nilo, built from primitives so the project ships no
 ## third-party 3D assets and remains CC-BY compatible.
 
+const TURN_SPEED := 9.0
+const SPIN_SPEED := 7.0
+
 var walking := false
 var _phase := 0.0
 var _body: MeshInstance3D
@@ -14,6 +17,8 @@ var _tween: Tween
 var _base_body_y := 0.92
 var _reduced_motion := false
 var _idle_time := 0.0
+var _target_yaw := 0.0
+var _spinning := false
 
 
 func _ready() -> void:
@@ -147,6 +152,7 @@ func _build() -> void:
 
 
 func _process(delta: float) -> void:
+	_update_facing(delta)
 	_idle_time += delta
 	if walking and not _reduced_motion:
 		_phase += delta * 10.0
@@ -166,30 +172,52 @@ func _process(delta: float) -> void:
 			_trunk.rotation.z = sin(_idle_time * 0.9) * 0.035
 
 
-func face_heading(heading: int, immediate := false) -> void:
-	var target := -float(heading) * PI * 0.5
-	if immediate or _reduced_motion:
-		rotation.y = target
+## Facing is interpolated here instead of by a tween: a tween on rotation:y
+## would run in parallel with the walk tween, the two would overwrite each
+## other and Nilo could end up facing away from the direction he just walked.
+func _update_facing(delta: float) -> void:
+	if _spinning:
+		rotation.y = move_toward(rotation.y, _target_yaw, delta * SPIN_SPEED)
+		if is_equal_approx(rotation.y, _target_yaw):
+			_spinning = false
+			rotation.y = wrapf(rotation.y, -PI, PI)
+			_target_yaw = rotation.y
 		return
-	var tw := create_tween()
-	tw.tween_property(self, "rotation:y", target, 0.18).set_trans(Tween.TRANS_SINE)
+	var diff := wrapf(_target_yaw - rotation.y, -PI, PI)
+	var step := minf(absf(diff), delta * TURN_SPEED)
+	rotation.y += signf(diff) * step
+
+
+func _aim(yaw: float, immediate := false) -> void:
+	_target_yaw = yaw
+	_spinning = false
+	if immediate or _reduced_motion:
+		rotation.y = wrapf(yaw, -PI, PI)
+
+
+func face_heading(heading: int, immediate := false) -> void:
+	_aim(-float(heading) * PI * 0.5, immediate)
+
+
+## Turns Nilo towards a world-space direction (used by the free-walk hub).
+func face_direction(dir: Vector3) -> void:
+	if Vector2(dir.x, dir.z).length_squared() < 0.0001:
+		return
+	_target_yaw = atan2(-dir.x, -dir.z)
+	_spinning = false
 
 
 func move_to_world(target: Vector3, heading: int, duration := 0.32, immediate := false) -> void:
 	if _tween != null and _tween.is_valid():
 		_tween.kill()
-	walking = true
-	var target_rot := -float(heading) * PI * 0.5
+	_aim(-float(heading) * PI * 0.5, immediate)
 	if immediate or _reduced_motion:
 		position = target
-		rotation.y = target_rot
 		walking = false
 		return
+	walking = true
 	_tween = create_tween()
-	_tween.set_parallel(true)
 	_tween.tween_property(self, "position", target, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	_tween.tween_property(self, "rotation:y", target_rot, minf(duration, 0.18))
-	_tween.set_parallel(false)
 	_tween.tween_callback(func(): walking = false)
 
 
@@ -197,17 +225,18 @@ func teleport(world_pos: Vector3, heading: int) -> void:
 	if _tween != null and _tween.is_valid():
 		_tween.kill()
 	position = world_pos
-	rotation.y = -float(heading) * PI * 0.5
+	_aim(-float(heading) * PI * 0.5, true)
 	walking = false
 
 
 func celebrate() -> void:
 	if _reduced_motion:
 		return
+	_target_yaw = rotation.y + TAU
+	_spinning = true
 	var tw := create_tween()
 	tw.tween_property(self, "scale", Vector3(0.88, 0.92, 0.88), 0.12)
 	tw.tween_property(self, "scale", Vector3(0.82, 0.82, 0.82), 0.22)
-	tw.tween_property(self, "rotation:y", rotation.y + TAU, 0.55).set_trans(Tween.TRANS_SINE)
 
 
 func oops() -> void:

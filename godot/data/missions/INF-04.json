@@ -95,9 +95,9 @@
   "narration_line": "Il tamburo nascosto. Un tamburo è dietro una siepe sul lato sinistro di Nilo, che parte rivolto in avanti.",
   "scale_m": 1,
   "scene_theme": {
-    "sky": "#f7c873",
-    "ground": "#c9a227",
-    "accent": "#e76f51",
+    "sky": "#b1ccd8",
+    "ground": "#829b71",
+    "accent": "#6f9385",
     "prop": "acacia"
   }
 }
